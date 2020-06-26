@@ -1,0 +1,19 @@
+version: '3'
+services:
+  be_express:
+    container_name: 'be_express'
+    build: ./be_express/
+    ports:
+      - '3001:3001'
+  pg:
+    image: 'postgres:12'
+    container_name: 'postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pg/db_data:/var/lib/postgresql/data
+  fe_react:
+    container_name: 'fe_react'
+    build: ./fe_react/
+    ports:
+      - '3000:3000'
