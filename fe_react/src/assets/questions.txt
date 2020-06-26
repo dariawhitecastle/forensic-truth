@@ -1,0 +1,195 @@
+Questionnaire order 
+
+
+All (Drop down yes/no) could also be select yes/no with button click things
+
+Progress bar/percentage at the bottom 
+
+
+
+PRE-EMPLOYMENT POLYGRAPH EXAMINATION RELEASE AND AUTHORIZATION
+
+Look up consent for digital signatures**
+
+Text from the front page- will include their name, what department they're applying for, digital signature and date/time. 
+
+Can we make some sort of an instruction page that says stuff like, �don't be too worried about exact dates/times/places. Please don't write us a fucking essay on every answer�...?
+
+SECTION 1
+
+PERSONAL INFORMATION
+
+Fields to enter in info: 
+Name (First, Middle and Last) [no restrictions]
+Street Address [no restrictions]
+City  [no restrictions]
+State [2 letters]
+Zip [5 number limit]
+Date of Birth  [00/00/0000] format
+Last 4 digits of SSN  [4 digit limit]
+Drop down: 
+Is this an application for the City and County of Denver or the Denver Civil Service Commission (Police or Fire)?
+If NO, then drop down 
+    Place of birth  [no restrictions]
+    Are you a US citizen? (drop down yes/no)
+    If not, are you legal to work in the United States? (drop down yes/no)
+    
+Have you ever taken a polygraph or voice stress examination (CVSA)? (drop down yes/no) 
+If yes: list all exams you have taken, for whom and when (agency and estimated month/year are acceptable).  [no restrictions]
+When was the last time you slept? (Options: Last night, Yesterday, Before Yesterday)
+Number of hours slept?  [2 digit limit]
+List all prescription medications, alcohol, or illegal drugs you have consumed in the last 24 hours. (Can we make this so it doesn't get distributed to the agency? We ask it for the polygraph, but technically the agency shouldn't have this information).  [no restrictions]
+Are you experiencing any physical discomfort that you think would affect this examination? (Drop down yes/no and a field that populates if they select �yes�)  [no restrictions]
+
+SECTION 2
+APPLICATION PROCESS
+
+List all the information you may have left off your application, or have incorrectly provided on your application.   [no restrictions]
+On any of your examinations or tests for the organization you are applying for (can we autopopulate the name of the agency?), did you falsify any information or cheat in any way?   [no restrictions]
+How long do you intend to stay with this organization, if hired (in number of years)? Number input only
+
+SECTION 3
+DRIVING AND EDUCATION
+
+Driving Record
+What state is your current driver's license issued in? [2 Letter restriction with N/A button if they don't have a license]
+Have you held a driver's license in any other state or country in the last 7 years? (Drop down yes/no) 
+If yes: List where and date range (year to year is acceptable). [number restriction]
+List all traffic violations, photo radar tickets, and at fault traffic accidents in the last 7 years: 
+Separate fields for date (month/year), City/state, offense, outcome/sentence, did you pay your fine on time
+
+Date (Month/Year)
+Location (City/State)
+Offense
+Outcome/Sentence
+Did you pay on time? (drop down)
+1
+11/2020
+Denver, CO
+Speeding
+Citation
+Yes
+2
+
+
+
+
+
+Has your driver's license ever been suspended, restricted or revoked, or have you ever been denied a drivers license? (Drop down yes/no) 
+If yes: list where, when and why   [no restrictions]
+Education: 
+List the high school you attended and all other schools you attended after high school. List the name of school, location, years attended, and any degrees or certificates you received. Include any police or fire academies. Do NOT include on the job training certificates. [list that drops down 1., 2., etc until they're done?]
+Separate fields for School Name  [no restrictions], Location (city/state or city/country), Dates attended [number restriction], Degree/Certificate? [yes/no drop down and if yes, what degree?  [no restrictions]]
+
+SECTION 4
+WORK HISTORY
+
+Work History: 
+List all jobs you have held in the last 5 years including short term or under the table jobs. Account for all periods of time over 60 days, including unemployment and self-employment.  [list that drops down 1., 2., etc until they're done?]
+Separate fields for Company  [no restrictions], Location (City/state), Dates (month/year from ____ to ____), Position (character limit), Why did you leave? (character limit) 
+List ALL the jobs you have been fired from, left by mutual decision, or have been asked to resign from. [list that drops down 1., 2., etc until they're done?]
+Disciplinary Actions: 
+Have you ever had any disciplinary actions taken against you? (Drop down yes/no)
+
+Date
+Description of Incident
+Action (write up, suspension, etc)
+Employer
+1
+
+(character limit) 
+
+
+
+Military Service 
+Have you ever served in the military, for any length of time? (Drop down yes/no)
+Branch [no restrictions]
+Dates of service [month/year to month/year]
+Any disciplinary actions, court martials, or judicial actions? (Including negative counselings and letters of reprimand) (Drop down yes/no) 
+If yes: please explain (character limit)
+Highest rank obtained (e.g., E-4, O-2, etc.) 
+Classification (MOS) [no restrictions]
+Primary or last duty station [no restrictions]
+Type of discharge (drop down choice: Honorable, General, General Under Honorable, Other Than Honorable, Bad Conduct, Dishonorable, Entry Level)
+Rank at discharge
+Have you ever served in the active reserves? (Drop down yes/no) 
+If yes: where, when and rank [no restrictions]
+
+SECTION 5
+CRIMINAL HISTORY
+
+Please list all the times you have ever been arrested or charged with a criminal offense (Do not include minor traffic incidents) [list that drops down 1., 2., etc until they're done?]
+Separate fields for Date [4 digit year restriction], Type of Offense [no restrictions], Where (city/state), Sentence [no restrictions]
+What are the most serious laws you have broken that you did not get caught for? 
+Separate fields for each offense: What [no restrictions], Date of last occurrence [4 digit year restriction], Explain (character limit) [list that drops down 1., 2., etc until they're done?]
+Are you now, or have you ever been, the subject of any criminal investigation? (Drop down yes/no) 
+If yes, please explain: (character limit) 
+
+
+
+
+SECTION 6
+DRUGS AND THEFT
+
+Drug Usage (Please only list the last time you used any of the following drugs, such as the last time you used marijuana and the last time you used cocaine, etc. 
+Bullet point clicky list RADIO BUTTONS- I KNOW THIS TERM NOW! (I'm sure that's the technical term): If they click on it, then a pop up for year of last use (or no pop up but just next to it, I don't really care)
+Marijuana, hashish, cocaine, crack cocaine, speed, downers, LSD/acid, heroin, PCP, quaaludes, anabolic steroids, opium, mushrooms, other psychedelics, ecstasy, write in box for �Other� (character limit for Other) 
+Do you suspect you have ever been drugged? (Drop down yes/no) 
+If yes, please explain (character limit) 
+Have you ever used someone else's prescription medication, for any reason? (Drop down yes/no) 
+If yes, please explain (character limit)
+Have you ever inhaled any fumes or chemicals, such as glue, �Whip-its�, or gasoline, for the purposes of getting high? (Drop down yes/no) 
+If yes, please explain: 
+Have you ever used marijuana, alcohol, or any other illegal drugs at work? (Drop down yes/no) 
+If yes, please explain (character limit)
+Drug Sales/Manufacturing
+Which of the above illegal drugs have you ever sold or traded (even at cost), manufactured, or transported? (character limit)
+Theft/Stealing � for all the theft questions, have a sliding bar of �Estimated Total Amount� from $0-$10,000 (will be 3 separate bars)
+In the past 10 years, have you, without permission, taken, given away or discounted any merchandise or property from your employers? (Drop down yes/no)
+If yes, what and estimate total worth (list) 
+In the past 10 years, have you, without permission, taken any money from your employers? (Drop down yes/no)
+If yes, how much and explain (character limit)
+Not counting employers, in the past 10 years, have you, without permission, taken, shoplifted or stolen from anyone (including shoplifting)? (Drop down yes/no)
+If yes, what and estimate total worth (list) 
+
+SECTION 7
+INTEGRITY
+
+Physical Violence and Mental Abuse
+When was the last time you participated in a physical fight?  Number box for year or age and text box? 
+Have you ever engaged in any mental abuse? (Drop down yes/no)
+Please explain (character limit) 
+Have you treated every person fairly and politely, without prejudice, regardless of their race, creed, gender, or sexual preference? (Drop down yes/no)
+If yes, please explain: (character limit) 
+Are you applying for a FIRE DEPARTMENT? 
+If yes: Have you engaged in any acts of illegal  fire setting? (Character limit) 
+Are you applying at the COLORADO PARKS AND WILDLIFE? 
+If yes: Have you ever violated any laws or regulations regarding parks or wildlife rules (e.g., hunting or fishing without a license)? Please describe when and where.  [no restrictions]
+Law Enforcement Power Abuse
+Have you ever had any law enforcement powers? (Worked for a police department/corrections, etc.) (Drop down yes/no) 
+If Yes: Have you participated in any of the following activities? Bullet point clicky list (If they click on it, then a pop up for month/year of last incident and an explanation text box with character limit)
+Excessive force, taking bribes, manufacturing probable cause, professional courtesy/fixing traffic tickets, taking contraband into jail, falsifying records, accepting gratuities or discounts, accessing criminal databases for personal use, mishandling of evidence
+Illegal Sexual Activities: 
+Have you ever participated in any of the following activities (please note that admissions in this section are not automatic disqualifiers)? Bullet point clicky list (If they click on it, then a pop up for month/year of last incident and an explanation text box with character limit)
+Rape, date rape, child molestation, prostitution or pimping, public indecent exposure, child pornography, bestiality, sexual harassment, incest, sex in public locations, peeping
+
+SECTION 8
+FINANCIAL INFORMATION
+
+Have you ever filed for bankruptcy? (Drop down yes/no)
+If yes, date, amount, why? (character limit)
+Are any of your bills more than 30 days past due? (Drop down yes/no)
+If yes, number of bills behind, how long, explain (character limit)
+Do you currently have any judgments, garnishments, court actions, or pending actions against you for any money you owe anyone? (Drop down yes/no)
+If yes, explain: (character limit)
+Do you have any bills that are currently in collections? (Drop down yes/no)
+If yes, number of bills, total amount, explain (character limit)
+Are you currently behind on any child support payments? (Drop down yes/no)
+If yes, explain (character limit)
+
+IS THERE ANYTHING ELSE YOU WOULD LIKE TO DISCUSS WITH YOUR EXAMINER PRIOR TO TAKING THIS EXAMINATION? (Text box, definitely a character limit)
+
+
+
+
+

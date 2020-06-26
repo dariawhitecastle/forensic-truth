@@ -1,0 +1,1228 @@
+entity: Question
+items:
+  question1:
+    description: First Name
+    type: text
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question129:
+    description: Middle Name
+    type: text
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question130:
+    description: Last Name
+    type: text
+    placeholder:
+    order: 3
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'    
+  question2:  
+    description: Street Address
+    type: text
+    placeholder:
+    order: 4
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question3:  
+    description: City
+    type: text
+    placeholder:
+    order: 5
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question4:    
+    description: State
+    type: dropdown
+    placeholder:
+    order: 6
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question5:    
+    description: Zip
+    type: number
+    placeholder:
+    order: 7
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question6:
+    description: Date of Birth
+    type: text
+    placeholder:
+    order: 8
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question7:  
+    description: Last 4 digits of SSN
+    type: number
+    placeholder:
+    order: 9
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question8:
+    description: 
+      Is this an application for the City and County of Denver or the Denver Civil
+      Service Commission (Police or Fire)?
+    type: checkbox
+    placeholder:
+    order: 10
+    subQuestions: '11,12,13'
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question9:  
+    description: Place of birth
+    type: text
+    placeholder:
+    order: 11
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question10:
+    description: Are you a US citizen?
+    type: checkbox
+    placeholder:
+    order: 12
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question11:
+    description: 'If not, are you legal to work in the United States?'
+    type: checkbox
+    placeholder:
+    order: 13
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question12:
+    description: Have you ever taken a polygraph or voice stress examination (CVSA)?
+    type: checkbox
+    placeholder:
+    order: 14
+    subQuestions: '15'
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question13:
+    description: 
+      List all exams you have taken, for whom and when (agency and estimated
+      month/year are acceptable).
+    type: textArea
+    placeholder:
+    order: 15
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question14:
+    description: When was the last time you slept?
+    type: radio
+    placeholder:
+    order: 16
+    subQuestions: ''
+    responseOptions: 'Today, Last night, Yesterday, Before Yesterday'
+    externalUse: true
+    section: '@section8'
+  question15:
+    description: Number of hours slept?
+    type: number
+    placeholder:
+    order: 17
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question16:
+    description:
+      List all prescription medications, alcohol, or illegal drugs you have
+      consumed in the last 24 hours.
+    type: textArea
+    placeholder:
+    order: 18
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: false
+    section: '@section8'
+  question17:
+    description:
+      Are you experiencing any physical discomfort that you think would affect
+      this examination?
+    type: checkbox
+    placeholder:
+    order: 19
+    subQuestions: '20'
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'
+  question18:
+    description:
+     Please explain
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 20
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section8'  
+  question19:
+    description:
+      List all the information you may have left off your application, or have
+      incorrectly provided on your application. 
+    type: textArea
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section7'
+  question20:
+    description:
+      On any of your examinations or tests for the organization you are applying
+      for, did you falsify any information or cheat in any way? 
+    type: checkbox
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section7'
+  question21:
+    description:
+      How long do you intend to stay with this organization, if hired (in number
+      of years)?
+    type: number
+    placeholder:
+    order: 3
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section7'
+  question23:
+    description: Driving Record
+    type: none
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question24:
+    description: What state is your current drivers license issued in?
+    type: dropdown
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question25:
+    description:
+      Have you held a drivers license in any other state or country in the last 7
+      years?
+    type: checkbox
+    placeholder:
+    order: 3
+    subQuestions: '4'
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question26:
+    description: Where and when did you hold drivers license
+    type: text
+    placeholder:
+    order: 4
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question28:
+    description: 'List all traffic violations, photo radar tickets, and at fault traffic accidents in the last 7 years:'
+    type: none
+    placeholder:
+    order: 6
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question29:
+    description: Date (Month/Year)
+    type: table
+    order: 7
+    placeholder: 11/2020
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question30:
+    description: Location (City/State)
+    type: table
+    order: 8
+    placeholder: Denver, CO
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question31:
+    description: Offense
+    type: table
+    order: 9
+    placeholder: Speeding
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question32:
+    description: Outcome/Sentence
+    type: table
+    order: 10
+    placeholder: Citation
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question132:
+    description: Add More
+    type: button
+    order: 11
+    subQuestions: ''
+    responseOptions: '7,8,9,10'
+    externalUse: true
+    section: '@section6'  
+  question33:
+    description: Did you pay any of these late?
+    type: checkbox
+    order: 12
+    placeholder: Yes
+    subQuestions: '13'
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question136:
+    description: Please explain
+    type: textArea
+    order: 13
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'  
+  question34:
+    description:
+      Has your drivers license ever been suspended, restricted or revoked, or have
+      you ever been denied a drivers license?
+    type: checkbox
+    order: 14
+    subQuestions: '15'
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question35:
+    description: 'List where, when and why'
+    type: textArea
+    placeholder:
+    order: 15
+    charLimit: 140
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question36:
+    description: Education
+    type: none
+    placeholder:
+    order: 16
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question37:
+    description:
+      List the high school you attended and all other schools you attended after
+      high school. Include any police or fire academies.
+    type: none
+    placeholder:
+    order: 17
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question38:
+    description: School Name
+    type: table
+    placeholder:
+    order: 18
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question39:
+    description: Location (City/State)
+    type: table
+    placeholder:
+    order: 19
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question40:
+    description: Years attended
+    type: table
+    placeholder:
+    order: 20
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question41:
+    description: Degree/Certificate
+    type: table
+    placeholder:
+    order: 21
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+  question133:
+    description: Add More
+    type: button
+    placeholder:
+    order: 22
+    subQuestions: ''
+    responseOptions: '18,19,20,21'
+    externalUse: true
+    section: '@section6'  
+  question43:
+    description: Work History
+    type: none
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question44:
+    description:
+      List all jobs you have held in the last 5 years including short term or
+      under the table jobs. Account for all periods of time over 60 days,
+      including unemployment and self employment.
+    type: none
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question45:
+    description: Company
+    type: table
+    placeholder:
+    order: 3
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question46:
+    description: City/state
+    type: text
+    placeholder:
+    order: 4
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question47:
+    description: From-To
+    type: text
+    placeholder:
+    order: 5
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question48:
+    description: Position
+    type: text
+    placeholder:
+    order: 6
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question49:
+    description: Why did you leave?
+    type: text
+    placeholder:
+    charLimit: 140
+    order: 7
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question134:
+    description: Add More
+    type: button
+    placeholder:
+    order: 8
+    subQuestions: ''
+    responseOptions: '3,4,5,6,7'
+    externalUse: true
+    section: '@section5'  
+  question50:
+    description:
+      List ALL the jobs you have been fired from, left by mutual decision, or have
+      been asked to resign from.
+    type: textArea
+    placeholder:
+    order: 9
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question131:
+    description: Disciplinary actions
+    type: none
+    placeholder:
+    order: 10
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'  
+  question51:
+    description: Have you ever had any disciplinary actions taken against you?
+    type: checkbox
+    placeholder:
+    order: 11
+    subQuestions: '12,13,14,15,16'
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question52:
+    description: Date
+    type: text
+    order: 12
+    placeholder: Date
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question53:
+    description: Explanation
+    type: text
+    order: 13
+    placeholder: Description of Incident
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question54:
+    description: Employer
+    type: text
+    order: 14
+    placeholder: Employer
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question55:
+    description: 'Action'
+    type: text
+    order: 15
+    placeholder: Action (write up, suspension, etc)
+    charLimit: 140
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5' 
+  question137:
+    description: Add More
+    type: button
+    order: 16
+    subQuestions: ''
+    responseOptions: '12,13,14,15'
+    externalUse: true
+    section: '@section5'       
+  question56:
+    description: 'Military Service'
+    type: none
+    order: 17
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question57:
+    description: 'Have you ever served in the military, for any length of time?'
+    type: checkbox
+    order: 18
+    subQuestions: '19,20,22,23,24,25,26,27'
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question58:
+    description: Branch
+    type: text
+    placeholder:
+    order: 19
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question59:
+    description: 'From-To'
+    type: text
+    placeholder:
+    order: 20
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question60:
+    description:
+      Any disciplinary actions, court martials, or judicial actions? (Including
+      negative counselings and letters of reprimand)
+    type: checkbox
+    placeholder:
+    order: 21
+    subQuestions: '22'
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question61:
+    description: 'Please explain'
+    type: textArea
+    placeholder:
+    order: 22
+    charLimit: 200
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question62:
+    description: 'Highest rank obtained'
+    type: text
+    placeholder:
+    order: 23
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question63:
+    description: 'MOS'
+    type: text
+    placeholder:
+    order: 24
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'  
+  question64:
+    description: Primary or last duty station
+    type: text
+    placeholder:
+    order: 25
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question65:
+    description: Type of discharge
+    type: dropdown
+    placeholder:
+    order: 26
+    subQuestions: ''
+    responseOptions:
+      Honorable, General, General Under Honorable, Other Than Honorable, Bad
+      Conduct, Dishonorable, Entry Level
+    externalUse: true
+    section: '@section5'
+  question66:
+    description: Rank at discharge
+    type: text
+    placeholder:
+    order: 27
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question67:
+    description: Have you ever served in the active reserves?
+    type: checkbox
+    placeholder:
+    order: 28
+    subQuestions: '29'
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question68:
+    description: 'Where, when and rank'
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 29
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section5'
+  question69:
+    description: 'Criminal History'
+    type: 'none'
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question70:
+    description:
+      Please list all the times you have ever been arrested or charged with a
+      criminal offense (Do not include minor traffic incidents)
+    type: 'none'
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question71:
+    description: Date
+    type: table
+    placeholder:
+    order: 3
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question72:
+    description: Type of offense
+    type: table
+    placeholder:
+    order: 4
+    charLimit: 40
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question73:
+    description: City/State
+    type: table
+    placeholder:
+    order: 5
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question74:
+    description: Sentence
+    type: table
+    placeholder:
+    order: 6
+    charLimit: 50
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question135:
+    description: Add More
+    type: button
+    placeholder:
+    order: 7
+    subQuestions: ''
+    responseOptions: '3,4,5,6'
+    externalUse: true
+    section: '@section4'  
+  question75:
+    description:
+      What are the most serious laws you have broken that you did not get caught
+      for?
+    type: textArea
+    placeholder:
+    charLimit: 200
+    order: 8
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section4'
+  question81:
+    description: 'Drug and Theft'
+    type: 'none'
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question82:
+    description:
+      Drug Usage (Please only list the last time you used any of the following
+      drugs, such as the last time you used marijuana and the last time you used
+      cocaine, etc.
+    type: radio
+    placeholder:
+    order: 2
+    subQuestions: ''
+    responseOptions:
+      Marijuana, Hashish, Cocaine, Crack cocaine, Speed, Downers, LSD/acid,
+      Heroin, PCP, Quaaludes, Anabolic steroids, Opium, Mushrooms, Other
+      Psychedelics, Ecstasy, Other
+    externalUse: true
+    section: '@section3'
+  question83:
+    description: Do you suspect you have ever been drugged?
+    type: checkbox
+    placeholder:
+    order: 3
+    subQuestions: '4'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question84:
+    description: 'Please explain'
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 4
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question85:
+    description: 'Have you ever used someone else''s prescription medication, for any reason?'
+    type: checkbox
+    placeholder:
+    order: 5
+    subQuestions: '6'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question86:
+    description: 'Please explain '
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 6
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question87:
+    description:
+      Have you ever inhaled any fumes or chemicals, such as glue, Whip its, or
+      gasoline, for the purposes of getting high?
+    type: checkbox
+    placeholder:
+    order: 7
+    subQuestions: '8'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question88:
+    description: 'Please explain '
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 8
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question89:
+    description: 'Have you ever used marijuana, alcohol, or any other illegal drugs at work?'
+    type: checkbox
+    placeholder:
+    order: 9
+    subQuestions: '10'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question90:
+    description: 'Please explain '
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 10
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question91:
+    description: Drug Sales/Manufacturing
+    type: none
+    placeholder:
+    order: 11
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question92:
+    description:
+      Which of the above illegal drugs have you ever sold or traded (even at
+      cost), manufactured, or transported?
+    type: textArea
+    placeholder:
+    order: 12
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question93:
+    description: 'Theft/Stealing '
+    type: none
+    placeholder:
+    order: 13
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question94:
+    description:
+      In the past 10 years, have you, without permission, taken, given away or
+      discounted any merchandise or property from your employers? 
+    type: checkbox
+    placeholder:
+    order: 14
+    subQuestions: '15,16'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question95:
+    description: What and most valuable item
+    type: text
+    placeholder:
+    order: 15
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question96:
+    description: Total worth
+    type: rangeSelector
+    placeholder:
+    order: 17
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question97:
+    description:
+      In the past 10 years, have you, without permission, taken any money from
+      your employers? 
+    type: checkbox
+    placeholder:
+    order: 18
+    subQuestions: '20'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question99:
+    description: Total worth
+    type: rangeSelector
+    placeholder:
+    order: 20
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question100:
+    description:
+      Not counting employers, in the past 10 years, have you, without permission,
+      taken, shoplifted or stolen from anyone (including shoplifting)? 
+    type: checkbox
+    placeholder:
+    order: 21
+    subQuestions: '22, 23'
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question101:
+    description: What and most valuable item
+    type: text
+    placeholder:
+    order: 22
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question102:
+    description: Total worth
+    type: rangeSelector
+    placeholder:
+    order: 23
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section3'
+  question103:
+    description: Physical Violence and Mental Abuse
+    type: none
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question104:
+    description: 'When was the last time you participated in a physical fight?  '
+    type: number
+    placeholder:
+    order: 2
+    subQuestions:  ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question105:
+    description: 'Have you ever engaged in any mental abuse? '
+    type: checkbox
+    placeholder:
+    order: 3
+    subQuestions: '4'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question106:
+    description: Please explain
+    type: textArea
+    placeholder:
+    order: 4
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question107:
+    description:
+      Have you treated anyone unfairly based on their race, creed, gender, or sexual orientation?
+    type: checkbox
+    placeholder:
+    order: 5
+    subQuestions: '6'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question108:
+    description: Please explain
+    type: textArea
+    placeholder:
+    order: 6
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question109:
+    description: Are you applying for a FIRE DEPARTMENT?
+    type: checkbox
+    placeholder:
+    order: 7
+    subQuestions: '8'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question110:
+    description: Have you engaged in any acts of illegal fire setting?
+    type: text
+    placeholder:
+    order: 8
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question111:
+    description: Are you applying at the COLORADO PARKS AND WILDLIFE?
+    type: checkbox
+    placeholder:
+    order: 9
+    subQuestions: '10'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question112:
+    description:
+      Have you ever violated any laws or regulations regarding parks or wildlife
+      rules (e.g., hunting or fishing without a license)? Please describe when and
+      where.
+    type: textArea
+    placeholder:
+    order: 10
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question113:
+    description: Law Enforcement Power Abuse
+    type: none
+    placeholder:
+    order: 11
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question114:
+    description:
+      Have you ever had any law enforcement powers? (Worked for a police
+      department/corrections, etc.) 
+    type: checkbox
+    placeholder:
+    order: 12
+    subQuestions: '13'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question115:
+    description: What law enforcement powers have you abused?
+    type: textArea
+    placeholder:
+    order: 13
+    charLimit: 250
+    subQuestions: ''
+    responseOptions:
+    externalUse: true
+    section: '@section2'
+  question116:
+    description: Illegal Sexual Activities
+    type: none
+    placeholder:
+    order: 14
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question117:
+    description:
+      Have you ever participated in any illegal sexual activities (please note
+      that admissions in this section are not automatic disqualifiers)? 
+    type: textArea
+    placeholder:
+    charLimit: 300
+    order: 15
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question118:
+    description: 'Financial Information'
+    type: 'none'
+    placeholder:
+    order: 1
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question119:
+    description: Have you ever filed for bankruptcy?
+    type: checkbox
+    placeholder:
+    order: 2
+    subQuestions: '3'
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question120:
+    description: 'Please provide date, amount, reason'
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 3
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question121:
+    description: Are any of your bills more than 30 days past due?
+    type: checkbox
+    placeholder:
+    order: 4
+    subQuestions: '5'
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question122:
+    description: 'Please provide number of bills behind, how long, explanation'
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 5
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question123:
+    description:
+      Do you currently have any judgments, garnishments, court actions, or pending
+      actions against you for any money you owe anyone?
+    type: checkbox
+    placeholder:
+    order: 6
+    subQuestions: '7'
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question124:
+    description: Please explain
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 7
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question125:
+    description: Do you have any bills that are currently in collections?
+    type: checkbox
+    placeholder:
+    order: 8
+    subQuestions: '9'
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question126:
+    description: 'Please provide number of bills, total amount, explanation'
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 9
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question127:
+    description: Are you currently behind on any child support payments?
+    type: checkbox
+    placeholder:
+    order: 10
+    subQuestions: '11'
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'
+  question128:
+    description: Please explain
+    type: textArea
+    placeholder:
+    charLimit: 140
+    order: 11
+    subQuestions: ''
+    responseOptions: ''
+    externalUse: true
+    section: '@section1'

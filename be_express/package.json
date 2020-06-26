@@ -1,0 +1,52 @@
+{
+  "name": "@mz3/express-typeorm",
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^7.17.0",
+    "ramda": "^0.26.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typeorm": "0.2.22"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.2",
+    "@types/ramda": "^0.26.38",
+    "@types/webpack-env": "^1.14.1",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "dotenv-cli": "^3.1.0",
+    "execa": "^4.0.0",
+    "jest": "^24.8.0",
+    "nodemon": "^2.0.2",
+    "pm2": "^4.2.1",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.3.0",
+    "ts-node": "^8.2.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typeorm-fixtures-cli": "^1.5.0",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts --watch .env",
+    "test": "jest -c jest.unit.js src/",
+    "build": "tsc -b -v",
+    "clean": "tsc -b --clean",
+    "prepare": "yarn clean; yarn build",
+    "startdb": "bin/psql-db.sh",
+    "typeorm": "ts-node ./node_modules/typeorm/cli -f ./src/typeorm.config.ts",
+    "migration:generate": "yarn typeorm -c forensic_truth migration:generate -n",
+    "db:create": "bin/create-db.sh",
+    "db:drop": "bin/drop-db.sh",
+    "db:migrate": "yarn typeorm migration:run -c forensic_truth",
+    "db:revert": "yarn typeorm migration:revert -c forensic_truth",
+    "db:seed": "fixtures ./src/fixtures -c ./src/typeorm.config.ts --sync --require=ts-node/register --connection forensic_truth",
+    "client": "bin/build-client.ts"
+  }
+}
