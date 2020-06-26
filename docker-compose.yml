@@ -2,15 +2,23 @@ version: '3'
 services:
   be_express:
     container_name: 'be_express'
-    build: ./be_express/
+    build: 
+      context: .
+      dockerfile: ./be_express/Dockerfile
     ports:
-      - '3001:3001'
+      - '1337:1337'
     environment:
       PGHOST: 'postgres'
       PGUSER: 'postgres'
       PGPASSWORD: 'anything'
       PGPORT: '5432'
       EXPRESS_TYPEORM_PGDATABASE: 'forensic_truth'
+    depends_on:
+      - pg
+    volumes:
+      - ./be_express:/usr/src/app
+      - /usr/src/app/node_modules
+    command: /bin/bash -c "npm run build && npm run db:migrate && npm run db:seed && npm run start"
   pg:
     image: 'postgres:12'
     container_name: 'postgres'
@@ -21,9 +29,17 @@ services:
       POSTGRES_PASSWORD: 'anything'
       POSTGRES_DB: 'forensic_truth'
     volumes:
-      - ./pg/db_data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
   fe_react:
     container_name: 'fe_react'
-    build: ./fe_react/
+    build: 
+      context: .
+      dockerfile: ./fe_react/Dockerfile
     ports:
       - '3000:3000'
+    volumes:
+      - ./fe_react:/usr/src/app
+      - /usr/src/app/node_modules
+    command: /bin/bash -c "npm run start"
+volumes:
+  data: {}
