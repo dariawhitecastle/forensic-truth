@@ -1,7 +1,7 @@
 // environment
 require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const {
-  PGHOST = 'localhost',
+  PGHOST = 'pg',
   PGUSER,
   PGPASSWORD,
   PGPORT = '5432',
