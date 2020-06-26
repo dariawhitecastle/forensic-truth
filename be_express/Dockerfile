@@ -1,8 +1,6 @@
 FROM node:12
 WORKDIR /usr/src/app
-COPY package*.json ./
+ADD be_express/ .
+RUN npm install typescript ts-node ts-node-dev -g
 RUN npm install
-COPY . .
-RUN npm run build
-EXPOSE 3001
-CMD [ "node", "dist/index.js" ]
+EXPOSE 1337
