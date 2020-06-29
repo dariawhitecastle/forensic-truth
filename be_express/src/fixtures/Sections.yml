@@ -1,33 +1,26 @@
 entity: Section
 items:
   section1:
-    name: 'Financial Information' 
-    application: '@application1'   
-
+    name: 'Personal Information'
+    application: '@application1'
   section2:
-    name: 'Integrity'
-    application: '@application1'
-
-  section3:
-    name: 'Drugs and Theft'    
-    application: '@application1'
-    
-  section4:
-    name: 'Criminal History'   
-    application: '@application1'
-
-  section5:
-    name: 'Work History'
-    application: '@application1'
-    
-  section6:
-    name: 'Driving and Education'
-    application: '@application1'
-   
-  section7:
     name: 'Application Process'
     application: '@application1'
-      
+  section3:
+    name: 'Driving and Education'
+    application: '@application1'
+  section4:
+    name: 'Work History'
+    application: '@application1'
+  section5:
+    name: 'Criminal History'
+    application: '@application1'
+  section6:
+    name: 'Drugs and Theft'
+    application: '@application1'
+  section7:
+    name: 'Integrity'
+    application: '@application1'
   section8:
-    name: 'Personal Information'
+    name: 'Financial Information'
     application: '@application1'

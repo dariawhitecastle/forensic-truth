@@ -9,7 +9,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question129:
     description: Middle Name
     type: text
@@ -19,7 +19,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question130:
     description: Last Name
     type: text
@@ -29,7 +29,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question2:
     description: Street Address
     type: text
@@ -39,7 +39,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question3:
     description: City
     type: text
@@ -49,7 +49,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question4:
     description: State
     type: dropdown
@@ -59,7 +59,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question5:
     description: Zip
     type: number
@@ -69,7 +69,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question6:
     description: Date of Birth
     type: text
@@ -79,7 +79,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question7:
     description: Last 4 digits of SSN
     type: number
@@ -89,7 +89,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question8:
     description:
       Is this an application for the City and County of Denver or the Denver Civil
@@ -101,7 +101,7 @@ items:
     subQuestions: '11,12,13'
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question9:
     description: Place of birth
     type: text
@@ -111,7 +111,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question10:
     description: Are you a US citizen?
     type: yesNo
@@ -121,7 +121,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question11:
     description: 'If not, are you legal to work in the United States?'
     type: yesNo
@@ -131,7 +131,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question12:
     description: Have you ever taken a polygraph or voice stress examination (CVSA)?
     type: yesNo
@@ -141,7 +141,7 @@ items:
     subQuestions: '15'
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question13:
     description:
       List all exams you have taken, for whom and when (agency and estimated
@@ -153,7 +153,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question14:
     description: When was the last time you slept?
     type: radio
@@ -163,7 +163,7 @@ items:
     subQuestions: ''
     responseOptions: 'Today, Last night, Yesterday, Before Yesterday'
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question15:
     description: Number of hours slept?
     type: number
@@ -173,7 +173,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question16:
     description:
       List all prescription medications, alcohol, or illegal drugs you have
@@ -185,7 +185,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: false
-    section: '@section8'
+    section: '@section1'
   question17:
     description:
       Are you experiencing any physical discomfort that you think would affect
@@ -197,7 +197,7 @@ items:
     subQuestions: '20'
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question18:
     description: Please explain
     type: textArea
@@ -208,7 +208,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section8'
+    section: '@section1'
   question19:
     description:
       List all the information you may have left off your application, or have
@@ -221,7 +221,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section7'
+    section: '@section2'
   question20:
     description:
       On any of your examinations or tests for the organization you are applying
@@ -233,7 +233,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section7'
+    section: '@section2'
   question21:
     description:
       How long do you intend to stay with this organization, if hired (in number
@@ -245,7 +245,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section7'
+    section: '@section2'
   question22:
     description: What other applications do you currently have in active process?
     type: textArea
@@ -255,7 +255,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section7'
+    section: '@section2'
   question23:
     description: Driving Record
     type: none
@@ -265,7 +265,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question24:
     description: What state is your current driver's license issued in?
     type: dropdown
@@ -275,7 +275,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question25:
     description:
       Have you held a driver's license in any other state or country in the last 7
@@ -287,7 +287,7 @@ items:
     subQuestions: '4'
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question26:
     description: Where and when did you hold driver's license?
     type: text
@@ -297,7 +297,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question28:
     description: 'List all traffic violations, photo radar tickets, and at fault traffic accidents in the last 7 years:'
     type: none
@@ -307,7 +307,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section6'
+    section: '@section3'
   question29:
     description: Date (Month/Year)
     type: table
@@ -317,7 +317,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question30:
     description: Location (City/State)
     type: table
@@ -327,7 +327,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question31:
     description: Offense
     type: table
@@ -337,7 +337,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question32:
     description: Outcome/Sentence
     type: table
@@ -347,7 +347,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question132:
     description: Add More
     type: button
@@ -356,7 +356,7 @@ items:
     responseOptions: '7,8,9,10'
     externalUse: true
     required: false
-    section: '@section6'
+    section: '@section3'
   question33:
     description: Did you pay any of these late?
     type: yesNo
@@ -366,7 +366,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section6'
+    section: '@section3'
   question136:
     description: Please explain
     type: textArea
@@ -376,7 +376,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question34:
     description:
       Has your drivers license ever been suspended, restricted or revoked, or have
@@ -387,7 +387,7 @@ items:
     subQuestions: '15'
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question35:
     description: 'List where, when and why'
     type: textArea
@@ -398,7 +398,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question36:
     description: Education
     type: none
@@ -408,7 +408,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section6'
+    section: '@section3'
   question37:
     description:
       List the high school you attended and all other schools you attended after
@@ -419,7 +419,7 @@ items:
     responseOptions: ''
     required: false
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question38:
     description: School Name
     type: table
@@ -429,7 +429,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question39:
     description: Location (City/State)
     type: table
@@ -439,7 +439,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question40:
     description: Years attended
     type: table
@@ -449,7 +449,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question41:
     description: Degree/Certificate
     type: table
@@ -459,7 +459,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section6'
+    section: '@section3'
   question133:
     description: Add More
     type: button
@@ -469,7 +469,7 @@ items:
     responseOptions: '18,19,20,21'
     externalUse: true
     required: false
-    section: '@section6'
+    section: '@section3'
   question43:
     description: Work History
     type: none
@@ -478,7 +478,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question44:
     description:
       List all jobs you have held in the last 5 years including short term or
@@ -491,7 +491,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question45:
     description: Company
     type: table
@@ -501,7 +501,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question46:
     description: City/state
     type: text
@@ -511,7 +511,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question47:
     description: From-To
     type: text
@@ -521,7 +521,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question48:
     description: Position
     type: text
@@ -531,7 +531,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question49:
     description: Why did you leave?
     type: text
@@ -542,7 +542,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question134:
     description: Add More
     type: button
@@ -552,7 +552,7 @@ items:
     responseOptions: '3,4,5,6,7'
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question50:
     description:
       List ALL the jobs you have been fired from, left by mutual decision, or have
@@ -564,7 +564,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question131:
     description: Disciplinary actions
     type: none
@@ -574,7 +574,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question51:
     description: Have you ever had any disciplinary actions taken against you?
     type: yesNo
@@ -584,7 +584,7 @@ items:
     subQuestions: '12,13,14,15'
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question52:
     description: Date
     type: text
@@ -594,7 +594,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question53:
     description: Explanation
     type: text
@@ -604,7 +604,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question54:
     description: Employer
     type: text
@@ -614,7 +614,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question55:
     description: 'Action'
     type: text
@@ -625,7 +625,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question137:
     description: Add More
     type: button
@@ -634,7 +634,7 @@ items:
     responseOptions: '12,13,14,15'
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question56:
     description: 'Military Service'
     type: none
@@ -643,7 +643,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question57:
     description: 'Have you ever served in the military, for any length of time?'
     type: yesNo
@@ -652,7 +652,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section5'
+    section: '@section4'
   question58:
     description: Branch
     type: text
@@ -662,7 +662,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question59:
     description: 'From-To'
     type: text
@@ -672,7 +672,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question60:
     description:
       Any disciplinary actions, court martials, or judicial actions? (Including
@@ -684,7 +684,7 @@ items:
     subQuestions: '22'
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question61:
     description: 'Please explain'
     type: textArea
@@ -695,7 +695,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question62:
     description: 'Highest rank obtained'
     type: text
@@ -705,7 +705,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question63:
     description: 'MOS'
     type: text
@@ -715,7 +715,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question64:
     description: Primary or last duty station
     type: text
@@ -725,7 +725,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question65:
     description: Type of discharge
     type: dropdown
@@ -737,7 +737,7 @@ items:
       Honorable, General, General Under Honorable, Other Than Honorable, Bad
       Conduct, Dishonorable, Entry Level
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question66:
     description: Rank at discharge
     type: text
@@ -747,7 +747,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question67:
     description: Have you ever served in the active reserves?
     type: yesNo
@@ -757,7 +757,7 @@ items:
     subQuestions: '29'
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question68:
     description: 'Where, when and rank'
     type: textArea
@@ -768,7 +768,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section5'
+    section: '@section4'
   question69:
     description: 'Criminal History'
     type: 'none'
@@ -778,7 +778,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section4'
+    section: '@section5'
   question70:
     description:
       Please list all the times you have ever been arrested or charged with a
@@ -790,7 +790,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section4'
+    section: '@section5'
   question71:
     description: Date
     type: table
@@ -800,7 +800,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question72:
     description: Type of offense
     type: table
@@ -811,7 +811,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question73:
     description: City/State
     type: table
@@ -821,7 +821,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question74:
     description: Sentence
     type: table
@@ -832,7 +832,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question135:
     description: Add More
     type: button
@@ -842,7 +842,7 @@ items:
     subQuestions: ''
     responseOptions: '3,4,5,6'
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question75:
     description:
       What are the most serious laws you have broken that you did not get caught
@@ -855,7 +855,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section4'
+    section: '@section5'
   question81:
     description: 'Illegal Drugs and Theft'
     type: 'none'
@@ -865,7 +865,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section3'
+    section: '@section6'
   question82:
     description:
       Drug Usage (Please only list the last time you used any of the following
@@ -881,7 +881,7 @@ items:
       Heroin, PCP, Quaaludes, Anabolic steroids, Opium, Mushrooms, Other
       Psychedelics, Ecstasy, Other
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question83:
     description: Do you suspect you have ever been drugged?
     type: yesNo
@@ -891,7 +891,7 @@ items:
     subQuestions: '4'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question84:
     description: 'Please explain'
     type: textArea
@@ -902,7 +902,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question85:
     description: "Have you ever used someone else's prescription medication, for any reason?"
     type: yesNo
@@ -912,7 +912,7 @@ items:
     subQuestions: '6'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question86:
     description: 'Please explain '
     type: textArea
@@ -923,7 +923,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question87:
     description:
       Have you ever inhaled any fumes or chemicals, such as glue, Whip its, or
@@ -935,7 +935,7 @@ items:
     subQuestions: '8'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question88:
     description: 'Please explain '
     type: textArea
@@ -946,7 +946,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question89:
     description: 'Have you ever used marijuana, alcohol, or any other illegal drugs at work?'
     type: yesNo
@@ -956,7 +956,7 @@ items:
     subQuestions: '10'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question90:
     description: 'Please explain '
     type: textArea
@@ -967,7 +967,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question91:
     description: Drug Sales/Manufacturing
     type: none
@@ -977,7 +977,7 @@ items:
     responseOptions: ''
     required: false
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question92:
     description:
       Which of the above illegal drugs have you ever sold or traded (even at
@@ -989,7 +989,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question93:
     description: 'Theft/Stealing '
     type: none
@@ -999,7 +999,7 @@ items:
     responseOptions: ''
     required: false
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question94:
     description:
       In the past 10 years, have you, without permission, taken, given away or
@@ -1011,7 +1011,7 @@ items:
     subQuestions: '15,16'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question95:
     description: What and most valuable item
     type: text
@@ -1022,7 +1022,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question96:
     description: Total worth
     type: text
@@ -1032,7 +1032,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question97:
     description:
       In the past 10 years, have you, without permission, taken any money from
@@ -1044,7 +1044,7 @@ items:
     subQuestions: '20'
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question99:
     description: Total worth
     type: text
@@ -1054,7 +1054,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section3'
+    section: '@section6'
   question100:
     description:
       Not counting employers, in the past 10 years, have you, without permission,
@@ -1066,7 +1066,7 @@ items:
     responseOptions: ''
     required: false
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question101:
     description: What and most valuable item
     type: text
@@ -1076,7 +1076,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question102:
     description: Total worth
     type: text
@@ -1086,7 +1086,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section3'
+    section: '@section6'
   question103:
     description: Physical Violence and Mental Abuse
     type: none
@@ -1096,7 +1096,7 @@ items:
     responseOptions: ''
     externalUse: true
     required: false
-    section: '@section2'
+    section: '@section7'
   question104:
     description: 'When was the last time you participated in a physical fight?  '
     type: number
@@ -1106,7 +1106,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question105:
     description: 'Have you ever engaged in any mental abuse? '
     type: yesNo
@@ -1116,7 +1116,7 @@ items:
     subQuestions: '4'
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question106:
     description: Please explain
     type: textArea
@@ -1127,7 +1127,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question107:
     description: Have you treated anyone unfairly based on their race, creed, gender, or sexual orientation?
     type: yesNo
@@ -1137,7 +1137,7 @@ items:
     subQuestions: '6'
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question108:
     description: Please explain
     type: textArea
@@ -1147,7 +1147,7 @@ items:
     responseOptions: ''
     required: false
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question109:
     description: Are you applying for a FIRE DEPARTMENT?
     type: yesNo
@@ -1157,7 +1157,7 @@ items:
     subQuestions: '8'
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question110:
     description: Have you engaged in any acts of illegal fire setting?
     type: text
@@ -1167,7 +1167,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question111:
     description: Are you applying at the COLORADO PARKS AND WILDLIFE?
     type: yesNo
@@ -1177,7 +1177,7 @@ items:
     subQuestions: '10'
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question112:
     description:
       Have you ever violated any laws or regulations regarding parks or wildlife
@@ -1190,7 +1190,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question113:
     description: Law Enforcement Power Abuse
     type: none
@@ -1200,7 +1200,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question114:
     description:
       Have you ever had any law enforcement powers? (Worked for a police
@@ -1212,7 +1212,7 @@ items:
     subQuestions: '13'
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question115:
     description: What law enforcement powers have you abused?
     type: textArea
@@ -1223,7 +1223,7 @@ items:
     subQuestions: ''
     responseOptions:
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question116:
     description: Illegal Sexual Activities
     type: none
@@ -1233,7 +1233,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question117:
     description:
       Have you ever participated in any illegal sexual activities (please note
@@ -1246,7 +1246,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section2'
+    section: '@section7'
   question118:
     description: 'Financial Information'
     type: 'none'
@@ -1256,7 +1256,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question119:
     description: Have you ever filed for bankruptcy?
     type: yesNo
@@ -1266,7 +1266,7 @@ items:
     subQuestions: '3'
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question120:
     description: 'Please provide date, amount, reason'
     type: textArea
@@ -1277,7 +1277,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question121:
     description: Are any of your bills more than 30 days past due?
     type: yesNo
@@ -1287,7 +1287,7 @@ items:
     required: false
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question122:
     description: 'Please provide number of bills behind, how long, explanation'
     type: textArea
@@ -1298,7 +1298,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question123:
     description:
       Do you currently have any judgments, garnishments, court actions, or pending
@@ -1310,7 +1310,7 @@ items:
     subQuestions: '7'
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question124:
     description: Please explain
     type: textArea
@@ -1321,7 +1321,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question125:
     description: Do you have any bills that are currently in collections?
     type: yesNo
@@ -1331,7 +1331,7 @@ items:
     subQuestions: '9'
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question126:
     description: 'Please provide number of bills, total amount, explanation'
     type: textArea
@@ -1342,7 +1342,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question127:
     description: Are you currently behind on any child support payments?
     type: yesNo
@@ -1352,7 +1352,7 @@ items:
     subQuestions: '11'
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
   question128:
     description: Please explain
     type: textArea
@@ -1363,4 +1363,4 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    section: '@section1'
+    section: '@section8'
