@@ -1,6 +1,6 @@
 // environment
 require('dotenv').config({
-  path: require('path').join(__dirname, '../../../.env')
+  path: require('path').join(__dirname, '../../../.env'),
 });
 
 // imports
@@ -35,9 +35,9 @@ createConnection(config)
     // Section
     const sectionRepository = connection.getRepository(Section);
 
-    app.get('/question', async (req: Request, res: Response) => {
+    app.get('/api/question', async (req: Request, res: Response) => {
       const sections = await sectionRepository.find({
-        relations: [ 'question' ]
+        relations: ['question'],
       });
       return res.send(sections);
     });
@@ -45,7 +45,7 @@ createConnection(config)
     // User
     const userRepository = connection.getRepository(User);
     app.post(
-      '/create-user',
+      '/api/create-user',
       PostRequestHandler(async (body) => {
         const user = new User();
         Object.assign(user, body);
@@ -57,7 +57,7 @@ createConnection(config)
     // Submission
     const submissionsRepository = connection.getRepository(Submission);
     app.post(
-      '/submissions',
+      '/api/submissions',
       RequestHandler(async (body: any) => {
         const submission = Object.assign(new Submission(), body);
         await submissionsRepository.save(submission);
@@ -67,8 +67,8 @@ createConnection(config)
 
     // /submissions?caseId=xxx,lastName=yyy
     app.get(
-      '/submissions',
-      RequestHandler((query) => submissionsRepository.find(query), [ 'query' ])
+      '/api/submissions',
+      RequestHandler((query) => submissionsRepository.find(query), ['query'])
     );
 
     // app.post(
