@@ -15,7 +15,10 @@ import {
 import { states } from '../utils/constants';
 
 // styles
-import { StyledRadioButtonGroup } from './SingleStepForm.styled';
+import {
+  StyledRadioButtonGroup,
+  StyledFormField,
+} from './SingleStepForm.styled';
 
 const FormFieldComponent = ({
   question,
@@ -75,14 +78,12 @@ const FormFieldComponent = ({
     case 'text':
     case 'number':
     case 'date':
-      // console.log(personalInfo[id]);
-
       return (
         <Box
           pad={{ right: 'medium' }}
           style={{ display: 'inline-flex' }}
           width={description.length > 20 ? '80%' : '33%'}>
-          <FormField
+          <StyledFormField
             autoComplete='none'
             label={description}
             maxLength={charLimit ?? 100}

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useCallback, useMemo, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { observer } from 'mobx-react';
 import { Form, Heading } from 'grommet';
 
@@ -10,6 +10,9 @@ import FormFieldComponent from './FormField';
 
 // styles
 import { StyledFormWrapper } from './SingleStepForm.styled.js';
+
+// helpers
+import { checkCharLimit } from '../utils/helpers';
 
 const PersonalInfoStep = observer(
   ({
@@ -62,7 +65,7 @@ const PersonalInfoStep = observer(
         );
 
         // set value in state
-        setPersonalInfo({ field, value: e.option || value });
+        checkCharLimit(e, setPersonalInfo);
 
         if (type === 'yesNo') {
           if (value === 'true' && filtered?.subQuestions?.length) {
