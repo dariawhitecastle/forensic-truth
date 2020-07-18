@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Box,
   Button,
@@ -9,15 +9,21 @@ import {
   Select,
   Text,
   TextArea,
-} from 'grommet'
+} from 'grommet';
 
 // utils
-import { states } from '../utils/constants'
+import { states } from '../utils/constants';
 
 // styles
-import { StyledRadioButtonGroup } from './SingleStepForm.styled'
+import { StyledRadioButtonGroup } from './SingleStepForm.styled';
 
-const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, currentSubqs }) => {
+const FormFieldComponent = ({
+  question,
+  onChange,
+  onAddMore,
+  personalInfo,
+  currentSubqs,
+}) => {
   const {
     id,
     charLimit,
@@ -27,56 +33,57 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
     placeholder,
     responseOptions,
     required,
-  } = question
+  } = question;
 
-  if (currentSubqs.includes(order.toString())) return null
+  if (currentSubqs.includes(order.toString())) return null;
+
   switch (type) {
     case 'table':
       return (
         <Box style={{ display: 'inline-flex' }} pad={{ right: 'small' }}>
           <FormField
-            autoComplete="none"
+            autoComplete='none'
             label={description}
             maxLength={charLimit ?? 100}
             name={id.toString()}
             value={personalInfo[id] ?? ''}
             onChange={(event) => onChange(event, id)}
             placeholder={placeholder}
-            type="text"
+            type='text'
             required={required}
           />
         </Box>
-      )
+      );
     case 'button':
       return (
         <Box
-          align="start"
+          align='start'
           style={{
             display: 'inline-flex',
             verticalAlign: 'bottom',
             paddingBottom: 33,
             marginRight: 5,
-          }}
-        >
+          }}>
           <Button
             primary
-            color="primary"
+            color='primary'
             label={description}
             onClick={() => onAddMore(responseOptions, id)}
           />
         </Box>
-      )
+      );
     case 'text':
     case 'number':
     case 'date':
+      // console.log(personalInfo[id]);
+
       return (
         <Box
           pad={{ right: 'medium' }}
           style={{ display: 'inline-flex' }}
-          width={description.length > 20 ? '80%' : '33%'}
-        >
+          width={description.length > 20 ? '80%' : '33%'}>
           <FormField
-            autoComplete="none"
+            autoComplete='none'
             label={description}
             maxLength={charLimit ?? 100}
             name={id.toString()}
@@ -87,15 +94,15 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     case 'textArea':
       return (
-        <Box width="80%">
+        <Box width='80%'>
           <Box pad={{ vertical: 'medium' }}>
             <Text>{description}</Text>
           </Box>
           <TextArea
-            placeholder="type here"
+            placeholder='type here'
             name={id.toString()}
             maxLength={charLimit ?? 100}
             value={personalInfo[id]}
@@ -103,14 +110,13 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     case 'dropdown':
       return (
         <Box
           width={description.length > 25 ? '80%' : '33%'}
           pad={{ right: 'medium' }}
-          style={{ display: 'inline-flex' }}
-        >
+          style={{ display: 'inline-flex' }}>
           <Text>{description}</Text>
           <Select
             options={responseOptions.length ? responseOptions : states}
@@ -122,11 +128,11 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     case 'yesNo':
     case 'yesNo reverse':
       return (
-        <Box pad="small" direction="row" align="start">
+        <Box pad='small' direction='row' align='start'>
           <Text>{description}</Text>
           <StyledRadioButtonGroup
             name={id.toString()}
@@ -139,10 +145,10 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     case 'checkBoxGroup':
       return (
-        <Box pad="small" direction="column" align="start">
+        <Box pad='small' direction='column' align='start'>
           <Text>{description}</Text>
           <CheckBoxGroup
             options={responseOptions}
@@ -150,10 +156,10 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     case 'radio':
       return (
-        <Box pad="small">
+        <Box pad='small'>
           <Text margin={{ top: '12px', bottom: '12px' }}>{description}</Text>
           <RadioButtonGroup
             label={description}
@@ -164,16 +170,16 @@ const FormFieldComponent = ({ question, onChange, onAddMore, personalInfo, curre
             required={required}
           />
         </Box>
-      )
+      );
     default:
       return (
-        <Box width="100%">
-          <Heading level="4" style={{ maxWidth: '100%' }}>
+        <Box width='100%'>
+          <Heading level='4' style={{ maxWidth: '100%' }}>
             {description}
           </Heading>
         </Box>
-      )
+      );
   }
-}
+};
 
-export default FormFieldComponent
+export default FormFieldComponent;

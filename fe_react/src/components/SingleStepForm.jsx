@@ -53,8 +53,6 @@ const PersonalInfoStep = observer(
       !!Object.keys(personalInfo).length && !isInvalid && setDisableNext(false);
     }, [Object.keys(personalInfo).length, currentSubqs.length]);
 
-    // console.log(currentSubqs);
-
     const onChange = useCallback(
       (e, id, type) => {
         const { name: field, value } = e.target;
@@ -105,20 +103,17 @@ const PersonalInfoStep = observer(
       setQuestions(R.flatten(updated));
     };
 
-    const components = useMemo(
-      () =>
-        questions.map((question, i) => (
-          <FormFieldComponent
-            key={`${question.id}-${i}`}
-            onChange={onChange}
-            onAddMore={onAddMore}
-            question={question}
-            personalInfo={personalInfo}
-            currentSubqs={currentSubqs}
-          />
-        )),
-      [personalInfo, questions, currentSubqs]
-    );
+    const renderFormFields = () =>
+      questions.map((question, i) => (
+        <FormFieldComponent
+          key={`${question.id}-${i}`}
+          onChange={onChange}
+          onAddMore={onAddMore}
+          question={question}
+          personalInfo={personalInfo}
+          currentSubqs={currentSubqs}
+        />
+      ));
 
     return (
       <StyledFormWrapper height='100vh' alignSelf='center'>
@@ -126,7 +121,7 @@ const PersonalInfoStep = observer(
           {header}
         </Heading>
         <Form validate='blur' onSubmit={() => saveData(personalInfo)}>
-          {components}
+          {renderFormFields()}
         </Form>
       </StyledFormWrapper>
     );
