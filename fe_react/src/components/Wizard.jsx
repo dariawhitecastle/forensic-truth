@@ -1,11 +1,11 @@
-import React from 'react'
-import { observer } from 'mobx-react'
+import React from 'react';
+import { observer } from 'mobx-react';
 
-import styled from 'styled-components'
-import { Box, Button } from 'grommet'
+import styled from 'styled-components';
+import { Box, Button } from 'grommet';
 
 // utils
-import { getCurrentStepProp } from '../utils/helpers'
+import { getCurrentStepProp } from '../utils/helpers';
 
 const StyledButtonBox = styled(Box)`
   left: 250px;
@@ -13,27 +13,35 @@ const StyledButtonBox = styled(Box)`
   bottom: 0px;
   padding: 24px;
   width: calc(100% - 249px);
-`
+`;
 
 const Wizard = observer(
-  ({ currentStep, disableNext, steps, onClickNext, onClickPrev, component, setDisableNext }) => {
-    const goToNext = (formData) => {
+  ({
+    currentStep,
+    disableNext,
+    steps,
+    onClickNext,
+    onClickPrev,
+    component,
+    setDisableNext,
+  }) => {
+    const goToNext = () => {
       if (currentStep < steps.length) {
-        setDisableNext(true)
-        onClickNext(currentStep + 1)
+        setDisableNext(true);
+        onClickNext(currentStep + 1);
       }
-      return null
-    }
+      return null;
+    };
 
     const goToPrev = () => {
       if (currentStep > 1) {
-        onClickPrev(currentStep - 1)
+        onClickPrev(currentStep - 1);
       }
-      return null
-    }
+      return null;
+    };
 
     return (
-      <Box direction="column" display="flex" justify="stretch">
+      <Box direction='column' display='flex' justify='stretch'>
         {/* <TransitionGroup component="div" className="App">
         <CSSTransition
           key={currentKey}
@@ -51,23 +59,32 @@ const Wizard = observer(
         </Box>
         {/* </CSSTransition>
       </TransitionGroup> */}
-        <StyledButtonBox direction="row" display="flex" justify="between" elevation="large">
+        <StyledButtonBox
+          direction='row'
+          display='flex'
+          justify='between'
+          elevation='large'>
           {currentStep > 1 ? (
-            <Button primary color="primary" label="Previous" onClick={() => goToPrev()} />
+            <Button
+              primary
+              color='primary'
+              label='Previous'
+              onClick={() => goToPrev()}
+            />
           ) : (
             <Box />
           )}
           <Button
             disabled={disableNext}
             primary
-            color="primary"
+            color='primary'
             label={currentStep === steps.length ? 'Submit' : 'Next'}
             onClick={() => goToNext()}
           />
         </StyledButtonBox>
       </Box>
-    )
-  },
-)
+    );
+  }
+);
 
-export default Wizard
+export default Wizard;

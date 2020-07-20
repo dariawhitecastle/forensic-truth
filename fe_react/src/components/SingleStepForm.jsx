@@ -25,6 +25,7 @@ const PersonalInfoStep = observer(
   }) => {
     const [questions, setQuestions] = useState([]);
     const [currentSubqs, setCurrentSubqs] = useState([]);
+    const [tableRow, setTableRow] = useState(0);
 
     useEffect(() => {
       setQuestions(questionList);
@@ -58,7 +59,7 @@ const PersonalInfoStep = observer(
 
     const onChange = useCallback(
       (e, id, type) => {
-        const { name: field, value } = e.target;
+        const { value } = e.target;
         // find subquestions for this question
         const filtered = questionList.find(
           (singleQuestion) => singleQuestion.id === id
@@ -97,12 +98,20 @@ const PersonalInfoStep = observer(
     );
 
     const onAddMore = (options, id) => {
+      setTableRow(tableRow + 1);
+
       const findSubQ = (option) => {
-        return R.find(R.propEq('order', Number(option)))(questionList);
+        const foundSubq = R.find(R.propEq('order', Number(option)))(
+          questionList
+        );
+        return {
+          ...foundSubq,
+          id: Number(`${foundSubq.id}${tableRow}`),
+        };
       };
-      const idx = R.findIndex(R.propEq('id', id), questionList);
+      const idx = R.findIndex(R.propEq('id', id), questions);
       const subQuestions = R.map(findSubQ, options);
-      const updated = R.insert(idx, [...subQuestions], questions);
+      const updated = R.insert(idx, subQuestions, questions);
       setQuestions(R.flatten(updated));
     };
 
