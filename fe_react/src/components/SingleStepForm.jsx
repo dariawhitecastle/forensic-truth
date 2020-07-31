@@ -76,6 +76,10 @@ const PersonalInfoStep = observer(
             // add subquestion back to currentSubqs
             const subqs = R.union(currentSubqs, filtered?.subQuestions);
             setCurrentSubqs(subqs);
+            // clear out all subquestions from personal info
+            R.forEach((q) => {
+              setPersonalInfo({ field: [Number(q)], value: undefined });
+            }, filtered.subQuestions);
           }
         }
 
@@ -91,11 +95,17 @@ const PersonalInfoStep = observer(
               questionList
             );
             setCurrentSubqs(subqs);
+            // clear out all subquestions from personal info
+            R.forEach((q) => {
+              setPersonalInfo({ field: [Number(q)], value: undefined });
+            }, filtered.subQuestions);
           }
         }
       },
       [currentSubqs]
     );
+
+    console.log(JSON.parse(JSON.stringify(personalInfo)));
 
     const onAddMore = (options, id) => {
       setTableRow(tableRow + 1);

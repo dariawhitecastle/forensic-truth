@@ -38,7 +38,7 @@ const FormFieldComponent = ({
     required,
   } = question;
 
-  if (currentSubqs.includes(order.toString())) return null;
+  if (currentSubqs.includes(order.toString()) && !personalInfo[id]) return null;
 
   switch (type) {
     case 'table':

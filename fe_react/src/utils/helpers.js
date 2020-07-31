@@ -8,14 +8,16 @@ export const getCurrentStepProp = (prop, xs, value) =>
 export const checkCharLimit = (e, fn) => {
   const { name: field, value } = e.target;
 
-  if (field === '123' && value.length >= 5) {
+  // for Zip
+  if (field === '7' && value.length >= 5) {
     return fn({
       field,
       value: value.slice(0, 5),
     });
   }
 
-  if (field === '2' && value.length >= 4) {
+  // for SSN
+  if (field === '9' && value.length >= 4) {
     return fn({
       field,
       value: value.slice(0, 4),
