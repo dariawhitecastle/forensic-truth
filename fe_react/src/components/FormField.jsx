@@ -10,6 +10,7 @@ import {
   Text,
   TextArea,
 } from 'grommet';
+import { Add } from 'grommet-icons';
 
 // utils
 import { states } from '../utils/constants';
@@ -36,6 +37,7 @@ const FormFieldComponent = ({
     placeholder,
     responseOptions,
     required,
+    width,
   } = question;
 
   if (currentSubqs.includes(order.toString()) && !personalInfo[id]) return null;
@@ -43,10 +45,13 @@ const FormFieldComponent = ({
   switch (type) {
     case 'table':
       return (
-        <Box style={{ display: 'inline-flex' }} pad={{ right: 'small' }}>
+        <Box
+          style={{ display: 'inline-flex' }}
+          pad={{ right: 'small' }}
+          width={width ? `${width}%` : '20%'}>
           <FormField
             autoComplete='none'
-            label={description}
+            label={<Text truncate>{description}</Text>}
             maxLength={charLimit ?? 100}
             name={id.toString()}
             value={personalInfo[id] ?? ''}
@@ -70,7 +75,7 @@ const FormFieldComponent = ({
           <Button
             primary
             color='primary'
-            label={description}
+            icon={<Add />}
             onClick={() => onAddMore(responseOptions, id)}
           />
         </Box>
@@ -82,7 +87,7 @@ const FormFieldComponent = ({
         <Box
           pad={{ right: 'medium' }}
           style={{ display: 'inline-flex' }}
-          width={description.length > 20 ? '80%' : '33%'}>
+          width={width ? `${width}%` : 'auto'}>
           <StyledFormField
             autoComplete='none'
             label={description}
@@ -133,7 +138,7 @@ const FormFieldComponent = ({
     case 'yesNo':
     case 'yesNo reverse':
       return (
-        <Box pad='small' direction='row' align='start'>
+        <Box pad={{ vertical: 'small' }} direction='row' align='start'>
           <Text>{description}</Text>
           <StyledRadioButtonGroup
             name={id.toString()}

@@ -18,6 +18,8 @@ export class Question {
 
   @Column() order: number;
 
+  @Column({ nullable: true }) width: number;
+
   @Column() required: boolean;
 
   @Column({ nullable: true })

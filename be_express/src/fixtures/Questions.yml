@@ -9,6 +9,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question129:
     description: Middle Name
@@ -19,6 +20,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question130:
     description: Last Name
@@ -29,6 +31,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question2:
     description: Street Address
@@ -39,6 +42,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question3:
     description: City
@@ -49,6 +53,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question4:
     description: State
@@ -59,6 +64,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question5:
     description: Zip
@@ -69,6 +75,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question6:
     description: Date of Birth
@@ -79,6 +86,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question7:
     description: Last 4 digits of SSN
@@ -89,6 +97,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section1'
   question8:
     description:
@@ -504,7 +513,7 @@ items:
     section: '@section4'
   question46:
     description: City/state
-    type: text
+    type: table
     placeholder: 'Pleasantville, CO'
     required: false
     order: 4
@@ -514,17 +523,18 @@ items:
     section: '@section4'
   question47:
     description: From-To
-    type: text
+    type: table
     placeholder: '2010-present'
     required: true
     order: 5
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 15
     section: '@section4'
   question48:
     description: Position
-    type: text
+    type: table
     placeholder: 'Police Officer'
     required: false
     order: 6
@@ -534,7 +544,7 @@ items:
     section: '@section4'
   question49:
     description: Why did you leave?
-    type: text
+    type: table
     placeholder: 'Moved'
     required: false
     charLimit: 140
@@ -542,6 +552,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 25
     section: '@section4'
   question134:
     description: Add More
@@ -581,33 +592,35 @@ items:
     placeholder:
     required: true
     order: 11
-    subQuestions: '12,13,14,15'
+    subQuestions: '12,13,14,15,16'
     responseOptions: ''
     externalUse: true
     section: '@section4'
   question52:
     description: Date
-    type: text
+    type: table
     order: 12
     placeholder: '12/2015'
     required: false
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 15
     section: '@section4'
   question53:
     description: Explanation
-    type: text
+    type: table
     order: 13
     placeholder: Description of Incident
     required: false
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 25
     section: '@section4'
   question54:
     description: Employer
-    type: text
+    type: table
     order: 14
     placeholder: Employer
     required: false
@@ -625,6 +638,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 30
     section: '@section4'
   question137:
     description: Add More
@@ -705,6 +719,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section4'
   question63:
     description: 'MOS'
@@ -715,6 +730,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section4'
   question64:
     description: Primary or last duty station
@@ -725,6 +741,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 33
     section: '@section4'
   question65:
     description: Type of discharge
