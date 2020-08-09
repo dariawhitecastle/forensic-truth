@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box,
   Button,
-  CheckBoxGroup,
+  CheckBox,
   FormField,
   Heading,
   RadioButtonGroup,
@@ -39,6 +39,33 @@ const FormFieldComponent = ({
     required,
     width,
   } = question;
+
+  const checkboxes = () => {
+    return responseOptions.map((option, i) => {
+      return (
+        <Box direction='row' key={option}>
+          <CheckBox
+            key={option}
+            checked={personalInfo[id]?.includes(option)}
+            label={<Box margin={{ top: '8px', bottom: '8px' }}>{option}</Box>}
+            onChange={(event) => onChange(event, id, 'checkboxGroup', option)}
+          />
+          {personalInfo[id]?.includes(option) && (
+            <Box width='170px' margin={{ left: '8px' }}>
+              <StyledFormField
+                autoComplete='none'
+                name={id.toString()}
+                value=''
+                // onChange={(event) => onChange(event, id, 'checkboxGroup')}
+                placeholder='10/10/2010'
+                type='text'
+              />
+            </Box>
+          )}
+        </Box>
+      );
+    });
+  };
 
   if (currentSubqs.includes(order.toString()) && !personalInfo[id]) return null;
 
@@ -80,6 +107,7 @@ const FormFieldComponent = ({
           />
         </Box>
       );
+
     case 'text':
     case 'number':
     case 'date':
@@ -155,12 +183,7 @@ const FormFieldComponent = ({
     case 'checkBoxGroup':
       return (
         <Box pad='small' direction='column' align='start'>
-          <Text>{description}</Text>
-          <CheckBoxGroup
-            options={responseOptions}
-            onChange={(event) => onChange(event, id)}
-            required={required}
-          />
+          {checkboxes()}
         </Box>
       );
     case 'radio':

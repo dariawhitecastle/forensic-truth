@@ -41,11 +41,9 @@ const PersonalInfoStep = observer(
       const isRequired = (question) => question.required;
 
       const isAnswered = (question) => R.has(question.id, personalInfo);
-      const isRequiredAndAnswered = (question) => {
-        return isRequired(question)
-          ? R.both(isRequired, isAnswered)(question)
-          : true;
-      };
+      const isRequiredAndAnswered = (question) =>
+        isRequired(question) ? R.both(isRequired, isAnswered)(question) : true;
+
       // remove currentSubquestions from questionlist to validate
       const filteredQuestionList = R.filter(
         (question) => !currentSubqs.includes(question.order.toString()),
@@ -58,54 +56,76 @@ const PersonalInfoStep = observer(
     }, [Object.keys(personalInfo).length, currentSubqs.length]);
 
     const onChange = useCallback(
-      (e, id, type) => {
+      (e, id, type, option) => {
         const { value } = e.target;
         // find subquestions for this question
         const filtered = questionList.find(
           (singleQuestion) => singleQuestion.id === id
         );
 
-        // set value in state
-        checkCharLimit(e, setPersonalInfo);
+        switch (type) {
+          case 'yesNo':
+            setPersonalInfo({ field: id, value });
+            if (value === 'true' && filtered?.subQuestions?.length) {
+              // remove subquestion from currentSubqs
+              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
+            } else {
+              // add subquestion back to currentSubqs
+              const subqs = R.union(currentSubqs, filtered?.subQuestions);
+              setCurrentSubqs(subqs);
+              // clear out all subquestions from personal info
+              R.forEach((q) => {
+                const questionFromSubq = R.find(
+                  R.propEq('order', parseInt(q)),
+                  questions
+                );
+                setPersonalInfo({
+                  field: questionFromSubq.id,
+                  value: undefined,
+                });
+              }, filtered.subQuestions);
+            }
+            break;
+          case 'yesNo reverse':
+            setPersonalInfo({ field: id, value });
+            if (value === 'false' && filtered?.subQuestions?.length) {
+              // remove subquestion from currentSubqs
+              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
+            } else {
+              // add subquestion back to  currentSubqs
+              const subqs = R.reduce(
+                (acc, { subQuestions }) => acc.concat(subQuestions),
+                [],
+                questionList
+              );
+              setCurrentSubqs(subqs);
+              // clear out all subquestions from personal info
+              R.forEach((q) => {
+                setPersonalInfo({ field: parseInt(q.id), value: undefined });
+              }, filtered.subQuestions);
+            }
+            break;
+          case 'checkboxGroup':
+            let selectedValues = personalInfo[id]?.includes(option)
+              ? R.without(option, personalInfo[id])
+              : personalInfo[id]
+              ? R.concat(personalInfo[id], [option])
+              : [option];
 
-        if (type === 'yesNo') {
-          if (value === 'true' && filtered?.subQuestions?.length) {
-            // remove subquestion from currentSubqs
-            setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
-          } else {
-            // add subquestion back to currentSubqs
-            const subqs = R.union(currentSubqs, filtered?.subQuestions);
-            setCurrentSubqs(subqs);
-            // clear out all subquestions from personal info
-            R.forEach((q) => {
-              setPersonalInfo({ field: [Number(q)], value: undefined });
-            }, filtered.subQuestions);
-          }
-        }
-
-        if (type === 'yesNo reverse') {
-          if (value === 'false' && filtered?.subQuestions?.length) {
-            // remove subquestion from currentSubqs
-            setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
-          } else {
-            // add subquestion back to  currentSubqs
-            const subqs = R.reduce(
-              (acc, { subQuestions }) => acc.concat(subQuestions),
-              [],
-              questionList
-            );
-            setCurrentSubqs(subqs);
-            // clear out all subquestions from personal info
-            R.forEach((q) => {
-              setPersonalInfo({ field: [Number(q)], value: undefined });
-            }, filtered.subQuestions);
-          }
+            setPersonalInfo({
+              field: id,
+              value: selectedValues,
+            });
+            break;
+          default:
+            // set value in state
+            checkCharLimit(e, setPersonalInfo);
         }
       },
-      [currentSubqs]
+      [currentSubqs, personalInfo]
     );
 
-    console.log(JSON.parse(JSON.stringify(personalInfo)));
+    // console.log(JSON.parse(JSON.stringify(personalInfo)));
 
     const onAddMore = (options, id) => {
       setTableRow(tableRow + 1);
