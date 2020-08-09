@@ -426,7 +426,7 @@ items:
     order: 17
     subQuestions: ''
     responseOptions: ''
-    required: false
+    required: true
     externalUse: true
     section: '@section3'
   question38:
@@ -570,7 +570,7 @@ items:
       been asked to resign from.
     type: textArea
     placeholder: 'Pleasantville PD'
-    required: false
+    required: true
     order: 9
     subQuestions: ''
     responseOptions: ''
