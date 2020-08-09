@@ -36,8 +36,6 @@ export class ApplicationStore {
 
   @action.bound
   setPersonalInfo({ field, value }) {
-    console.log(field, value);
-
     if (!value) return delete this.personalInfo[field];
     this.personalInfo = { ...this.personalInfo, [field]: value };
   }

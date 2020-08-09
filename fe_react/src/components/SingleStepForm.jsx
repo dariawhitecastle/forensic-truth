@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
-import { Form, Heading } from 'grommet';
+import { Box, Form, Heading } from 'grommet';
 
 import * as R from 'ramda';
 
@@ -26,6 +26,17 @@ const PersonalInfoStep = observer(
     const [questions, setQuestions] = useState([]);
     const [currentSubqs, setCurrentSubqs] = useState([]);
     const [tableRow, setTableRow] = useState(0);
+    const headerRef = useRef(null);
+
+    useEffect(() => {
+      if (headerRef) {
+        headerRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'start',
+        });
+      }
+    }, [questionList]);
 
     useEffect(() => {
       setQuestions(questionList);
@@ -125,8 +136,6 @@ const PersonalInfoStep = observer(
       [currentSubqs, personalInfo]
     );
 
-    // console.log(JSON.parse(JSON.stringify(personalInfo)));
-
     const onAddMore = (options, id) => {
       setTableRow(tableRow + 1);
 
@@ -158,7 +167,7 @@ const PersonalInfoStep = observer(
       ));
 
     return (
-      <StyledFormWrapper height='100vh' alignSelf='center'>
+      <StyledFormWrapper height='100vh' alignSelf='center' ref={headerRef}>
         <Heading alignSelf='center' textAlign='center' level={3}>
           {header}
         </Heading>
