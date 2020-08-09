@@ -118,7 +118,16 @@ const FormFieldComponent = ({
           width={width ? `${width}%` : 'auto'}>
           <StyledFormField
             autoComplete='none'
-            label={description}
+            label={
+              required ? (
+                <Box direction='row'>
+                  <Text>{description}</Text>
+                  <Text color='status-critical'>*</Text>
+                </Box>
+              ) : (
+                description
+              )
+            }
             maxLength={charLimit ?? 100}
             name={id.toString()}
             value={personalInfo[id] ?? ''}
@@ -133,7 +142,14 @@ const FormFieldComponent = ({
       return (
         <Box width='80%'>
           <Box pad={{ vertical: 'medium' }}>
-            <Text>{description}</Text>
+            {required ? (
+              <Box direction='row'>
+                <Text>{description}</Text>
+                <Text color='status-critical'>*</Text>
+              </Box>
+            ) : (
+              description
+            )}
           </Box>
           <TextArea
             placeholder='type here'
@@ -151,7 +167,14 @@ const FormFieldComponent = ({
           width={description.length > 25 ? '80%' : '33%'}
           pad={{ right: 'medium' }}
           style={{ display: 'inline-flex' }}>
-          <Text>{description}</Text>
+          {required ? (
+            <Box direction='row'>
+              <Text>{description}</Text>
+              <Text color='status-critical'>*</Text>
+            </Box>
+          ) : (
+            description
+          )}
           <Select
             options={responseOptions.length ? responseOptions : states}
             placeholder={description}
@@ -167,7 +190,14 @@ const FormFieldComponent = ({
     case 'yesNo reverse':
       return (
         <Box pad={{ vertical: 'small' }} direction='row' align='start'>
-          <Text>{description}</Text>
+          {required ? (
+            <Box direction='row'>
+              <Text>{description}</Text>
+              <Text color='status-critical'>*</Text>
+            </Box>
+          ) : (
+            description
+          )}
           <StyledRadioButtonGroup
             name={id.toString()}
             options={[
@@ -189,7 +219,14 @@ const FormFieldComponent = ({
     case 'radio':
       return (
         <Box pad='small'>
-          <Text margin={{ top: '12px', bottom: '12px' }}>{description}</Text>
+          {required ? (
+            <Box direction='row'>
+              <Text>{description}</Text>
+              <Text color='status-critical'>*</Text>
+            </Box>
+          ) : (
+            <Text margin={{ top: '12px', bottom: '12px' }}>{description}</Text>
+          )}
           <RadioButtonGroup
             label={description}
             name={id.toString()}
@@ -204,7 +241,14 @@ const FormFieldComponent = ({
       return (
         <Box width='100%'>
           <Heading level='4' style={{ maxWidth: '100%' }}>
-            {description}
+            {required ? (
+              <Box direction='row'>
+                <Text>{description}</Text>
+                <Text color='status-critical'>*</Text>
+              </Box>
+            ) : (
+              description
+            )}
           </Heading>
         </Box>
       );
