@@ -426,7 +426,7 @@ items:
     order: 17
     subQuestions: ''
     responseOptions: ''
-    required: true
+    required: false
     externalUse: true
     section: '@section3'
   question38:
@@ -510,6 +510,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 20
     section: '@section4'
   question46:
     description: City/state
@@ -520,6 +521,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 20
     section: '@section4'
   question47:
     description: From-To
@@ -540,6 +542,7 @@ items:
     order: 6
     subQuestions: ''
     responseOptions: ''
+    width: 20
     externalUse: true
     section: '@section4'
   question49:
@@ -817,6 +820,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 15
     section: '@section5'
   question72:
     description: Type of offense
@@ -849,6 +853,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 30
     section: '@section5'
   question135:
     description: Add More

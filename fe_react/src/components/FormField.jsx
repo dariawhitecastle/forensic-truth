@@ -75,7 +75,7 @@ const FormFieldComponent = ({
         <Box
           style={{ display: 'inline-flex' }}
           pad={{ right: 'small' }}
-          width={width ? `${width}%` : '20%'}>
+          width={width ? `${width}%` : '23%'}>
           <FormField
             autoComplete='none'
             label={<Text truncate>{description}</Text>}
