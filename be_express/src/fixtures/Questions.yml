@@ -107,7 +107,7 @@ items:
     placeholder:
     required: true
     order: 10
-    subQuestions: '11,12,13'
+    subQuestions: '11,12'
     responseOptions: ''
     externalUse: true
     section: '@section1'
@@ -123,11 +123,11 @@ items:
     section: '@section1'
   question10:
     description: Are you a US citizen?
-    type: yesNo
+    type: yesNo reverse
     placeholder:
     required: false
     order: 12
-    subQuestions: ''
+    subQuestions: '13'
     responseOptions: ''
     externalUse: true
     section: '@section1'
@@ -239,6 +239,16 @@ items:
     placeholder:
     required: true
     order: 2
+    subQuestions: '3'
+    responseOptions: ''
+    externalUse: true
+    section: '@section2'
+  question138:
+    description: Please explain
+    type: textArea
+    placeholder: 'Type here'
+    required: false
+    order: 3
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -250,7 +260,7 @@ items:
     type: number
     placeholder: '20'
     required: true
-    order: 3
+    order: 4
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -260,7 +270,7 @@ items:
     type: textArea
     placeholder:
     required: false
-    order: 4
+    order: 5
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -1030,7 +1040,7 @@ items:
     placeholder:
     required: true
     order: 14
-    subQuestions: '15,16'
+    subQuestions: '15,17'
     responseOptions: ''
     externalUse: true
     section: '@section6'
@@ -1044,6 +1054,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 50
     section: '@section6'
   question96:
     description: Total worth
@@ -1070,7 +1081,7 @@ items:
   question99:
     description: Total worth
     type: text
-    placeholder:
+    placeholder: '$250'
     order: 20
     subQuestions: ''
     responseOptions: ''
@@ -1084,7 +1095,7 @@ items:
     type: yesNo
     placeholder:
     order: 21
-    subQuestions: '22, 23'
+    subQuestions: '22,23'
     responseOptions: ''
     required: false
     externalUse: true
@@ -1098,6 +1109,7 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
+    width: 50
     section: '@section6'
   question102:
     description: Total worth
@@ -1183,7 +1195,7 @@ items:
   question110:
     description: Have you engaged in any acts of illegal fire setting?
     type: text
-    placeholder: 'Set a field on fire while playing with fireworks when I was 17'
+    placeholder: 'Please explain'
     required: false
     order: 8
     subQuestions: ''

@@ -116,16 +116,37 @@ const PersonalInfoStep = observer(
               }, filtered.subQuestions);
             }
             break;
+
           case 'checkboxGroup':
-            let selectedValues = personalInfo[id]?.includes(option)
-              ? R.without(option, personalInfo[id])
+            const includesDrug = personalInfo[id]?.find(
+              (answer) => answer?.name === option.name
+            );
+
+            let selectedValues = !!includesDrug
+              ? R.reject(R.propEq('name', option.name), personalInfo[id])
               : personalInfo[id]
-              ? R.concat(personalInfo[id], [option])
+              ? [...personalInfo[id], option]
               : [option];
 
             setPersonalInfo({
               field: id,
               value: selectedValues,
+            });
+            break;
+          case 'drugDate':
+            const drugIndex = R.findIndex(
+              R.propEq('name', option.name),
+              personalInfo[id]
+            );
+            const updatedDrugInfo = R.update(
+              drugIndex,
+              option,
+              personalInfo[id]
+            );
+
+            setPersonalInfo({
+              field: id,
+              value: updatedDrugInfo,
             });
             break;
           default:

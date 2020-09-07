@@ -37,7 +37,7 @@ export class ApplicationStore {
   @action.bound
   setPersonalInfo({ field, value }) {
     if (!value) return delete this.personalInfo[field];
-    this.personalInfo = { ...this.personalInfo, [field]: value };
+    this.personalInfo = R.assoc(field, value, this.personalInfo);
   }
 
   @action.bound

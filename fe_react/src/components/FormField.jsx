@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   TextArea,
 } from 'grommet';
 import { Add } from 'grommet-icons';
+import * as R from 'ramda';
 
 // utils
 import { states } from '../utils/constants';
@@ -41,23 +42,36 @@ const FormFieldComponent = ({
   } = question;
 
   const checkboxes = () => {
-    return responseOptions.map((option, i) => {
+    return responseOptions.map((option) => {
+      const drugName = option;
+      const includesDrug = personalInfo[id]?.find(R.propEq('name', drugName));
+      const drugDate = includesDrug?.date;
+
       return (
-        <Box direction='row' key={option}>
+        <Box direction='row' key={drugName}>
           <CheckBox
-            key={option}
-            checked={personalInfo[id]?.includes(option)}
-            label={<Box margin={{ top: '8px', bottom: '8px' }}>{option}</Box>}
-            onChange={(event) => onChange(event, id, 'checkboxGroup', option)}
+            checked={!!includesDrug}
+            label={<Box margin={{ top: '8px', bottom: '8px' }}>{drugName}</Box>}
+            onChange={(event) =>
+              onChange(event, id, 'checkboxGroup', {
+                name: drugName,
+                date: '',
+              })
+            }
           />
-          {personalInfo[id]?.includes(option) && (
+          {!!includesDrug && (
             <Box width='170px' margin={{ left: '8px' }}>
               <StyledFormField
+                required
                 autoComplete='none'
-                name={id.toString()}
-                value=''
-                // onChange={(event) => onChange(event, id, 'checkboxGroup')}
-                placeholder='10/10/2010'
+                value={drugDate}
+                onChange={(event) =>
+                  onChange(event, id, 'drugDate', {
+                    name: drugName,
+                    date: event.target.value,
+                  })
+                }
+                placeholder='10/2010'
                 type='text'
               />
             </Box>
