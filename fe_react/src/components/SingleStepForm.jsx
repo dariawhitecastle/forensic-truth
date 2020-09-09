@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
-import { Box, Form, Heading } from 'grommet';
+import { Form, Heading } from 'grommet';
 
 import * as R from 'ramda';
 
