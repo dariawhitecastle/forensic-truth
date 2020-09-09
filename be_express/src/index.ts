@@ -12,6 +12,9 @@ import { PostRequestHandler, RequestHandler } from './express';
 import { Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+// import expressJwt from 'express-jwt';
+import crypto from 'crypto';
 
 import { User } from './entity/User';
 import { UserDomainRole } from './entity/UserDomainRole';
@@ -21,16 +24,47 @@ import { Section } from './entity/Section';
 // connection
 import config from './typeorm.config';
 import { Submission } from './entity/Submission';
+
 createConnection(config)
   .then(async (connection) => {
     // app
     const { EXPRESS_TYPEORM_PORT: PORT = 1337 } = process.env;
     const baseUrl = `http://localhost:${PORT}`;
+    const accessTokenSecret = crypto.randomBytes(64).toString('hex');
 
     const app = express();
     app.use(cors());
     app.use(bodyParser.json());
     app.use(morgan('dev'));
+
+    // Login
+    app.post('/examiner/login', async (req, res) => {
+      const { emailAddress, password } = req.body;
+      console.log(emailAddress, password);
+
+      try {
+        const user = await userRepository.findOne({ emailAddress });
+        console.log('******* NEWUSER', user);
+        if (user) {
+          const accessToken = jwt.sign(
+            { username: emailAddress },
+            accessTokenSecret,
+            { expiresIn: 129600 }
+          );
+          res.json({
+            accessToken,
+          });
+        } else {
+          res.status(401).json({
+            sucess: false,
+            token: null,
+            err: 'Username or password is incorrect',
+          });
+        }
+      } catch (err) {
+        throw err;
+      }
+    });
 
     // Section
     const sectionRepository = connection.getRepository(Section);

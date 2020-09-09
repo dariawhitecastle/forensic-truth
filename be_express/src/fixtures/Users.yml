@@ -1,0 +1,6 @@
+entity: User
+items:
+  user1:
+    firstName: Test
+    lastName: User
+    emailAddress: test@gmail.com
