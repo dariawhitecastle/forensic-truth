@@ -13,8 +13,7 @@ import { Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
-// import expressJwt from 'express-jwt';
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 
 import { User } from './entity/User';
 import { UserDomainRole } from './entity/UserDomainRole';
@@ -30,7 +29,6 @@ createConnection(config)
     // app
     const { EXPRESS_TYPEORM_PORT: PORT = 1337 } = process.env;
     const baseUrl = `http://localhost:${PORT}`;
-    const accessTokenSecret = crypto.randomBytes(64).toString('hex');
 
     const app = express();
     app.use(cors());
@@ -38,22 +36,23 @@ createConnection(config)
     app.use(morgan('dev'));
 
     // Login
-    app.post('/examiner/login', async (req, res) => {
+    app.post('/api/examiner/login', async (req, res) => {
       const { emailAddress, password } = req.body;
-      console.log(emailAddress, password);
 
       try {
         const user = await userRepository.findOne({ emailAddress });
-        console.log('******* NEWUSER', user);
         if (user) {
-          const accessToken = jwt.sign(
-            { username: emailAddress },
-            accessTokenSecret,
-            { expiresIn: 129600 }
-          );
-          res.json({
-            accessToken,
-          });
+          const validated = await bcrypt.compare(password, user.secret);
+          if (validated) {
+            const accessToken = jwt.sign(
+              { username: emailAddress },
+              process.env.TOKEN_SECRET,
+              { expiresIn: 129600 }
+            );
+            res.json({
+              accessToken,
+            });
+          }
         } else {
           res.status(401).json({
             sucess: false,
@@ -78,11 +77,14 @@ createConnection(config)
 
     // User
     const userRepository = connection.getRepository(User);
+
     app.post(
       '/api/create-user',
-      PostRequestHandler(async (body) => {
+      PostRequestHandler(async ({ password, ...userInfo }) => {
         const user = new User();
-        Object.assign(user, body);
+        const salt = await bcrypt.genSalt(10);
+        user.secret = await bcrypt.hash(password, salt);
+        Object.assign(user, userInfo);
         await userRepository.save(user);
         return user;
       })

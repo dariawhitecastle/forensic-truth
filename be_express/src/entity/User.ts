@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { UserDomainRole } from './UserDomainRole'
-import { Submission } from './Submission'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { UserDomainRole } from './UserDomainRole';
+import { Submission } from './Submission';
 
 @Entity()
 export class User {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,10 +16,14 @@ export class User {
   @Column()
   emailAddress: string;
 
-  @OneToMany(type => UserDomainRole, userToRole => userToRole.user, { eager: true })
+  @Column()
+  secret: string;
+
+  @OneToMany((type) => UserDomainRole, (userToRole) => userToRole.user, {
+    eager: true,
+  })
   public userDomainRoles!: UserDomainRole[];
 
-  @OneToMany(type => Submission, submission => submission.user)
-  public submission: Submission[]
-
+  @OneToMany((type) => Submission, (submission) => submission.user)
+  public submission: Submission[];
 }
