@@ -1,79 +1,61 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  FormField,
-  Image,
-  TextInput,
-  ThemeContext,
-} from 'grommet';
+import React, { useState, useContext, useEffect } from 'react';
+import { Box, Grid } from 'grommet';
+
+// Store
+import { ApplicationStoreContext } from '../stores/applicationStore';
 
 // Componenets
-import { StyledHeader } from './Form.styled';
-
-// Assets
-import logo from '../assets/logo.jpg';
-
-// Services
-import { authenticate } from '../services/applicationServices';
-import { set } from 'mobx';
+import { StyledSidebar, MainComponent } from './Form.styled';
+import SidebarNav from '../components/Sidebar';
 
 const ExaminerView = () => {
-  const [credentials, setCredentials] = useState({
-    emailAddress: '',
-    password: '',
-  });
-  const login = () => {
-    authenticate(credentials);
-  };
-  const onChange = (value) => {
-    setCredentials({ ...credentials, ...value });
-  };
+  const { getQuestions, sortedSectionList } = useContext(
+    ApplicationStoreContext
+  );
+  const [sidebarOpen, toggleSidebar] = useState(true);
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const handleClickNext = (step) => setCurrentStep(step);
+
+  const handleClickPrev = (step) => setCurrentStep(step);
+
+  useEffect(() => {
+    getQuestions();
+  }, [getQuestions]);
+
+  useEffect(() => {
+    !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
+  }, [sortedSectionList]);
+
   return (
-    <>
-      <StyledHeader
-        elevation='xlarge'
-        direction='row'
-        align='center'
-        justify='between'
-        pad={{ horizontal: 'medium', vertical: 'small' }}>
-        <Image src={logo} height='40' width='200' />
-      </StyledHeader>
-      <Box
-        width='400px'
-        margin={{ vertical: '15%', horizontal: 'auto' }}
-        elevation='medium'
-        pad='medium'>
-        <ThemeContext.Extend
-          value={{
-            formField: {
-              border: { position: 'inner', side: 'all', radius: '5px' },
-            },
-          }}>
-          <FormField label='Username'>
-            <TextInput
-              placeholder='email@email.com'
-              type='email'
-              value={credentials.username}
-              onChange={(event) =>
-                onChange({ emailAddress: event.target.value })
-              }
-            />
-          </FormField>
-          <FormField label='Password'>
-            <TextInput
-              placeholder='Password'
-              type='password'
-              value={credentials.password}
-              onChange={(event) => onChange({ password: event.target.value })}
-            />
-          </FormField>
-        </ThemeContext.Extend>
-        <Box margin={{ vertical: 'small', horizontal: 'xlarge' }}>
-          <Button color='primary' label='Login' primary onClick={login} />
-        </Box>
-      </Box>
-    </>
+    <Grid
+      fill
+      rows={['auto', 'flex']}
+      columns={['auto', 'flex']}
+      areas={[
+        { name: 'sidebar', start: [0, 1], end: [0, 1] },
+        { name: 'main', start: [1, 1], end: [1, 1] },
+      ]}>
+      {sidebarOpen && !!sortedSectionList.length && (
+        <StyledSidebar
+          elevation='xlarge'
+          gridArea='sidebar'
+          width='250px'
+          animation={[
+            { type: 'fadeIn', duration: 300 },
+            { type: 'slideRight', size: 'xlarge', duration: 150 },
+          ]}>
+          <SidebarNav
+            currentStep={currentStep}
+            steps={sortedSectionList}
+            handleClickPrev={handleClickPrev}
+          />
+        </StyledSidebar>
+      )}
+      <MainComponent gridArea='main' justify='center' align='center'>
+        <Box fill>Main Component here</Box>
+      </MainComponent>
+    </Grid>
   );
 };
 

@@ -13,11 +13,24 @@ export const getQuestions = async () => {
 
 export const authenticate = async (credentials) => {
   const baseURL = process.env.REACT_APP_BASE_URL || window.location.origin;
-
-  console.log(credentials);
   try {
-    const response = await axios.post(`${baseURL}/examiner/login`, credentials);
-    // return response.data;
+    const response = await axios.post(
+      `${baseURL}/api/examiner/login`,
+      credentials
+    );
+    sessionStorage.setItem('jwt', response.accessToken);
+    return true;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const registerUser = async (credentials) => {
+  console.log(credentials);
+  const baseURL = process.env.REACT_APP_BASE_URL || window.location.origin;
+  try {
+    await axios.post(`${baseURL}/api/create-user`, credentials);
+    return true;
   } catch (err) {
     throw err;
   }
