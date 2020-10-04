@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Box, Grid } from 'grommet';
+import { observer } from 'mobx-react';
+
+import { Box, Grid, Heading } from 'grommet';
 
 // Store
 import { ApplicationStoreContext } from '../stores/applicationStore';
@@ -8,16 +10,21 @@ import { ApplicationStoreContext } from '../stores/applicationStore';
 import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
 
-const ExaminerView = () => {
+const ExaminerView = observer(() => {
   const { getQuestions, sortedSectionList } = useContext(
     ApplicationStoreContext
   );
-  const [sidebarOpen, toggleSidebar] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const handleClickNext = (step) => setCurrentStep(step);
-
-  const handleClickPrev = (step) => setCurrentStep(step);
+  const handleSideNavClick = (step) => {
+    const el = document.getElementById(step);
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+    setCurrentStep(step);
+  };
 
   useEffect(() => {
     getQuestions();
@@ -36,7 +43,7 @@ const ExaminerView = () => {
         { name: 'sidebar', start: [0, 1], end: [0, 1] },
         { name: 'main', start: [1, 1], end: [1, 1] },
       ]}>
-      {sidebarOpen && !!sortedSectionList.length && (
+      {!!sortedSectionList.length && (
         <StyledSidebar
           elevation='xlarge'
           gridArea='sidebar'
@@ -48,15 +55,26 @@ const ExaminerView = () => {
           <SidebarNav
             currentStep={currentStep}
             steps={sortedSectionList}
-            handleClickPrev={handleClickPrev}
+            handleClickNext={handleSideNavClick}
           />
         </StyledSidebar>
       )}
       <MainComponent gridArea='main' justify='center' align='center'>
-        <Box fill>Main Component here</Box>
+        <Box fill>
+          {sortedSectionList.map((section) => (
+            <div id={section.id} key={section.id}>
+              <Heading level={4} size='large'>
+                {section.title}
+              </Heading>
+              {section.questions.map((question) => (
+                <Box key={question.id}>{question.description}</Box>
+              ))}
+            </div>
+          ))}
+        </Box>
       </MainComponent>
     </Grid>
   );
-};
+});
 
 export default ExaminerView;

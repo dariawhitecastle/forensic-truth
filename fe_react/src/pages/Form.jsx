@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Grid, Button, Image } from 'grommet';
+import { Grid } from 'grommet';
 import { observer } from 'mobx-react';
 
 // Store
@@ -11,7 +11,6 @@ import SidebarNav from '../components/Sidebar';
 import Wizard from '../components/Wizard';
 
 // Assets
-import logo from '../assets/logo.jpg';
 import { StyledSidebar, StyledHeader, MainComponent } from './Form.styled';
 
 const Form = observer(() => {
@@ -34,9 +33,7 @@ const Form = observer(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
   }, [sortedSectionList]);
 
-  const handleClickNext = (step) => setCurrentStep(step);
-
-  const handleClickPrev = (step) => setCurrentStep(step);
+  const handleClick = (step) => setCurrentStep(step);
 
   return (
     <Grid
@@ -59,19 +56,26 @@ const Form = observer(() => {
           <SidebarNav
             currentStep={currentStep}
             steps={sortedSectionList}
-            handleClickPrev={handleClickPrev}
+            handleClickPrev={handleClick}
           />
         </StyledSidebar>
       )}
-      <MainComponent gridArea='main' justify='center' align='center'>
+      <MainComponent
+        gridArea='main'
+        justify='center'
+        align='center'
+        animation={[
+          { type: 'fadeIn', duration: 300 },
+          { type: 'slideLeft', size: 'xlarge', duration: 150 },
+        ]}>
         {!!sortedSectionList.length && (
           <Wizard
             currentStep={currentStep}
             disableNext={disableNext}
             steps={sortedSectionList}
             setDisableNext={setDisableNext}
-            onClickNext={handleClickNext}
-            onClickPrev={handleClickPrev}
+            onClickNext={handleClick}
+            onClickPrev={handleClick}
             component={(props) => (
               <SingleStepForm
                 sortedSectionList={sortedSectionList}

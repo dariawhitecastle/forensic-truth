@@ -69,7 +69,7 @@ const Wizard = observer(
               primary
               color='primary'
               label='Previous'
-              onClick={() => goToPrev()}
+              onClick={goToPrev}
             />
           ) : (
             <Box />
@@ -79,7 +79,7 @@ const Wizard = observer(
             primary
             color='primary'
             label={currentStep === steps.length ? 'Submit' : 'Next'}
-            onClick={() => goToNext()}
+            onClick={goToNext}
           />
         </StyledButtonBox>
       </Box>
