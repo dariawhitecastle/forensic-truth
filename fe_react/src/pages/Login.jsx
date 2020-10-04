@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
-import {
-  Box,
-  Button,
-  FormField,
-  Image,
-  TextInput,
-  ThemeContext,
-} from 'grommet';
+import { Box, Button, FormField, Text, TextInput, ThemeContext } from 'grommet';
 
 // Services
-import { authenticate } from '../services/applicationServices';
+import { ApplicationStoreContext } from '../stores/applicationStore';
 
-const Login = () => {
+const Login = observer(() => {
+  const { loginError, setLoginError, handleLogin } = useContext(
+    ApplicationStoreContext
+  );
+
   const [credentials, setCredentials] = useState({
     emailAddress: '',
     password: '',
   });
   const { push } = useHistory();
+
   const login = async () => {
-    await authenticate(credentials);
+    await handleLogin(credentials);
     push('/examiner');
   };
   const onChange = (value) => {
+    setLoginError(false);
     setCredentials({ ...credentials, ...value });
   };
   return (
@@ -41,7 +41,6 @@ const Login = () => {
           }}>
           <FormField label='Username'>
             <TextInput
-              placeholder='email@email.com'
               type='email'
               value={credentials.username}
               onChange={(event) =>
@@ -51,12 +50,18 @@ const Login = () => {
           </FormField>
           <FormField label='Password'>
             <TextInput
-              placeholder='Password'
               type='password'
               value={credentials.password}
               onChange={(event) => onChange({ password: event.target.value })}
             />
           </FormField>
+          {loginError && (
+            <Box>
+              <Text color='status-error' size='small'>
+                Email or password is incorrect. Please try again.
+              </Text>
+            </Box>
+          )}
         </ThemeContext.Extend>
         <Box margin={{ vertical: 'small', horizontal: 'xlarge' }}>
           <Button color='primary' label='Login' primary onClick={login} />
@@ -64,6 +69,6 @@ const Login = () => {
       </Box>
     </>
   );
-};
+});
 
 export default Login;

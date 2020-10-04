@@ -2,12 +2,16 @@ import { action, observable, computed } from 'mobx';
 import { createContext } from 'react';
 import * as R from 'ramda';
 
-import { getQuestions as getQuestionsService } from '../services/applicationServices';
+import {
+  getQuestions as getQuestionsService,
+  authenticate as authService,
+} from '../services/applicationServices';
 
 export class ApplicationStore {
   @observable sectionList = [];
   @observable personalInfo = {};
   @observable disableNext = true;
+  @observable loginError = false;
 
   @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));
@@ -43,6 +47,20 @@ export class ApplicationStore {
   @action.bound
   setDisableNext(payload) {
     this.disableNext = payload;
+  }
+
+  @action.bound
+  setLoginError(payload) {
+    this.loginError = payload;
+  }
+
+  @action.bound
+  async handleLogin(payload) {
+    try {
+      await authService(payload);
+    } catch (err) {
+      this.setLoginError(true);
+    }
   }
 }
 

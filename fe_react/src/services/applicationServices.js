@@ -26,7 +26,6 @@ export const authenticate = async (credentials) => {
 };
 
 export const registerUser = async (credentials) => {
-  console.log(credentials);
   const baseURL = process.env.REACT_APP_BASE_URL || window.location.origin;
   try {
     await axios.post(`${baseURL}/api/create-user`, credentials);

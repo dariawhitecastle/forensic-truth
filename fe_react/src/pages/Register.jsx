@@ -35,7 +35,7 @@ const Register = () => {
             <TextInput
               placeholder='Margot'
               type='text'
-              value={credentials.firstName}
+              value={credentials.firstName ?? ''}
               onChange={(event) => onChange({ firstName: event.target.value })}
             />
           </FormField>
@@ -43,7 +43,7 @@ const Register = () => {
             <TextInput
               placeholder='Tennenbaum'
               type='text'
-              value={credentials.lastName}
+              value={credentials.lastName ?? ''}
               onChange={(event) => onChange({ lastName: event.target.value })}
             />
           </FormField>
