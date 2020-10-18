@@ -118,7 +118,7 @@ createConnection(config)
             (singleAnswer) =>
               singleAnswer.question.id === 1 ||
               singleAnswer.question.id === 3 ||
-              singleAnswer.question.id === 7
+              singleAnswer.question.id === 9
           );
           return {
             ...submission,

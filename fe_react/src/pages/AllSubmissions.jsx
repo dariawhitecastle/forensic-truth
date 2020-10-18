@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { observer } from 'mobx-react';
+import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
 import { Box, Text, DataTable } from 'grommet';
 
 // Store
 import { fetchAllSubmissions } from '../services/applicationServices';
+import { ExaminerStoreContext } from '../stores/examinerStore';
 
 const columns = [
   {
@@ -47,7 +49,7 @@ const formatData = (submissions) =>
       R.cond([
         [R.equals(1), R.always(['firstName', body])],
         [R.equals(3), R.always(['lastName', body])],
-        [R.equals(7), R.always(['ssn', body])],
+        [R.equals(9), R.always(['ssn', body])],
       ])(id)
     );
     return R.length(answers)
@@ -56,14 +58,17 @@ const formatData = (submissions) =>
   });
 
 const AllSubmissions = observer(() => {
+  const { setSelectedSubmissionId } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
+  const { push } = useHistory();
 
   useEffect(() => {
     fetchAllSubmissions().then((data) => setSubmissions(formatData(data)));
   }, []);
 
   const handleRowClick = (row) => {
-    console.log(row);
+    setSelectedSubmissionId(row.id);
+    push('/examiner');
   };
 
   return (
