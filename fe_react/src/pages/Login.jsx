@@ -20,7 +20,7 @@ const Login = observer(() => {
 
   const login = async () => {
     await handleLogin(credentials);
-    push('/examiner');
+    push('/all-submissions');
   };
   const onChange = (value) => {
     setLoginError(false);

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { Box, Grid, Heading } from 'grommet';
 
 // Store
-import { ApplicationStoreContext } from '../stores/applicationStore';
+import { ExaminerStoreContext } from '../stores/examinerStore';
 
 // Componenets
 import { StyledSidebar, MainComponent } from './Form.styled';
@@ -15,7 +15,8 @@ const ExaminerView = observer(() => {
     getQuestions,
     fetchSubmission,
     sortedSectionList,
-  } = useContext(ApplicationStoreContext);
+    currentSubmission,
+  } = useContext(ExaminerStoreContext);
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleSideNavClick = (step) => {
