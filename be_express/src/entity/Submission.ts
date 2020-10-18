@@ -1,19 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, OneToMany } from "typeorm";
-import { Answer } from './Answer'
-// import { Question } from './Question'
-// import { Section } from "./Section";
-import { User } from './User'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Answer } from './Answer';
+import { User } from './User';
 
 @Entity()
 export class Submission {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column() caseId: number;
+  @Column() caseId: number;
 
-    @ManyToOne(type => User, user => user.submission)
-    public user: User;
+  @Column()
+  date: string;
 
-    @ManyToOne(type => Answer, answer => answer.submission)
-    public answer: Answer[];
+  @ManyToOne((type) => User, (user) => user.submission)
+  public user: User;
+
+  @OneToMany((type) => Answer, (answer) => answer.submission, {
+    eager: true,
+    cascade: true,
+  })
+  public answer: Answer[];
 }

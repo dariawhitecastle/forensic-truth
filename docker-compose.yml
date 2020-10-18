@@ -2,7 +2,7 @@ version: '3'
 services:
   be_express:
     container_name: 'be_express'
-    build: 
+    build:
       context: .
       dockerfile: ./be_express/Dockerfile
     ports:
@@ -18,7 +18,7 @@ services:
     volumes:
       - ./be_express:/usr/src/app
       - /usr/src/app/node_modules
-    command: /bin/bash -c "npm run build && npm run db:migrate && npm run db:seed && npm run start"
+    command: /bin/bash -c "npm run build && npm run db:migrate && npm run db:seed && npm run dev"
   pg:
     image: 'postgres:12'
     container_name: 'postgres'
@@ -32,7 +32,7 @@ services:
       - data:/var/lib/postgresql/data
   fe_react:
     container_name: 'fe_react'
-    build: 
+    build:
       context: .
       dockerfile: ./fe_react/Dockerfile
     ports:

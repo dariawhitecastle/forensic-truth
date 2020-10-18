@@ -3,6 +3,11 @@ require('dotenv').config({
   path: require('path').join(__dirname, '../../../.env'),
 });
 
+const logReturn = (x) => {
+  console.log(x);
+  return x;
+};
+
 // imports
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
@@ -96,8 +101,31 @@ createConnection(config)
       '/api/submissions',
       RequestHandler(async (body: any) => {
         const submission = Object.assign(new Submission(), body);
+        submission.answer = body.answer;
         await submissionsRepository.save(submission);
         return submission;
+      })
+    );
+
+    // /all-submissions
+    app.get(
+      '/api/all-submissions',
+      RequestHandler(async () => {
+        const allSubmissions = await submissionsRepository.find();
+        return allSubmissions.map((submission) => {
+          const { answer } = submission;
+          const filteredAnswer = answer.filter(
+            (singleAnswer) =>
+              singleAnswer.question.id === 1 ||
+              singleAnswer.question.id === 3 ||
+              singleAnswer.question.id === 7
+          );
+          return {
+            ...submission,
+            answer: filteredAnswer,
+          };
+        });
+        //
       })
     );
 

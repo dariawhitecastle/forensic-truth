@@ -4,7 +4,7 @@ import {
   Column,
   OneToOne,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
 } from 'typeorm';
 import { Question } from './Question';
 import { Note } from './Note';
@@ -21,7 +21,9 @@ export class Answer {
   @ManyToOne((type) => Submission, (submission) => submission.answer)
   public submission: Submission;
 
-  @ManyToOne((type) => Question, (question) => question.answer)
+  @ManyToOne((type) => Question, (question) => question.answer, {
+    eager: true,
+  })
   public question: Question;
 
   @OneToOne((type) => Note)
