@@ -11,9 +11,11 @@ import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
 
 const ExaminerView = observer(() => {
-  const { getQuestions, sortedSectionList } = useContext(
-    ApplicationStoreContext
-  );
+  const {
+    getQuestions,
+    fetchSubmission,
+    sortedSectionList,
+  } = useContext(ApplicationStoreContext);
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleSideNavClick = (step) => {
@@ -28,6 +30,7 @@ const ExaminerView = observer(() => {
 
   useEffect(() => {
     getQuestions();
+    fetchSubmission();
   }, [getQuestions]);
 
   useEffect(() => {

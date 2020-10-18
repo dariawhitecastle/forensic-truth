@@ -5,6 +5,8 @@ import * as R from 'ramda';
 import {
   getQuestions as getQuestionsService,
   authenticate as authService,
+  submitApplication as submitApplicationService,
+  fetchSubmission as fetchSubmissionService,
 } from '../services/applicationServices';
 
 export class ApplicationStore {
@@ -12,6 +14,9 @@ export class ApplicationStore {
   @observable personalInfo = {};
   @observable disableNext = true;
   @observable loginError = false;
+  @observable submitApplicationError = false;
+  // TODO set this to correct cubmission id
+  @observable selectedSubmissionId = 1;
 
   @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));
@@ -39,6 +44,17 @@ export class ApplicationStore {
   }
 
   @action.bound
+  async fetchSubmission() {
+    try {
+      const data = await fetchSubmissionService(this.selectedSubmissionId);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+
+  @action.bound
   setPersonalInfo({ field, value }) {
     if (!value) return delete this.personalInfo[field];
     this.personalInfo = R.assoc(field, value, this.personalInfo);
@@ -55,11 +71,24 @@ export class ApplicationStore {
   }
 
   @action.bound
+  setSubmitApplicationError(payload) {
+    this.submitApplicationError = payload;
+  }
+
+  @action.bound
   async handleLogin(payload) {
     try {
       await authService(payload);
     } catch (err) {
       this.setLoginError(true);
+    }
+  }
+  @action.bound
+  async submitApplication(payload) {
+    try {
+      await submitApplicationService(payload);
+    } catch (err) {
+      this.setSubmitApplicationError(true);
     }
   }
 }

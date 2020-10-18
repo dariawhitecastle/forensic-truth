@@ -15,11 +15,7 @@ import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
 // local dependencies
-import Form from './pages/Form';
-import ExaminerView from './pages/ExaminerView';
-import Login from './pages/Login';
-import Register from './pages/Register';
-
+import { Form, Login, Register, AllSubmissions, ExaminerView } from './pages';
 import { StyledHeader } from './pages/Form.styled';
 import './App.css';
 import customTheme from './utils/theme';
@@ -41,7 +37,10 @@ const history = syncHistoryWithStore(browserHistory, routingStore);
 const ProtectedRoutes = () => {
   const authenticated = sessionStorage.getItem('jwt');
   return authenticated ? (
-    <Route path='/examiner' component={ExaminerView} />
+    <>
+      <Route path='/all-submissions' component={AllSubmissions} />
+      <Route path='/examiner' component={ExaminerView} />
+    </>
   ) : (
     <Redirect to='/examiner/login' />
   );
