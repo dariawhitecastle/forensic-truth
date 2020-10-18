@@ -36,7 +36,12 @@ export class Question {
 
   @Column() externalUse: boolean;
 
-  @ManyToOne((type) => Section, (section) => section.question)
+  @Column({ nullable: true }) answerGroup: number;
+
+  @ManyToOne((type) => Section, (section) => section.question, {
+    eager: true,
+    cascade: true,
+  })
   public section: Section;
 
   @OneToMany((type) => Answer, (answer) => answer.question)
