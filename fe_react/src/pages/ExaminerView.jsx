@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import * as R from 'ramda';
 
 import { Box, Grid, Heading } from 'grommet';
 
@@ -9,15 +10,17 @@ import { ExaminerStoreContext } from '../stores/examinerStore';
 // Componenets
 import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
+import SubmissionSection from '../components/SubmissionSection';
 
 const ExaminerView = observer(() => {
   const {
     getQuestions,
     fetchSubmission,
     sortedSectionList,
-    currentSubmission,
+    sortedAnswers,
   } = useContext(ExaminerStoreContext);
   const [currentStep, setCurrentStep] = useState(1);
+  const [answers, setAnswers] = useState();
 
   const handleSideNavClick = (step) => {
     const el = document.getElementById(step);
@@ -35,8 +38,16 @@ const ExaminerView = observer(() => {
   }, [getQuestions]);
 
   useEffect(() => {
+    setAnswers(sortedAnswers);
+  }, [sortedAnswers]);
+
+  useEffect(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
   }, [sortedSectionList]);
+
+  const getSubsections = R.map((subSection) => (
+    <SubmissionSection answers={subSection} />
+  ));
 
   return (
     <Grid
@@ -47,7 +58,7 @@ const ExaminerView = observer(() => {
         { name: 'sidebar', start: [0, 1], end: [0, 1] },
         { name: 'main', start: [1, 1], end: [1, 1] },
       ]}>
-      {!!sortedSectionList.length && (
+      {!R.isEmpty(sortedSectionList) && (
         <StyledSidebar
           elevation='xlarge'
           gridArea='sidebar'
@@ -63,16 +74,16 @@ const ExaminerView = observer(() => {
           />
         </StyledSidebar>
       )}
-      <MainComponent gridArea='main' justify='center' align='center'>
-        <Box fill>
+      <MainComponent gridArea='main'>
+        <Box fill align='start' pad='medium'>
           {sortedSectionList.map((section) => (
             <div id={section.id} key={section.id}>
-              <Heading level={4} size='large'>
+              <Heading level={3} size='large' textAlign='start'>
                 {section.title}
               </Heading>
-              {section.questions.map((question) => (
-                <Box key={question.id}>{question.description}</Box>
-              ))}
+              {!R.isEmpty(answers) &&
+                answers[section.id] &&
+                getSubsections(R.values(answers[section.id]))}
             </div>
           ))}
         </Box>

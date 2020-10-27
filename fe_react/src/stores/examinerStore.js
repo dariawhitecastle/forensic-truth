@@ -9,8 +9,26 @@ import {
 
 export class ExaminerStore {
   @observable sectionList = [];
-  @observable selectedSubmissionId = undefined;
+  @observable selectedSubmissionId = 1; // TODO: set back to undefined
   @observable currentSubmission = {};
+
+  @computed get sortedAnswers() {
+    if (!R.isEmpty(this.currentSubmission)) {
+      const groupedById = R.groupBy(
+        R.view(R.lensPath(['question', 'section', 'id']))
+      );
+
+      const groupedByAnswerGroup = R.groupBy(
+        R.view(R.lensPath(['question', 'answerGroup']))
+      );
+
+      return R.compose(
+        R.map(groupedByAnswerGroup),
+        groupedById
+      )(this.currentSubmission.answer);
+    }
+    return [];
+  }
 
   @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));
@@ -44,9 +62,10 @@ export class ExaminerStore {
 
   @action.bound
   async fetchSubmission() {
+    // if (!R.isEmpty(this.currentSubmission)) return;
     try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
-      this.setCurrentSubmission(data);
+      this.setCurrentSubmission(data[0]);
     } catch (err) {
       throw err;
     }

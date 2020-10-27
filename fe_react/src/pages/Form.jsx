@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Grid } from 'grommet';
 import { observer } from 'mobx-react';
-
+import * as R from 'ramda';
 // Store
 import { ApplicationStoreContext } from '../stores/applicationStore';
 
@@ -11,7 +11,7 @@ import SidebarNav from '../components/Sidebar';
 import Wizard from '../components/Wizard';
 
 // Assets
-import { StyledSidebar, StyledHeader, MainComponent } from './Form.styled';
+import { StyledSidebar, MainComponent } from './Form.styled';
 
 const Form = observer(() => {
   const {
@@ -21,6 +21,7 @@ const Form = observer(() => {
     sortedSectionList,
     personalInfo,
     setPersonalInfo,
+    submitApplication,
   } = useContext(ApplicationStoreContext);
   const [sidebarOpen, toggleSidebar] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
@@ -33,7 +34,20 @@ const Form = observer(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
   }, [sortedSectionList]);
 
-  const handleClick = (step) => setCurrentStep(step);
+  const handleClick = (step) =>
+    step === sortedSectionList.length ? onSubmit() : setCurrentStep(step);
+
+  const onSubmit = () => {
+    const payload = [];
+    R.forEachObjIndexed((val, key) =>
+      payload.push({
+        question: key,
+        responseSelection: val,
+        body: val,
+      })
+    )(personalInfo);
+    submitApplication(payload);
+  };
 
   return (
     <Grid

@@ -76,7 +76,7 @@ const SidebarNav = ({
   return (
     <Box fill direction='row'>
       <Nav fill gap='none'>
-        {steps.map(({ title, id, questions }, index) => (
+        {steps.map(({ title, id }) => (
           <SidebarButton
             completed={id < active}
             key={id}
