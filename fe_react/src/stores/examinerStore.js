@@ -9,7 +9,7 @@ import {
 
 export class ExaminerStore {
   @observable sectionList = [];
-  @observable selectedSubmissionId = 1; // TODO: set back to undefined
+  @observable selectedSubmissionId = undefined;
   @observable currentSubmission = {};
 
   @computed get sortedAnswers() {

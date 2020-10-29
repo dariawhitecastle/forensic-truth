@@ -35,7 +35,7 @@ const ExaminerView = observer(() => {
   useEffect(() => {
     getQuestions();
     fetchSubmission();
-  }, [getQuestions]);
+  }, []);
 
   useEffect(() => {
     setAnswers(sortedAnswers);
@@ -46,7 +46,7 @@ const ExaminerView = observer(() => {
   }, [sortedSectionList]);
 
   const getSubsections = R.map((subSection) => (
-    <SubmissionSection answers={subSection} />
+    <SubmissionSection key={subSection[0].id} answers={subSection} />
   ));
 
   return (
@@ -76,16 +76,18 @@ const ExaminerView = observer(() => {
       )}
       <MainComponent gridArea='main'>
         <Box fill align='start' pad='medium'>
-          {sortedSectionList.map((section) => (
-            <div id={section.id} key={section.id}>
-              <Heading level={3} size='large' textAlign='start'>
-                {section.title}
-              </Heading>
-              {!R.isEmpty(answers) &&
-                answers[section.id] &&
-                getSubsections(R.values(answers[section.id]))}
-            </div>
-          ))}
+          {sortedSectionList.length
+            ? sortedSectionList.map((section) => (
+                <div id={section.id} key={section.id}>
+                  <Heading level={3} size='large' textAlign='start'>
+                    {section.title}
+                  </Heading>
+                  {!R.isEmpty(answers) &&
+                    answers[section.id] &&
+                    getSubsections(R.values(answers[section.id]))}
+                </div>
+              ))
+            : null}
         </Box>
       </MainComponent>
     </Grid>
