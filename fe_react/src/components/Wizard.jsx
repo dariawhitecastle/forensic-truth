@@ -26,7 +26,7 @@ const Wizard = observer(
     setDisableNext,
   }) => {
     const goToNext = () => {
-      if (currentStep < steps.length) {
+      if (currentStep <= steps.length) {
         setDisableNext(true);
         onClickNext(currentStep + 1);
       }

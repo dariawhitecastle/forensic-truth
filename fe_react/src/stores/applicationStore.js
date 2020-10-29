@@ -41,6 +41,11 @@ export class ApplicationStore {
   }
 
   @action.bound
+  resetForm() {
+    this.personalInfo = {};
+  }
+
+  @action.bound
   setPersonalInfo({ field, value }) {
     if (!value) return delete this.personalInfo[field];
     this.personalInfo = R.assoc(field, value, this.personalInfo);

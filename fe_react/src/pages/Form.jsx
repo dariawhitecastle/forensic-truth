@@ -20,6 +20,7 @@ const Form = observer(() => {
     getQuestions,
     sortedSectionList,
     personalInfo,
+    resetForm,
     setPersonalInfo,
     submitApplication,
   } = useContext(ApplicationStoreContext);
@@ -35,7 +36,7 @@ const Form = observer(() => {
   }, [sortedSectionList]);
 
   const handleClick = (step) =>
-    step === sortedSectionList.length ? onSubmit() : setCurrentStep(step);
+    step > sortedSectionList.length ? onSubmit() : setCurrentStep(step);
 
   const onSubmit = () => {
     const payload = [];
@@ -47,6 +48,8 @@ const Form = observer(() => {
       })
     )(personalInfo);
     submitApplication(payload);
+    setCurrentStep(sortedSectionList[0].id);
+    resetForm();
   };
 
   return (
