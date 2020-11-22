@@ -6,7 +6,6 @@ import * as R from 'ramda';
 import { Box, Text, DataTable } from 'grommet';
 
 // Store
-import { fetchAllSubmissions } from '../services/applicationServices';
 import { ExaminerStoreContext } from '../stores/examinerStore';
 
 const columns = [
@@ -58,13 +57,18 @@ const formatData = (submissions) =>
   });
 
 const AllSubmissions = observer(() => {
-  const { setSelectedSubmissionId } = useContext(ExaminerStoreContext);
+  const { setSelectedSubmissionId, allSubmissions, fetchAllSubmissions } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
 
   useEffect(() => {
-    fetchAllSubmissions().then((data) => setSubmissions(formatData(data)));
+    if(!allSubmissions.length)
+    fetchAllSubmissions()
   }, []);
+
+  useEffect(() => { 
+    setSubmissions(formatData(allSubmissions));
+  }, [allSubmissions.length])
 
   const handleRowClick = (row) => {
     setSelectedSubmissionId(row.id);

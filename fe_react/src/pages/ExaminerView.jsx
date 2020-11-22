@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Grid, Heading } from 'grommet';
+import { Box, Button, Grid, Heading } from 'grommet';
+import { Send } from 'grommet-icons';
+
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -12,15 +15,22 @@ import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
 import SubmissionSection from '../components/SubmissionSection';
 
+// TODO: IMPLEMENT UPDATING SIDE NAV ON SCROLL
+
 const ExaminerView = observer(() => {
   const {
     getQuestions,
+    setNotes,
+    notes,
+    hydrated,
     fetchSubmission,
     sortedSectionList,
     sortedAnswers,
+    submitNotes,
   } = useContext(ExaminerStoreContext);
   const [currentStep, setCurrentStep] = useState(1);
-  const [answers, setAnswers] = useState();
+  const [answers, setAnswers] = useState([]);
+  const { push } = useHistory();
 
   const handleSideNavClick = (step) => {
     const el = document.getElementById(step);
@@ -32,13 +42,15 @@ const ExaminerView = observer(() => {
     setCurrentStep(step);
   };
 
-  useEffect(() => {
+  useEffect(() => {  
     getQuestions();
-    fetchSubmission();
-  }, []);
+    if (hydrated) {
+      fetchSubmission();
+    }
+  }, [hydrated]);
 
   useEffect(() => {
-    setAnswers(sortedAnswers);
+      setAnswers(sortedAnswers);
   }, [sortedAnswers]);
 
   useEffect(() => {
@@ -46,8 +58,22 @@ const ExaminerView = observer(() => {
   }, [sortedSectionList]);
 
   const getSubsections = R.map((subSection) => (
-    <SubmissionSection key={subSection[0].id} answers={subSection} />
+    <SubmissionSection
+      key={subSection[0].id}
+      id={subSection[0].id}
+      answers={subSection}
+      autoSave={setNotes}
+      savedNote={notes[subSection[0].id]}
+    />
   ));
+
+  const handleSubmitNotes = async () => { 
+    await submitNotes()
+    push('/all-submissions')
+  }
+
+
+  
 
   return (
     <Grid
@@ -76,19 +102,29 @@ const ExaminerView = observer(() => {
       )}
       <MainComponent gridArea='main'>
         <Box fill align='start' pad='medium'>
+  
           {sortedSectionList.length
             ? sortedSectionList.map((section) => (
-                <div id={section.id} key={section.id}>
-                  <Heading level={3} size='large' textAlign='start'>
-                    {section.title}
-                  </Heading>
+              <div id={section.id} key={section.id}>
+                <Heading level={3} size='large' textAlign='start'>
+                  {section.title}
+                </Heading>
                   {!R.isEmpty(answers) &&
                     answers[section.id] &&
                     getSubsections(R.values(answers[section.id]))}
                 </div>
               ))
             : null}
+          
+          <Button
+            alignSelf="end"
+            margin='large'
+            size='medium'
+            primary 
+            color='primary'
+            icon={<Send />} onClick={submitNotes} label="Submit"/>
         </Box>
+        
       </MainComponent>
     </Grid>
   );
