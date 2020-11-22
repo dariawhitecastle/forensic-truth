@@ -1,5 +1,6 @@
 import { action, observable, computed } from 'mobx';
 import { createContext } from 'react';
+import { persist } from 'mobx-persist'
 import * as R from 'ramda';
 
 import {
@@ -9,11 +10,11 @@ import {
 } from '../services/applicationServices';
 
 export class ApplicationStore {
-  @observable sectionList = [];
-  @observable personalInfo = {};
-  @observable disableNext = true;
-  @observable loginError = false;
-  @observable submitApplicationError = false;
+  @persist('list') @observable sectionList = [];
+  @persist('object') @observable personalInfo = {};
+  @persist @observable disableNext = true;
+  @persist @observable loginError = false;
+  @persist @observable submitApplicationError = false;
 
   @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));

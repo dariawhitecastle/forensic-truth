@@ -1,16 +1,30 @@
 import { action, observable, computed } from 'mobx';
+import { persist , create } from 'mobx-persist'
 import { createContext } from 'react';
 import * as R from 'ramda';
 
 import {
   getQuestions as getQuestionsService,
   fetchSubmission as fetchSubmissionService,
+  submitNotes as submitNotesService,
+  fetchAllSubmissions  as fetchAllSubmissionsService
 } from '../services/applicationServices';
 
+const hydrate = create({})
+
 export class ExaminerStore {
-  @observable sectionList = [];
-  @observable selectedSubmissionId = undefined;
-  @observable currentSubmission = {};
+  @observable hydrated = false;
+  @persist('list') @observable sectionList = [];
+  @persist @observable selectedSubmissionId;
+  @persist('object') @observable currentSubmission = {};
+  @persist('object') @observable notes = {};
+  @persist('list') @observable allSubmissions = [];
+
+  constructor() {
+    hydrate('examiner', this).then(() => {
+      this.hydrated = true;
+    });
+  }
 
   @computed get sortedAnswers() {
     if (!R.isEmpty(this.currentSubmission)) {
@@ -30,7 +44,7 @@ export class ExaminerStore {
     return [];
   }
 
-  @computed get sortedSectionList() {
+   @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));
     const mapSections = ({ id, name: title, question }) => {
       const sortedQuestions = R.sortBy(R.prop('order'))(question);
@@ -50,6 +64,17 @@ export class ExaminerStore {
   }
 
   @action.bound
+  setAllSubmissions(payload) { 
+    this.allSubmissions = payload
+  }
+
+  @action.bound
+  async fetchAllSubmissions() { 
+    const data = await fetchAllSubmissionsService()
+    this.setAllSubmissions(data)
+  }  
+
+  @action.bound
   async getQuestions() {
     const data = await getQuestionsService();
     this.setQuestions(data);
@@ -62,8 +87,7 @@ export class ExaminerStore {
 
   @action.bound
   async fetchSubmission() {
-    // if (!R.isEmpty(this.currentSubmission)) return;
-    try {
+      try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
       this.setCurrentSubmission(data[0]);
     } catch (err) {
@@ -74,6 +98,22 @@ export class ExaminerStore {
   @action.bound
   setCurrentSubmission(submission) {
     this.currentSubmission = submission;
+  }
+
+  @action.bound
+  setNotes(answerGroup, note) {
+    this.notes = { ...this.notes, [answerGroup]: note };
+    console.log('notes', JSON.parse(JSON.stringify(this.notes)))
+  }
+
+  @action.bound
+  async submitNotes() { 
+    try {
+      await submitNotesService({ [this.selectedSubmissionId]: this.notes })
+      return true
+    } catch (err) { 
+      throw err;
+    }
   }
 }
 

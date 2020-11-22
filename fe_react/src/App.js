@@ -19,6 +19,7 @@ import { Form, Login, Register, AllSubmissions, ExaminerView } from './pages';
 import { StyledHeader } from './pages/Form.styled';
 import './App.css';
 import customTheme from './utils/theme';
+import { rootStore } from './stores/RootStore'
 
 // Assets
 import logo from './assets/logo.jpg';
@@ -30,6 +31,7 @@ const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
 const stores = {
   routing: routingStore,
+  rootStore
 };
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
