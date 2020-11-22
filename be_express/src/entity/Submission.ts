@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Answer } from './Answer';
 import { User } from './User';
+import { Note } from './Note';
 
 @Entity()
 export class Submission {
@@ -27,4 +28,10 @@ export class Submission {
     cascade: true,
   })
   public answer: Answer[];
+
+  @OneToMany((type) => Note, (note) => note.submission, {
+    eager: true,
+    cascade: true,
+  })
+  public note: Note[];
 }

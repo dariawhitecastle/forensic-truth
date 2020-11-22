@@ -1,13 +1,5 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Question } from './Question';
-import { Note } from './Note';
 import { Submission } from './Submission';
 
 @Entity()
@@ -25,8 +17,4 @@ export class Answer {
     eager: true,
   })
   public question: Question;
-
-  @OneToOne((type) => Note)
-  @JoinColumn()
-  public note: Note;
 }
