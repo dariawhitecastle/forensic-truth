@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn, Column, JoinColumn } from 'typeorm';
 import { Submission } from './Submission';
 
 @Entity()
@@ -12,6 +12,10 @@ export class Note {
   @Column()
   answerGroup: number;
 
+  @Column({ nullable: true })
+  submissionId: number;
+
   @ManyToOne((type) => Submission, (submission) => submission.note)
+  @JoinColumn({ name: "submissionId" })
   public submission: Submission;
 }

@@ -15,15 +15,15 @@ import express from 'express';
 import morgan from 'morgan';
 import { PostRequestHandler, RequestHandler } from './express';
 import { Request, Response } from 'express';
+import * as R from 'ramda'
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import { User } from './entity/User';
-import { UserDomainRole } from './entity/UserDomainRole';
-import { Question } from './entity/Question';
 import { Section } from './entity/Section';
+import { Note } from './entity/Note'
 
 // connection
 import config from './typeorm.config';
@@ -134,6 +134,17 @@ createConnection(config)
       '/api/submissions',
       RequestHandler((query) => submissionsRepository.find(query), ['query'])
     );
+     
+    // /notes
+    const noteRepository = connection.getRepository(Note);
+    app.post('/api/note',
+      RequestHandler(async (body: any) => {
+        await R.map(noteRepository.save.bind(noteRepository))(body)
+        const savedNotes = await noteRepository.find({ where: { submissionId: body[0].submissionId } });
+        return savedNotes
+      })
+    )
+
 
     // app.post(
     //   '/find-user-by-id',

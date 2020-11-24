@@ -8,8 +8,10 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
   // ever 5 minutes autoSave to Store
   useEffect(() => { 
     const timer = setTimeout(() => {
-    autoSave(id, noteText);
-    }, 15000);
+      if (noteText) {
+        autoSave(id, noteText);
+      }
+    }, 5000);
     return() => clearTimeout(timer)
   }, [noteText])
  
@@ -30,8 +32,7 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
           
         </Box>
       ))}
-
-      <TextArea placeholder='Examiner Notes here' value={savedNote} onChange={(e) => setNoteText(e.target.value)} />
+      <TextArea placeholder='Examiner Notes here' value={noteText ?? savedNote} onChange={(e) => setNoteText(e.target.value)} />
     </Box>
   );
 };

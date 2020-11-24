@@ -20,7 +20,7 @@ const config: ConnectionOptions = {
   password: PGPASSWORD,
   port: parseInt(PGPORT),
   database: PGDATABASE,
-  synchronize: false,
+  synchronize: true,
   logging: false,
   entities: [ path.join(__dirname, './entity/**/*') ],
   migrations: [ path.join(__dirname, './migration/**/*') ],

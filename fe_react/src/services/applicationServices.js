@@ -71,7 +71,7 @@ export const registerUser = async (credentials) => {
 
 export const submitNotes = async (submissionNotes) => {
   try {
-    await axios.post(`${baseURL}/api/notes`, submissionNotes);
+    await axios.post(`${baseURL}/api/note`, submissionNotes);
     return true;
   } catch (err) {
     throw err;

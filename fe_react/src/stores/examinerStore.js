@@ -10,7 +10,9 @@ import {
   fetchAllSubmissions  as fetchAllSubmissionsService
 } from '../services/applicationServices';
 
-const hydrate = create({})
+const hydrate = create({
+  storage: Window.sessionStorage
+})
 
 export class ExaminerStore {
   @observable hydrated = false;
@@ -56,6 +58,13 @@ export class ExaminerStore {
       };
     };
     return R.compose(R.map(mapSections), sortById)(this.sectionList);
+   }
+  
+  @computed get notesByAnswerGroup() { 
+    if (!R.isEmpty(this.currentSubmission)) {
+      return R.uniqBy(R.prop('answerGroup'))(this.currentSubmission.note)
+    } 
+    return []
   }
 
   @action.bound
@@ -103,13 +112,29 @@ export class ExaminerStore {
   @action.bound
   setNotes(answerGroup, note) {
     this.notes = { ...this.notes, [answerGroup]: note };
-    console.log('notes', JSON.parse(JSON.stringify(this.notes)))
   }
 
   @action.bound
-  async submitNotes() { 
+  async submitNotes() {
+    const createRequestObj = (note) => { 
+      const answerGroup = note[0]
+      const body = note[1]
+      return body ? {
+        answerGroup,
+        body,
+        submissionId: this.selectedSubmissionId
+      } : undefined
+    }
+    const requestBody = R.compose(
+      R.map(createRequestObj),
+      R.filter((pair) => !R.isNil(pair[1])),
+      R.toPairs)
+      (this.notes)
+      
+    console.log(requestBody)
     try {
-      await submitNotesService({ [this.selectedSubmissionId]: this.notes })
+      await submitNotesService(requestBody)
+      this.setNotes({})
       return true
     } catch (err) { 
       throw err;

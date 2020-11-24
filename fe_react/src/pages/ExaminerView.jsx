@@ -14,9 +14,7 @@ import { ExaminerStoreContext } from '../stores/examinerStore';
 import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
 import SubmissionSection from '../components/SubmissionSection';
-
-// TODO: IMPLEMENT UPDATING SIDE NAV ON SCROLL
-
+ 
 const ExaminerView = observer(() => {
   const {
     getQuestions,
@@ -26,11 +24,37 @@ const ExaminerView = observer(() => {
     fetchSubmission,
     sortedSectionList,
     sortedAnswers,
+    notesByAnswerGroup,
     submitNotes,
   } = useContext(ExaminerStoreContext);
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
+
+  
+  useEffect(() => {
+    if(sortedSectionList.length) {
+      const intersectionCallback = (entries) => {
+      entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let step = entry.target.id;
+        setCurrentStep(parseInt(step))
+      }
+    });
+    }
+  
+    let intersectionObserver = new IntersectionObserver(intersectionCallback, {
+      rootMargin: '0px',
+      threshold: .1
+    });
+
+      R.map(({ id }) => {
+      const target = document.querySelector(`#\\3${id}`)
+      intersectionObserver.observe(target)
+      })(sortedSectionList)
+    }
+   }, [sortedSectionList])
+
 
   const handleSideNavClick = (step) => {
     const el = document.getElementById(step);
@@ -57,23 +81,24 @@ const ExaminerView = observer(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
   }, [sortedSectionList]);
 
-  const getSubsections = R.map((subSection) => (
-    <SubmissionSection
-      key={subSection[0].id}
-      id={subSection[0].id}
-      answers={subSection}
-      autoSave={setNotes}
-      savedNote={notes[subSection[0].id]}
-    />
-  ));
+  const getSubsections = R.map((subSection) => {
+    const currentAnswerGroup = subSection[0].question.answerGroup
+    const currentNote = notesByAnswerGroup[currentAnswerGroup] ? notesByAnswerGroup[currentAnswerGroup].body : notes[currentAnswerGroup]
+    return (
+      <SubmissionSection
+        key={subSection[0].id}
+        id={currentAnswerGroup}
+        answers={subSection}
+        autoSave={setNotes}
+        savedNote={currentNote}
+      />
+    )
+  });
 
   const handleSubmitNotes = async () => { 
     await submitNotes()
     push('/all-submissions')
   }
-
-
-  
 
   return (
     <Grid
@@ -109,7 +134,7 @@ const ExaminerView = observer(() => {
                 <Heading level={3} size='large' textAlign='start'>
                   {section.title}
                 </Heading>
-                  {!R.isEmpty(answers) &&
+                  {hydrated && !R.isEmpty(answers) &&
                     answers[section.id] &&
                     getSubsections(R.values(answers[section.id]))}
                 </div>
@@ -122,7 +147,7 @@ const ExaminerView = observer(() => {
             size='medium'
             primary 
             color='primary'
-            icon={<Send />} onClick={submitNotes} label="Submit"/>
+            icon={<Send />} onClick={handleSubmitNotes} label="Submit"/>
         </Box>
         
       </MainComponent>
