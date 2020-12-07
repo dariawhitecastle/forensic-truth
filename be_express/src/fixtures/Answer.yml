@@ -1,0 +1,582 @@
+entity: Answer
+items:
+  answer1:
+    body: 'John'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question1'
+  answer2:
+    body: 'James'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question129'
+  answer3:
+    body: 'Smith'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question130'
+  answer4:
+    body: '1234 Pleasant Pl'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question2'
+  answer5:
+    body: 'Pleasantville'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question3'
+  answer6:
+    body: 'Co'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question4'
+  answer7:
+    body: '12345'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question5'
+  answer8:
+    body: '01/01/1990'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question6'
+  answer9:
+    body: '1234'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question7'
+  answer10:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question8'
+  answer11:
+    body: 'Pleasantville, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question9'
+  answer12:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question10'
+  answer13:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question11'
+  answer14:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question12'
+  answer15:
+    body: 'Pleasantville PD 6/18- polygraph'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question13'
+  answer16:
+    body: 'Today'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question14'
+  answer17:
+    body: '8'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question15'
+  answer18:
+    body: 'One glass of wine, albuterol inhaler'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question16'
+  answer19:
+    body: false
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question17'
+  answer20:
+    body: 'Forgot 2 jobs and 1 address'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question19'
+  answer21:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question20'
+  answer22:
+    body: 'Applicant response here'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question138'
+  answer23:
+    body: '10'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question21'
+  answer24:
+    body: 'Applicant response here'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question22'
+  answer25:
+    body: 'CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question24'
+  answer26:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question25'
+  answer27:
+    body: 'North Carolina, 2015-18'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question26'
+  answer28:
+    body: 'Applicant response here'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question28'
+  answer29:
+    body: '12/09/2020'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question29'
+  answer30:
+    body: 'Denver, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question30'
+  answer31:
+    body: 'Speeding'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question31'
+  answer32:
+    body: 'Citation'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question32'
+  answer33:
+    body: '12/20/2020'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question29'
+  answer34:
+    body: 'Springfield, Ohio'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question30'
+  answer35:
+    body: 'Speeding'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question31'
+  answer36:
+    body: 'Court'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question32'
+  answer37:
+    body: false
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question33'
+  answer38:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question34'
+  answer39:
+    body: 'Colorado, 2010-11, unpaid citation'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question35'
+  answer40:
+    body: 'Pleasantville High School'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question38'
+  answer41:
+    body: 'Pleasantville, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question39'
+  answer42:
+    body: '2010-14'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question40'
+  answer43:
+    body: 'HS Diploma'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question41'
+  answer444:
+    body: 'School 2'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question38'
+  answer45:
+    body: 'Location 2'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question39'
+  answer46:
+    body: '2014-2020'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question40'
+  answer47:
+    body: 'Certificate'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question41'
+  answer48:
+    body: 'Pleasantville PD'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question45'
+  answer49:
+    body: 'Pleasantville, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question46'
+  answer50:
+    body: '2010-present'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question47'
+  answer51:
+    body: 'Police Officer'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question48'
+  answer52:
+    body: 'Moved'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question49'
+  answer53:
+    body: 'Pleasantville PD'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question50'
+  answer54:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question51'
+  answer55:
+    body: '12/2015'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question52'
+  answer56:
+    body: 'Applicants response'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question53'
+  answer57:
+    body: 'Employer'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question54'
+  answer58:
+    body: 'Write Up'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question55'
+  answer59:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question57'
+  answer60:
+    body: 'US Army'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question58'
+  answer61:
+    body: '8/10-8/14'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question59'
+  answer62:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question60'
+  answer63:
+    body: 'Article 15 in 6/13'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question61'
+  answer64:
+    body: 'E-5'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question62'
+  answer65:
+    body: 'MOS'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question63'
+  answer66:
+    body: 'Fort Carson, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question64'
+  answer67:
+    body: 'Honorable'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question65'
+  answer68:
+    body: 'E-5'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question66'
+  answer69:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question67'
+  answer70:
+    body: 'Army National Guard, Fort Carson, CO, 2014-present, E-6'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question68'
+  answer71:
+    body: 'Applicant response'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question70'
+  answer72:
+    body: '05/2005'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question71'
+  answer73:
+    body: 'Shoplifting'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question72'
+  answer74:
+    body: 'Pleasantville, CO'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question73'
+  answer75:
+    body: 'Fines, community service, classes'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question74'
+  answer76:
+    body: 'Drinking and driving'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question75'
+  answer77:
+    body: ''
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question82'
+  answer78:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question83'
+  answer79:
+    body: 'Applicant answer'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question84'
+  answer80:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question85'
+  answer81:
+    body: 'Used mothers prescription allergy medication in 5/12'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question86'
+  answer82:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question87'
+  answer83:
+    body: 'Applicant answer'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question88'
+  answer84:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question89'
+  answer85:
+    body: 'Went to work at Pleasantville Bar high on marijuana last in 4/2009'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question90'
+  answer86:
+    body: 'Sold marijuana at cost to friends in high school'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question92'
+  answer87:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question94'
+  answer88:
+    body: 'Discounted clothing to friends without permission.'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question95'
+  answer89:
+    body: '$250'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question96'
+  answer90:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question97'
+  answer91:
+    body: '$250'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question99'
+  answer92:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question100'
+  answer93:
+    body: 'Shoplifted clothing in 2017 worth $130'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question101'
+  answer94:
+    body: '$200'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question102'
+  answer95:
+    body: '9/2012'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question104'
+  answer96:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question105'
+  answer97:
+    body: 'I threw items during a fight with my spouse to scare them'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question106'
+  answer98:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question107'
+  answer99:
+    body: 'I was raised in a racist household'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question108'
+  answer100:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question109'
+  answer101:
+    body: 'Applicant answer'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question110'
+  answer102:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question111'
+  answer103:
+    body: 'I fished without a license in 2014 in Wyoming'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question112'
+  answer104:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question114'
+  answer105:
+    body: 'I received professional courtesy for speeding'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question115'
+  answer106:
+    body: 'I last had intercourse in a park at night in 2014'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question117'
+  answer107:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question119'
+  answer108:
+    body: 'Chapter 7, 2017, $50,000, due to divorce'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question120'
+  answer109:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question121'
+  answer110:
+    body: "Internet, 3 months, spouse lost their job and we couldn't pay it"
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question122'
+  answer111:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question123'
+  answer112:
+    body: 'Wages garnished for 2017 taxes'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question124'
+  answer113:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question125'
+  answer114:
+    body: 'Three medical bills, $4,000, disputing with insurance'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question126'
+  answer115:
+    body: true
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question127'
+  answer116:
+    body: 'I fell behind when I got laid off from my last job.'
+    responseSelection: ''
+    submission: '@submission1'
+    question: '@question128'

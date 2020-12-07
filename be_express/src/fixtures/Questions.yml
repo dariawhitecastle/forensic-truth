@@ -1226,7 +1226,7 @@ items:
     section: '@section7'
   question104:
     description: 'When was the last time you participated in a physical fight?  '
-    type: number
+    type: text
     placeholder: '9/2012'
     required: false
     order: 2

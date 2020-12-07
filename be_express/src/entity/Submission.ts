@@ -15,7 +15,7 @@ export class Submission {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column() caseId: number;
+  @Column({ nullable: true }) caseId: number;
 
   @Column()
   date: string;
