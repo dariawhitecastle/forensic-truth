@@ -984,9 +984,9 @@ items:
     order: 2
     subQuestions: ''
     responseOptions:
-      Marijuana, Hashish, Cocaine, Crack cocaine, Speed, Downers, LSD/acid,
-      Heroin, PCP, Quaaludes, Anabolic steroids, Opium, Mushrooms, Other
-      Psychedelics, Ecstasy, Other
+      Marijuana,Hashish,Cocaine,Crackcocaine,Speed,Downers,LSD/acid,
+      Heroin,PCP,Quaaludes,Anabolic steroids,Opium,Mushrooms,Other
+      Psychedelics,Ecstasy,Other
     externalUse: true
     section: '@section6'
     answerGroup: 21
