@@ -46,6 +46,7 @@ const FormFieldComponent = ({
       const drugName = option;
       const includesDrug = personalInfo[id]?.find(R.propEq('name', drugName));
       const drugDate = includesDrug?.date;
+      const otherDrug = option === 'Other'
 
       return (
         <Box direction='row' key={drugName}>
@@ -60,7 +61,7 @@ const FormFieldComponent = ({
             }
           />
           {!!includesDrug && (
-            <Box width='170px' margin={{ left: '8px' }}>
+            <Box width='200px' margin={{ left: '8px' }}>
               <StyledFormField
                 required
                 autoComplete='none'
@@ -71,7 +72,7 @@ const FormFieldComponent = ({
                     date: event.target.value,
                   })
                 }
-                placeholder='10/2010'
+                placeholder={ otherDrug ? 'Please explain' : 'Enter date last used'}
                 type='text'
               />
             </Box>
