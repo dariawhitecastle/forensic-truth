@@ -49,7 +49,7 @@ const PersonalInfoStep = observer(
     }, [questionList]);
 
     useEffect(() => {
-      const isRequired = (question) => question.required;
+      const isRequired = (question) => question.required && question.type !== 'none';
 
       const isAnswered = (question) => R.has(question.id, personalInfo);
       const isRequiredAndAnswered = (question) =>

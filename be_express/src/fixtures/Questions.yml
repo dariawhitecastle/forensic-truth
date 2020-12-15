@@ -323,7 +323,7 @@ items:
     answerGroup: 10
   question25:
     description:
-      Have you held a driver's license in any other state or country in the last 7
+      Have you held a driver's licenses in any other state or country in the last 7
       years?
     type: yesNo
     placeholder:
@@ -335,7 +335,7 @@ items:
     section: '@section3'
     answerGroup: 10
   question26:
-    description: Where and when did you hold driver's license?
+    description: Where and when did you hold driver's licenses?
     type: text
     placeholder: 'North Carolina, 2015-18'
     required: false
@@ -473,7 +473,7 @@ items:
     order: 17
     subQuestions: ''
     responseOptions: ''
-    required: false
+    required: true
     externalUse: true
     section: '@section3'
     answerGroup: 13
@@ -549,7 +549,7 @@ items:
     placeholder:
     order: 2
     subQuestions: ''
-    required: false
+    required: true
     responseOptions: ''
     externalUse: true
     section: '@section4'
@@ -881,7 +881,7 @@ items:
   question70:
     description:
       Please list all the times you have ever been arrested or charged with a
-      criminal offense (Do not include minor traffic incidents)
+      criminal offense (do not include minor traffic incidents).
     type: 'none'
     placeholder:
     order: 2
@@ -1162,7 +1162,19 @@ items:
     placeholder:
     required: true
     order: 18
-    subQuestions: '20'
+    subQuestions: '19,20'
+    responseOptions: ''
+    externalUse: true
+    section: '@section6'
+    answerGroup: 27
+  question98:
+    description: 'Please explain'
+    type: textArea
+    placeholder: 'Add explanation here'
+    required: false
+    charLimit: 140
+    order: 19
+    subQuestions: ''
     responseOptions: ''
     externalUse: true
     section: '@section6'
