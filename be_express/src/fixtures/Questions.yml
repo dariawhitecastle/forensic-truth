@@ -185,7 +185,7 @@ items:
     required: true
     order: 16
     subQuestions: ''
-    responseOptions: 'Today, Last night, Yesterday, Before Yesterday'
+    responseOptions: 'Today,Last night,Yesterday,Before Yesterday'
     externalUse: true
     section: '@section1'
     answerGroup: 4
@@ -292,7 +292,7 @@ items:
   question22:
     description: What other applications do you currently have in active process?
     type: textArea
-    placeholder:
+    placeholder: 'Type here'
     required: false
     order: 5
     subQuestions: ''
@@ -984,7 +984,7 @@ items:
     order: 2
     subQuestions: ''
     responseOptions:
-      Marijuana,Hashish,Cocaine,Crackcocaine,Speed,Downers,LSD/acid,
+      Marijuana,Hashish,Cocaine,Crack cocaine,Speed,Downers,LSD/acid,
       Heroin,PCP,Quaaludes,Anabolic steroids,Opium,Mushrooms,Other
       Psychedelics,Ecstasy,Other
     externalUse: true

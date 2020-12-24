@@ -19,10 +19,12 @@ const Form = observer(() => {
     setDisableNext,
     getQuestions,
     sortedSectionList,
+    questionServicePending,
     personalInfo,
     resetForm,
     setPersonalInfo,
     submitApplication,
+    updateQuestions,
   } = useContext(ApplicationStoreContext);
   const [sidebarOpen, toggleSidebar] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
@@ -33,7 +35,7 @@ const Form = observer(() => {
 
   useEffect(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
-  }, [sortedSectionList]);
+  }, [questionServicePending]);
 
   const handleClick = (step) =>
     step > sortedSectionList.length ? onSubmit() : setCurrentStep(step);
@@ -95,10 +97,11 @@ const Form = observer(() => {
             onClickPrev={handleClick}
             component={(props) => (
               <SingleStepForm
-                sortedSectionList={sortedSectionList}
                 personalInfo={personalInfo}
                 setPersonalInfo={setPersonalInfo}
                 setDisableNext={setDisableNext}
+                currentStep={currentStep}
+                updateQuestions={updateQuestions}
                 {...props}
               />
             )}

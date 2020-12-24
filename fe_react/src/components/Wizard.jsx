@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react';
 
 import styled from 'styled-components';
@@ -25,7 +25,9 @@ const Wizard = observer(
     component,
     setDisableNext,
   }) => {
+    const [returning, setReturning] = useState(false)
     const goToNext = () => {
+      setReturning(false)
       if (currentStep <= steps.length) {
         setDisableNext(true);
         onClickNext(currentStep + 1);
@@ -34,6 +36,7 @@ const Wizard = observer(
     };
 
     const goToPrev = () => {
+      setReturning(true)
       if (currentStep > 1) {
         onClickPrev(currentStep - 1);
       }
@@ -55,6 +58,7 @@ const Wizard = observer(
             saveData: goToNext,
             questionList: getCurrentStepProp('questions', steps, currentStep),
             header: getCurrentStepProp('title', steps, currentStep),
+            returning,
           })}
         </Box>
         {/* </CSSTransition>

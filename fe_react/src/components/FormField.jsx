@@ -47,7 +47,6 @@ const FormFieldComponent = ({
       const includesDrug = personalInfo[id]?.find(R.propEq('name', drugName));
       const drugDate = includesDrug?.date;
       const otherDrug = option === 'Other'
-
       return (
         <Box direction='row' key={drugName}>
           <CheckBox
@@ -167,7 +166,7 @@ const FormFieldComponent = ({
             )}
           </Box>
           <TextArea
-            placeholder='type here'
+            placeholder={placeholder || 'Type here'}
             name={id.toString()}
             maxLength={charLimit ?? 100}
             value={personalInfo[id]}

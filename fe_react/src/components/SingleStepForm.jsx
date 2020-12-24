@@ -14,14 +14,17 @@ import { StyledFormWrapper } from './SingleStepForm.styled.js';
 // helpers
 import { checkCharLimit } from '../utils/helpers';
 
-const PersonalInfoStep = observer(
+const SingleStepForm = observer(
   ({
     questionList,
+    currentStep,
     header,
     saveData,
     personalInfo,
+    returning, 
     setPersonalInfo,
     setDisableNext,
+    updateQuestions
   }) => {
     const [questions, setQuestions] = useState([]);
     const [currentSubqs, setCurrentSubqs] = useState([]);
@@ -36,16 +39,19 @@ const PersonalInfoStep = observer(
           inline: 'start',
         });
       }
-    }, [questionList]);
+      if (!returning) {
+        const subqs = R.reduce(
+          (acc, { subQuestions }) => acc.concat(subQuestions),
+          [],
+          questionList
+        );
+        setCurrentSubqs(subqs);
+      }
+    }, [currentStep]);
 
-    useEffect(() => {
+    useEffect(() => { 
       setQuestions(questionList);
-      const subqs = R.reduce(
-        (acc, { subQuestions }) => acc.concat(subQuestions),
-        [],
-        questionList
-      );
-      setCurrentSubqs(subqs);
+      
     }, [questionList]);
 
     useEffect(() => {
@@ -66,10 +72,10 @@ const PersonalInfoStep = observer(
       !!Object.keys(personalInfo).length && !isInvalid && setDisableNext(false);
     }, [Object.keys(personalInfo).length, currentSubqs.length]);
 
-    const onChange = useCallback(
+    const onChange =
       (e, id, type, option) => {
         const { value } = e.target;
-        // find subquestions for this question
+        // find this question in the questionList
         const filtered = questionList.find(
           (singleQuestion) => singleQuestion.id === id
         );
@@ -81,29 +87,27 @@ const PersonalInfoStep = observer(
               // remove subquestion from currentSubqs
               setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
             } else {
-              // add subquestion back to currentSubqs
-              const subqs = R.union(currentSubqs, filtered?.subQuestions);
-              setCurrentSubqs(subqs);
-              // clear out all subquestions from personal info
+                // add subquestion back to currentSubqs
+                const subqs = R.union(currentSubqs, filtered?.subQuestions);
+                setCurrentSubqs(subqs);
+                // clear out all subquestions from personal info
               R.forEach((q) => {
-                const questionFromSubq = R.find(
-                  R.propEq('order', parseInt(q)),
-                  questions
-                );
-                setPersonalInfo({
-                  field: questionFromSubq.id,
-                  value: undefined,
-                });
-              }, filtered.subQuestions);
+                if (q.answerGroup === filtered.answerGroup) { 
+                   setPersonalInfo({
+                    field: q.id,
+                    value: undefined,
+                  });
+                }
+               }, questionList)
             }
             break;
           case 'yesNo reverse':
             setPersonalInfo({ field: id, value });
             if (value === 'false' && filtered?.subQuestions?.length) {
               // remove subquestion from currentSubqs
-              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
+              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));       
             } else {
-              // add subquestion back to  currentSubqs
+              // add subquestion back to currentSubqs
               const subqs = R.reduce(
                 (acc, { subQuestions }) => acc.concat(subQuestions),
                 [],
@@ -112,8 +116,15 @@ const PersonalInfoStep = observer(
               setCurrentSubqs(subqs);
               // clear out all subquestions from personal info
               R.forEach((q) => {
-                setPersonalInfo({ field: parseInt(q.id), value: undefined });
-              }, filtered.subQuestions);
+                // check if subQuestions have subQuestions ugh
+                questionList.find(({ order, subQuestions }) => {
+                  if (order === parseInt(q) && subQuestions.length) { 
+                    const id = subQuestions[0]
+                    setPersonalInfo({ field: parseInt(id), value: undefined });
+                  }
+                })
+                setPersonalInfo({ field: parseInt(q), value: undefined });
+               }, filtered.subQuestions);
             }
             break;
 
@@ -151,11 +162,9 @@ const PersonalInfoStep = observer(
             break;
           default:
             // set value in state
-            checkCharLimit(e, setPersonalInfo);
+            checkCharLimit(e, setPersonalInfo, personalInfo);
         }
-      },
-      [currentSubqs, personalInfo]
-    );
+      }
 
     const onAddMore = (options, id) => {
       setTableRow(tableRow + 1);
@@ -172,7 +181,7 @@ const PersonalInfoStep = observer(
       const idx = R.findIndex(R.propEq('id', id), questions);
       const subQuestions = R.map(findSubQ, options);
       const updated = R.insert(idx, subQuestions, questions);
-      setQuestions(R.flatten(updated));
+      updateQuestions(currentStep, R.flatten(updated))
     };
 
     const renderFormFields = () =>
@@ -200,4 +209,4 @@ const PersonalInfoStep = observer(
   }
 );
 
-export default PersonalInfoStep;
+export default SingleStepForm;
