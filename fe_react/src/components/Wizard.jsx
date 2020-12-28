@@ -26,10 +26,10 @@ const Wizard = observer(
     setDisableNext,
   }) => {
     const [returning, setReturning] = useState(false)
+
     const goToNext = () => {
       setReturning(false)
       if (currentStep <= steps.length) {
-        setDisableNext(true);
         onClickNext(currentStep + 1);
       }
       return null;
@@ -38,6 +38,7 @@ const Wizard = observer(
     const goToPrev = () => {
       setReturning(true)
       if (currentStep > 1) {
+        setDisableNext(false);
         onClickPrev(currentStep - 1);
       }
       return null;

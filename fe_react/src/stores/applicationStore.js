@@ -52,8 +52,13 @@ export class ApplicationStore {
    @action 
    getQuestions = async () => {
      const data = await getQuestionsService();
-    this.questionServicePending = false
+    this.setQuestionServicePending(false)
     this.setQuestions(data);
+   }
+  
+  @action
+  setQuestionServicePending = (payload) => { 
+    this.questionServicePending = payload
   }
 
   @action

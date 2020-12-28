@@ -227,6 +227,7 @@ const FormFieldComponent = ({
     case 'checkBoxGroup':
       return (
         <Box pad='small' direction='column' align='start'>
+          {description}
           {checkboxes()}
         </Box>
       );

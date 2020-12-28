@@ -51,7 +51,6 @@ const SingleStepForm = observer(
 
     useEffect(() => { 
       setQuestions(questionList);
-      
     }, [questionList]);
 
     useEffect(() => {
@@ -69,8 +68,9 @@ const SingleStepForm = observer(
       const validatedList = R.map(isRequiredAndAnswered, filteredQuestionList);
       const isInvalid = validatedList.includes(false);
 
+      isInvalid && setDisableNext(true) 
       !!Object.keys(personalInfo).length && !isInvalid && setDisableNext(false);
-    }, [Object.keys(personalInfo).length, currentSubqs.length]);
+    }, [Object.keys(personalInfo).length, currentSubqs]);
 
     const onChange =
       (e, id, type, option) => {
@@ -81,25 +81,24 @@ const SingleStepForm = observer(
         );
 
         switch (type) {
-          case 'yesNo':
-            setPersonalInfo({ field: id, value });
+          case 'yesNo': 
             if (value === 'true' && filtered?.subQuestions?.length) {
               // remove subquestion from currentSubqs
               setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
-            } else {
+            } else if (value === 'false' && filtered?.subQuestions?.length) {
                 // add subquestion back to currentSubqs
                 const subqs = R.union(currentSubqs, filtered?.subQuestions);
                 setCurrentSubqs(subqs);
                 // clear out all subquestions from personal info
-              R.forEach((q) => {
-                if (q.answerGroup === filtered.answerGroup) { 
-                   setPersonalInfo({
-                    field: q.id,
-                    value: undefined,
-                  });
+              R.forEach(({ order, id}) => {
+                if (filtered.subQuestions.includes(order.toString())) { 
+                  setPersonalInfo({ field: parseInt(id), value: undefined });
                 }
-               }, questionList)
+                
+               }, questionList);
             }
+            // make sure this is set last or it clears out selected option
+            setPersonalInfo({ field: id, value });
             break;
           case 'yesNo reverse':
             setPersonalInfo({ field: id, value });
