@@ -21,12 +21,10 @@ const SingleStepForm = observer(
     header,
     saveData,
     personalInfo,
-    returning, 
     setPersonalInfo,
     setDisableNext,
     updateQuestions
   }) => {
-    const [questions, setQuestions] = useState([]);
     const [currentSubqs, setCurrentSubqs] = useState([]);
     const [tableRow, setTableRow] = useState(0);
     const headerRef = useRef(null);
@@ -36,22 +34,16 @@ const SingleStepForm = observer(
         headerRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
-          inline: 'start',
+          inline: 'start'
         });
       }
-      if (!returning) {
         const subqs = R.reduce(
           (acc, { subQuestions }) => acc.concat(subQuestions),
           [],
           questionList
         );
         setCurrentSubqs(subqs);
-      }
     }, [currentStep]);
-
-    useEffect(() => { 
-      setQuestions(questionList);
-    }, [questionList]);
 
     useEffect(() => {
       const isRequired = (question) => question.required && question.type !== 'none';
@@ -63,7 +55,7 @@ const SingleStepForm = observer(
       // remove currentSubquestions from questionlist to validate
       const filteredQuestionList = R.filter(
         (question) => !currentSubqs.includes(question.order.toString()),
-        questions
+        questionList
       );
       const validatedList = R.map(isRequiredAndAnswered, filteredQuestionList);
       const isInvalid = validatedList.includes(false);
@@ -177,14 +169,14 @@ const SingleStepForm = observer(
           id: Number(`${foundSubq.id}${tableRow}`),
         };
       };
-      const idx = R.findIndex(R.propEq('id', id), questions);
+      const idx = R.findIndex(R.propEq('id', id), questionList);
       const subQuestions = R.map(findSubQ, options);
-      const updated = R.insert(idx, subQuestions, questions);
+      const updated = R.insert(idx, subQuestions, questionList);
       updateQuestions(currentStep, R.flatten(updated))
     };
 
     const renderFormFields = () =>
-      questions.map((question, i) => (
+      questionList.map((question, i) => (
         <FormFieldComponent
           key={`${question.id}-${i}`}
           onChange={onChange}
