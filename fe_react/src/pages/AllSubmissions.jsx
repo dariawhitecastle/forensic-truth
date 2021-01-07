@@ -57,10 +57,15 @@ const formatData = (submissions) =>
   });
 
 const AllSubmissions = observer(() => {
-  const { setSelectedSubmissionId, allSubmissions, fetchAllSubmissions } = useContext(ExaminerStoreContext);
+  const { setSelectedSubmissionId, allSubmissions, fetchAllSubmissions, resetNotes, selectedSubmissionId } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
 
+  useEffect(() => { 
+    resetNotes()
+  }, [selectedSubmissionId])
+
+  
   useEffect(() => {
     if(!allSubmissions.length)
     fetchAllSubmissions()
@@ -83,9 +88,11 @@ const AllSubmissions = observer(() => {
       margin={{ top: '10%', horizontal: 'auto' }}>
       {submissions.length ? (
         <DataTable
+          border
+          // border={{ header: true, "body": { side: "vertical", size: "small" }, footer: 'bottom'}}
           columns={columns.map((c) => ({
             ...c,
-            search: c.property === 'firstName' || c.property === 'lastName',
+            search: c.property === 'firstName' || c.property === 'lastName' || c.property === 'ssn',
           }))}
           data={submissions}
           onClickRow={(event) => handleRowClick(event.datum)}

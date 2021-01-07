@@ -23,6 +23,8 @@ export const StyledHeader = styled(Box)`
   position: fixed;
   left: 0;
   right: 0;
+  display: flex;
+  justify-content: space-between
 `
 export const StyledSidebar = styled(Box)`
   position: fixed;

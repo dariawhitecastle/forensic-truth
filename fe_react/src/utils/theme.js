@@ -10,6 +10,13 @@ const customTheme = {
       success: '#4C9F70', // Green
     },
   },
+  table: {
+    header: {
+      background: {
+        color: '#C5D0E5',
+      },
+    },
+  },
   checkBox: {
     gap: '6px',
   },

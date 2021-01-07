@@ -83,7 +83,8 @@ const ExaminerView = observer(() => {
 
   const getSubsections = R.map((subSection) => {
     const currentAnswerGroup = subSection[0].question.answerGroup
-    const currentNote = notesByAnswerGroup[currentAnswerGroup] ? notesByAnswerGroup[currentAnswerGroup].body : notes[currentAnswerGroup]
+    const savedNote = R.find(R.propEq('answerGroup', currentAnswerGroup), notesByAnswerGroup)
+    const currentNote = savedNote ? savedNote.body : notes[currentAnswerGroup]
     return (
       <SubmissionSection
         key={subSection[0].id}

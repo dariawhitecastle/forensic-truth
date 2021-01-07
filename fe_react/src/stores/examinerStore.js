@@ -1,4 +1,4 @@
-import { action, observable, computed } from 'mobx';
+import { action, observable, computed, makeAutoObservable } from 'mobx';
 import { persist , create } from 'mobx-persist'
 import { createContext } from 'react';
 import * as R from 'ramda';
@@ -23,6 +23,7 @@ export class ExaminerStore {
   @persist('list') @observable allSubmissions = [];
 
   constructor() {
+    makeAutoObservable(this);
     hydrate('examiner', this).then(() => {
       this.hydrated = true;
     });
@@ -67,35 +68,35 @@ export class ExaminerStore {
     return []
   }
 
-  @action.bound
-  setQuestions(payload) {
+  @action
+  setQuestions = (payload) => {
     this.sectionList = payload;
   }
 
-  @action.bound
-  setAllSubmissions(payload) { 
+  @action
+  setAllSubmissions = (payload) => { 
     this.allSubmissions = payload
   }
 
-  @action.bound
-  async fetchAllSubmissions() { 
+  @action
+   fetchAllSubmissions = async () => { 
     const data = await fetchAllSubmissionsService()
     this.setAllSubmissions(data)
   }  
 
-  @action.bound
-  async getQuestions() {
+  @action
+   getQuestions = async () =>{
     const data = await getQuestionsService();
     this.setQuestions(data);
   }
 
-  @action.bound
-  setSelectedSubmissionId(id) {
+  @action
+  setSelectedSubmissionId = (id) => {
     this.selectedSubmissionId = id;
   }
 
-  @action.bound
-  async fetchSubmission() {
+  @action
+  fetchSubmission = async () => {
       try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
       this.setCurrentSubmission(data[0]);
@@ -104,18 +105,23 @@ export class ExaminerStore {
     }
   }
 
-  @action.bound
-  setCurrentSubmission(submission) {
+  @action
+  setCurrentSubmission = (submission) => {
     this.currentSubmission = submission;
   }
 
-  @action.bound
-  setNotes(answerGroup, note) {
+  @action
+  setNotes = (answerGroup, note) => {
     this.notes = { ...this.notes, [answerGroup]: note };
   }
 
-  @action.bound
-  async submitNotes() {
+  @action
+  resetNotes = () => { 
+    this.notes = {}
+  }
+
+  @action
+  submitNotes = async () => {
     const createRequestObj = (note) => { 
       const answerGroup = note[0]
       const body = note[1]
@@ -134,7 +140,7 @@ export class ExaminerStore {
     console.log(requestBody)
     try {
       await submitNotesService(requestBody)
-      this.setNotes({})
+      this.resetNotes()
       return true
     } catch (err) { 
       throw err;
