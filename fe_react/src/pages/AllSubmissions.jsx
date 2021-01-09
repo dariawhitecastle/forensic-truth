@@ -3,10 +3,14 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Text, DataTable } from 'grommet';
+import { Box, Text, DataTable, Image } from 'grommet';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
+
+// Assets
+import { StyledHeader } from './Form.styled';
+import logo from '../assets/logo.jpg';
 
 const columns = [
   {
@@ -57,23 +61,27 @@ const formatData = (submissions) =>
   });
 
 const AllSubmissions = observer(() => {
-  const { setSelectedSubmissionId, allSubmissions, fetchAllSubmissions, resetNotes, selectedSubmissionId } = useContext(ExaminerStoreContext);
+  const {
+    setSelectedSubmissionId,
+    allSubmissions,
+    fetchAllSubmissions,
+    resetNotes,
+    selectedSubmissionId,
+  } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
 
-  useEffect(() => { 
-    resetNotes()
-  }, [selectedSubmissionId])
-
-  
   useEffect(() => {
-    if(!allSubmissions.length)
-    fetchAllSubmissions()
+    resetNotes();
+  }, [selectedSubmissionId]);
+
+  useEffect(() => {
+    if (!allSubmissions.length) fetchAllSubmissions();
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     setSubmissions(formatData(allSubmissions));
-  }, [allSubmissions.length])
+  }, [allSubmissions.length]);
 
   const handleRowClick = (row) => {
     setSelectedSubmissionId(row.id);
@@ -81,26 +89,38 @@ const AllSubmissions = observer(() => {
   };
 
   return (
-    <Box
-      pad='large'
-      height='50%'
-      align='center'
-      margin={{ top: '10%', horizontal: 'auto' }}>
-      {submissions.length ? (
-        <DataTable
-          border
-          // border={{ header: true, "body": { side: "vertical", size: "small" }, footer: 'bottom'}}
-          columns={columns.map((c) => ({
-            ...c,
-            search: c.property === 'firstName' || c.property === 'lastName' || c.property === 'ssn',
-          }))}
-          data={submissions}
-          onClickRow={(event) => handleRowClick(event.datum)}
-        />
-      ) : (
-        <Text> No Submissions</Text>
-      )}
-    </Box>
+    <>
+      <StyledHeader
+        elevation='xlarge'
+        direction='row'
+        align='center'
+        justify='between'
+        pad={{ horizontal: 'medium', vertical: 'small' }}>
+        <Image src={logo} height='40' width='200' />
+      </StyledHeader>
+      <Box
+        pad='large'
+        height='50%'
+        align='center'
+        margin={{ top: '10%', horizontal: 'auto' }}>
+        {submissions.length ? (
+          <DataTable
+            border
+            columns={columns.map((c) => ({
+              ...c,
+              search:
+                c.property === 'firstName' ||
+                c.property === 'lastName' ||
+                c.property === 'ssn',
+            }))}
+            data={submissions}
+            onClickRow={(event) => handleRowClick(event.datum)}
+          />
+        ) : (
+          <Text> No Submissions</Text>
+        )}
+      </Box>
+    </>
   );
 });
 

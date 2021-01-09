@@ -3,18 +3,20 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Button, Grid, Heading } from 'grommet';
+import { Box, Button, Grid, Heading, Image } from 'grommet';
 import { Send } from 'grommet-icons';
-
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
 
 // Componenets
-import { StyledSidebar, MainComponent } from './Form.styled';
 import SidebarNav from '../components/Sidebar';
 import SubmissionSection from '../components/SubmissionSection';
- 
+
+// Assets
+import { StyledSidebar, StyledHeader, MainComponent } from './Form.styled';
+import logo from '../assets/logo.jpg';
+
 const ExaminerView = observer(() => {
   const {
     getQuestions,
@@ -31,30 +33,31 @@ const ExaminerView = observer(() => {
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
 
-  
   useEffect(() => {
-    if(sortedSectionList.length) {
+    if (sortedSectionList.length) {
       const intersectionCallback = (entries) => {
-      entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        let step = entry.target.id;
-        setCurrentStep(parseInt(step))
-      }
-    });
-    }
-  
-    let intersectionObserver = new IntersectionObserver(intersectionCallback, {
-      rootMargin: '0px',
-      threshold: .1
-    });
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let step = entry.target.id;
+            setCurrentStep(parseInt(step));
+          }
+        });
+      };
+
+      let intersectionObserver = new IntersectionObserver(
+        intersectionCallback,
+        {
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
 
       R.map(({ id }) => {
-      const target = document.querySelector(`#\\3${id}`)
-      intersectionObserver.observe(target)
-      })(sortedSectionList)
+        const target = document.querySelector(`#\\3${id}`);
+        intersectionObserver.observe(target);
+      })(sortedSectionList);
     }
-   }, [sortedSectionList])
-
+  }, [sortedSectionList]);
 
   const handleSideNavClick = (step) => {
     const el = document.getElementById(step);
@@ -66,7 +69,7 @@ const ExaminerView = observer(() => {
     setCurrentStep(step);
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     getQuestions();
     if (hydrated) {
       fetchSubmission();
@@ -74,7 +77,7 @@ const ExaminerView = observer(() => {
   }, [hydrated]);
 
   useEffect(() => {
-      setAnswers(sortedAnswers);
+    setAnswers(sortedAnswers);
   }, [sortedAnswers]);
 
   useEffect(() => {
@@ -82,9 +85,12 @@ const ExaminerView = observer(() => {
   }, [sortedSectionList]);
 
   const getSubsections = R.map((subSection) => {
-    const currentAnswerGroup = subSection[0].question.answerGroup
-    const savedNote = R.find(R.propEq('answerGroup', currentAnswerGroup), notesByAnswerGroup)
-    const currentNote = savedNote ? savedNote.body : notes[currentAnswerGroup]
+    const currentAnswerGroup = subSection[0].question.answerGroup;
+    const savedNote = R.find(
+      R.propEq('answerGroup', currentAnswerGroup),
+      notesByAnswerGroup
+    );
+    const currentNote = savedNote ? savedNote.body : notes[currentAnswerGroup];
     return (
       <SubmissionSection
         key={subSection[0].id}
@@ -93,13 +99,13 @@ const ExaminerView = observer(() => {
         autoSave={setNotes}
         savedNote={currentNote}
       />
-    )
+    );
   });
 
-  const handleSubmitNotes = async () => { 
-    await submitNotes()
-    push('/all-submissions')
-  }
+  const handleSubmitNotes = async () => {
+    await submitNotes();
+    push('/all-submissions');
+  };
 
   return (
     <Grid
@@ -110,6 +116,20 @@ const ExaminerView = observer(() => {
         { name: 'sidebar', start: [0, 1], end: [0, 1] },
         { name: 'main', start: [1, 1], end: [1, 1] },
       ]}>
+      <StyledHeader
+        elevation='xlarge'
+        direction='row'
+        align='center'
+        justify='between'
+        pad={{ horizontal: 'medium', vertical: 'small' }}>
+        <Image src={logo} height='40' width='200' />
+        <Button
+          primary
+          label='Back'
+          color='primary'
+          onClick={() => push('/all-submissions')}
+        />
+      </StyledHeader>
       {!R.isEmpty(sortedSectionList) && (
         <StyledSidebar
           elevation='xlarge'
@@ -128,29 +148,31 @@ const ExaminerView = observer(() => {
       )}
       <MainComponent gridArea='main'>
         <Box fill align='start' pad='medium'>
-  
           {sortedSectionList.length
             ? sortedSectionList.map((section) => (
-              <div id={section.id} key={section.id}>
-                <Heading level={3} size='large' textAlign='start'>
-                  {section.title}
-                </Heading>
-                  {hydrated && !R.isEmpty(answers) &&
+                <div id={section.id} key={section.id}>
+                  <Heading level={3} size='large' textAlign='start'>
+                    {section.title}
+                  </Heading>
+                  {hydrated &&
+                    !R.isEmpty(answers) &&
                     answers[section.id] &&
                     getSubsections(R.values(answers[section.id]))}
                 </div>
               ))
             : null}
-          
+
           <Button
-            alignSelf="end"
+            alignSelf='end'
             margin='large'
             size='medium'
-            primary 
+            primary
             color='primary'
-            icon={<Send />} onClick={handleSubmitNotes} label="Submit"/>
+            icon={<Send />}
+            onClick={handleSubmitNotes}
+            label='Submit'
+          />
         </Box>
-        
       </MainComponent>
     </Grid>
   );

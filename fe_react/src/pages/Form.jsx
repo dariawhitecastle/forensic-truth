@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Grid } from 'grommet';
+import { Grid, Image, } from 'grommet';
 import { observer } from 'mobx-react';
 import * as R from 'ramda';
+
 // Store
 import { ApplicationStoreContext } from '../stores/applicationStore';
 
@@ -11,7 +12,8 @@ import SidebarNav from '../components/Sidebar';
 import Wizard from '../components/Wizard';
 
 // Assets
-import { StyledSidebar, MainComponent } from './Form.styled';
+import { StyledSidebar, MainComponent, StyledHeader } from './Form.styled';
+import logo from '../assets/logo.jpg';
 
 const Form = observer(() => {
   const {
@@ -60,9 +62,22 @@ const Form = observer(() => {
       rows={['auto', 'flex']}
       columns={['auto', 'flex']}
       areas={[
+        { name: 'header', start: [0, 0], end: [0, 1] },
         { name: 'sidebar', start: [0, 1], end: [0, 1] },
         { name: 'main', start: [1, 1], end: [1, 1] },
       ]}>
+      
+
+      <StyledHeader
+        gridArea='header'
+        elevation='xlarge'
+        direction='row'
+        align='center'
+        justify='between'
+        pad={{ horizontal: 'medium', vertical: 'small' }}>
+        <Image src={logo} height='40' width='200' />
+      </StyledHeader>
+
       {sidebarOpen && !!sortedSectionList.length && (
         <StyledSidebar
           elevation='xlarge'

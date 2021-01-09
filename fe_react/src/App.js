@@ -1,6 +1,5 @@
 import React from 'react';
-import { Provider, observer } from 'mobx-react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import {
@@ -22,8 +21,7 @@ import './App.css';
 import customTheme from './utils/theme';
 import { rootStore } from './stores/RootStore'
 
-// Assets
-import logo from './assets/logo.jpg';
+
 
 const theme = deepMerge(grommet, { ...customTheme });
 // Create MobX store with history
@@ -36,42 +34,25 @@ const stores = {
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
 
-const Header = ({ onClick }) => { 
-  const examinerView = useRouteMatch('/examiner')
-  return (
-     <StyledHeader
-        elevation='xlarge'
-        direction='row'
-        align='center'
-        justify='between'
-        pad={{ horizontal: 'medium', vertical: 'small' }}>
-        <Image src={logo} height='40' width='200' />
-      {examinerView && <Button primary label="Back" color='primary' onClick={onClick}/>}
-      </StyledHeader>
-  )
-}
-
 const ProtectedRoutes = () => {
-  const { push } = useHistory()
   const authenticated = sessionStorage.getItem('jwt');
   return authenticated ? (
     <>
-      <Header onClick={() => push('/all-submissions')}/>
-      <Route path='/all-submissions' component={AllSubmissions} />
-      <Route path='/examiner' component={ExaminerView} />
+      <Route  path='/all-submissions' component={AllSubmissions} />
+      <Route  path='/examiner' component={ExaminerView} />
     </>
   ) : (
     <Redirect to='/examiner/login' />
   );
 };
-const App = () =>  {
+
+const App = () => {
   return (
     <div className='App'>
      
       <Grommet full theme={theme}>
         <Provider {...stores}>
           <Router history={history}>
-            
             <Switch>
               <Route exact path='/' component={Form} />
               <Route path='/examiner/login' component={Login} />

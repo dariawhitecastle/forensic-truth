@@ -1000,7 +1000,7 @@ items:
     responseOptions: ''
     externalUse: true
     section: '@section6'
-    answerGroup: 22
+    answerGroup: 21
   question84:
     description: 'Please explain'
     type: textArea

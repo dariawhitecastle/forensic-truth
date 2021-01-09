@@ -1,38 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Text, TextArea } from 'grommet';
 import * as R from 'ramda';
+import { toJS } from 'mobx';
 
 const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
   const [noteText, setNoteText] = useState();
 
   // ever 5 minutes autoSave to Store
-  useEffect(() => { 
+  useEffect(() => {
     const timer = setTimeout(() => {
       if (noteText) {
         autoSave(id, noteText);
       }
     }, 5000);
-    return() => clearTimeout(timer)
-  }, [noteText])
- 
+    return () => clearTimeout(timer);
+  }, [noteText]);
 
-  const formatAnswer = (answer) =>  R.cond([
-    [R.equals('true'), R.always('YES')],
-    [R.equals('false'), R.always('NO')],
-    [R.T, R.always(answer)]
-  ])(answer)
+  const formatAnswer = (answer, questionType) => {
+    if (questionType === 'checkBoxGroup') {
+      const formattedAnswer = answer.replace(/["\\]/g, '').split('},');
+      return formattedAnswer.map((item, index) => {
+        const formatted = item.replace(/[{{}}]/g, '').split(',');
+        return (
+          <Box direction='row' key={item}>
+            <Box direction='row' margin={{ right: 'small' }} width='300px'>
+              <Text margin={{ right: 'small' }}>{`${index + 1}.`}</Text>
+              <Text>{`Name: ${formatted[0].split(':')[1]}`}</Text>
+            </Box>
+            <Box>
+              <Text>{`Last Used: ${formatted[1].split(':')[1]}`}</Text>
+            </Box>
+          </Box>
+        );
+      });
+    }
 
- 
+    return R.cond([
+      [R.equals('true'), R.always('YES')],
+      [R.equals('false'), R.always('NO')],
+      [R.T, R.always(answer)],
+    ])(answer);
+  };
+
   return (
-    <Box pad={{ horizontal: 'large', vertical: 'small' }} align='start'>
-      {answers.map((singleAnswer) => (
-        <Box align='start' pad={{ vertical: 'small' }} key={singleAnswer.id}>
-          <Text weight='bold'>{singleAnswer.question.description}</Text>
-          <Text>{formatAnswer(singleAnswer.body)}</Text>
-          
-        </Box>
-      ))}
-      <TextArea placeholder='Examiner Notes here' value={noteText ?? savedNote} onChange={(e) => setNoteText(e.target.value)} />
+    <Box
+      pad={{ vertical: 'medium' }}
+      align='start'
+      justify='start'
+      style={{ display: 'inline' }}>
+      {answers.map((singleAnswer) =>
+        singleAnswer.question.type === 'table' ? (
+          <Box
+            margin={{ vertical: 'medium' }}
+            direction='column'
+            style={{ display: 'inline-flex' }}
+            align='start'
+            justify='start'
+            width={
+              singleAnswer.question.width
+                ? `${singleAnswer.question.width}%`
+                : '23%'
+            }>
+            <Text weight='bold'>{singleAnswer.question.description}</Text>
+            <Text>{singleAnswer.body}</Text>
+          </Box>
+        ) : (
+          <Box
+            align='start'
+            style={{ display: 'inline-flex' }}
+            pad={{ vertical: 'small' }}
+            key={singleAnswer.id}
+            width={
+              singleAnswer.question.width
+                ? `${singleAnswer.question.width}%`
+                : '100%'
+            }>
+            <Text weight='bold'>{singleAnswer.question.description}</Text>
+            <Text>
+              {formatAnswer(singleAnswer.body, singleAnswer.question.type)}
+            </Text>
+          </Box>
+        )
+      )}
+      <TextArea
+        placeholder='Examiner Notes here'
+        value={noteText ?? savedNote}
+        onChange={(e) => setNoteText(e.target.value)}
+      />
     </Box>
   );
 };
