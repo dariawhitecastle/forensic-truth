@@ -17,11 +17,11 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
   }, [noteText]);
 
   const formatAnswer = (answer, questionType) => {
-    if (questionType === 'checkBoxGroup') {
+    if (questionType === 'checkBoxGroup' && answer) {
       const formattedAnswer = answer.replace(/["\\]/g, '').split('},');
       return formattedAnswer.map((item, index) => {
         const formatted = item.replace(/[{{}}]/g, '').split(',');
-        return (
+        return formatted.length ? (
           <Box direction='row' key={item}>
             <Box direction='row' margin={{ right: 'small' }} width='300px'>
               <Text margin={{ right: 'small' }}>{`${index + 1}.`}</Text>
@@ -31,7 +31,7 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
               <Text>{`Last Used: ${formatted[1].split(':')[1]}`}</Text>
             </Box>
           </Box>
-        );
+        ) : null;
       });
     }
 
@@ -51,6 +51,7 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
       {answers.map((singleAnswer) =>
         singleAnswer.question.type === 'table' ? (
           <Box
+            key={singleAnswer.id}
             margin={{ vertical: 'medium' }}
             direction='column'
             style={{ display: 'inline-flex' }}
