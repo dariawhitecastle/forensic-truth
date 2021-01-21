@@ -8,7 +8,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import { Image, Button } from 'grommet';
 
 import { Grommet } from 'grommet';
 import { grommet } from 'grommet/themes';
@@ -16,12 +15,9 @@ import { deepMerge } from 'grommet/utils';
 
 // local dependencies
 import { Form, Login, Register, AllSubmissions, ExaminerView } from './pages';
-import { StyledHeader } from './pages/Form.styled';
 import './App.css';
 import customTheme from './utils/theme';
-import { rootStore } from './stores/RootStore'
-
-
+import { rootStore } from './stores/RootStore';
 
 const theme = deepMerge(grommet, { ...customTheme });
 // Create MobX store with history
@@ -29,17 +25,16 @@ const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
 const stores = {
   routing: routingStore,
-  rootStore
+  rootStore,
 };
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
-
 const ProtectedRoutes = () => {
   const authenticated = sessionStorage.getItem('jwt');
   return authenticated ? (
     <>
-      <Route  path='/all-submissions' component={AllSubmissions} />
-      <Route  path='/examiner' component={ExaminerView} />
+      <Route path='/all-submissions' component={AllSubmissions} />
+      <Route path='/examiner' component={ExaminerView} />
     </>
   ) : (
     <Redirect to='/examiner/login' />
@@ -49,7 +44,6 @@ const ProtectedRoutes = () => {
 const App = () => {
   return (
     <div className='App'>
-     
       <Grommet full theme={theme}>
         <Provider {...stores}>
           <Router history={history}>
@@ -64,6 +58,6 @@ const App = () => {
       </Grommet>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,5 +1,5 @@
 import { action, observable, computed, makeAutoObservable } from 'mobx';
-import { persist , create } from 'mobx-persist'
+import { persist, create } from 'mobx-persist';
 import { createContext } from 'react';
 import * as R from 'ramda';
 
@@ -7,12 +7,12 @@ import {
   getQuestions as getQuestionsService,
   fetchSubmission as fetchSubmissionService,
   submitNotes as submitNotesService,
-  fetchAllSubmissions  as fetchAllSubmissionsService
+  fetchAllSubmissions as fetchAllSubmissionsService,
 } from '../services/applicationServices';
 
 const hydrate = create({
-  storage: Window.sessionStorage
-})
+  storage: Window.sessionStorage,
+});
 
 export class ExaminerStore {
   @observable hydrated = false;
@@ -21,6 +21,7 @@ export class ExaminerStore {
   @persist('object') @observable currentSubmission = {};
   @persist('object') @observable notes = {};
   @persist('list') @observable allSubmissions = [];
+  @observable notesError = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -47,7 +48,7 @@ export class ExaminerStore {
     return [];
   }
 
-   @computed get sortedSectionList() {
+  @computed get sortedSectionList() {
     const sortById = R.sortBy(R.prop('id'));
     const mapSections = ({ id, name: title, question }) => {
       const sortedQuestions = R.sortBy(R.prop('order'))(question);
@@ -59,93 +60,100 @@ export class ExaminerStore {
       };
     };
     return R.compose(R.map(mapSections), sortById)(this.sectionList);
-   }
-  
-  @computed get notesByAnswerGroup() { 
+  }
+
+  @computed get notesByAnswerGroup() {
     if (!R.isEmpty(this.currentSubmission)) {
-      return R.uniqBy(R.prop('answerGroup'))(this.currentSubmission.note)
-    } 
-    return []
+      return R.uniqBy(R.prop('answerGroup'))(this.currentSubmission.note);
+    }
+    return [];
   }
 
   @action
   setQuestions = (payload) => {
     this.sectionList = payload;
-  }
+  };
 
   @action
-  setAllSubmissions = (payload) => { 
-    this.allSubmissions = payload
-  }
+  setAllSubmissions = (payload) => {
+    this.allSubmissions = R.sortBy(R.prop('date'), payload);
+  };
 
   @action
-   fetchAllSubmissions = async () => { 
-    const data = await fetchAllSubmissionsService()
-    this.setAllSubmissions(data)
-  }  
+  fetchAllSubmissions = async () => {
+    const data = await fetchAllSubmissionsService();
+    this.setAllSubmissions(data);
+  };
 
   @action
-   getQuestions = async () =>{
+  getQuestions = async () => {
     const data = await getQuestionsService();
     this.setQuestions(data);
-  }
+  };
 
   @action
   setSelectedSubmissionId = (id) => {
     this.selectedSubmissionId = id;
-  }
+  };
 
   @action
   fetchSubmission = async () => {
-      try {
+    try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
       this.setCurrentSubmission(data[0]);
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   @action
   setCurrentSubmission = (submission) => {
     this.currentSubmission = submission;
-  }
+  };
 
   @action
   setNotes = (answerGroup, note) => {
     this.notes = { ...this.notes, [answerGroup]: note };
-  }
+  };
 
   @action
-  resetNotes = () => { 
-    this.notes = {}
-  }
+  setNotesError = (payload) => {
+    this.notesError = payload;
+  };
+
+  @action
+  resetNotes = () => {
+    this.notes = {};
+  };
 
   @action
   submitNotes = async () => {
-    const createRequestObj = (note) => { 
-      const answerGroup = note[0]
-      const body = note[1]
-      return body ? {
-        answerGroup,
-        body,
-        submissionId: this.selectedSubmissionId
-      } : undefined
-    }
+    const createRequestObj = (note) => {
+      const answerGroup = note[0];
+      const body = note[1];
+      return body
+        ? {
+            answerGroup,
+            body,
+            submissionId: this.selectedSubmissionId,
+          }
+        : undefined;
+    };
     const requestBody = R.compose(
       R.map(createRequestObj),
       R.filter((pair) => !R.isNil(pair[1])),
-      R.toPairs)
-      (this.notes)
-      
-    console.log(requestBody)
+      R.toPairs
+    )(this.notes);
+
     try {
-      await submitNotesService(requestBody)
-      this.resetNotes()
-      return true
-    } catch (err) { 
-      throw err;
+      await submitNotesService(requestBody);
+      this.resetNotes();
+      this.setNotesError(false);
+      return true;
+    } catch (err) {
+      this.setNotesError(true);
     }
-  }
+  };
 }
 
 export const examiner = new ExaminerStore();

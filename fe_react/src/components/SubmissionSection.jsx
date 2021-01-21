@@ -6,7 +6,7 @@ import { toJS } from 'mobx';
 const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
   const [noteText, setNoteText] = useState();
 
-  // ever 5 minutes autoSave to Store
+  // ever 5 seconds autoSave to Store
   useEffect(() => {
     const timer = setTimeout(() => {
       if (noteText) {

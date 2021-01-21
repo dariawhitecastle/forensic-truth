@@ -3,7 +3,8 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Text, DataTable, Image } from 'grommet';
+import { Button, Box, Text, DataTable, Image } from 'grommet';
+import { StatusGood } from 'grommet-icons';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -13,12 +14,6 @@ import { StyledHeader } from './Form.styled';
 import logo from '../assets/logo.jpg';
 
 const columns = [
-  {
-    property: 'id',
-    header: <Text>Submission Id</Text>,
-    size: 'small',
-    primary: true,
-  },
   {
     property: 'lastName',
     header: <Text>Last Name</Text>,
@@ -39,12 +34,36 @@ const columns = [
     header: <Text>Date</Text>,
     size: 'small',
   },
+  {
+    header: <Text>Done</Text>,
+    render: (row) => (
+      <Box align='center'>
+        <StatusGood
+          size='medium'
+          color={row.notes.length >= 41 ? 'success' : 'grey'}
+        />
+      </Box>
+    ),
+  },
+  {
+    render: (row) => (
+      <Button
+        primary
+        disabled={row.notes.length < 41}
+        color='primary'
+        label='Write report'
+        onClick={() => console.log('writing report')}
+      />
+    ),
+    size: 'small',
+  },
 ];
 
 const formatData = (submissions) =>
   submissions.map((submission) => {
     const { answer } = submission;
     const submissionData = [
+      ['notes', submission.note],
       ['date', submission.date],
       ['id', submission.id],
     ];
