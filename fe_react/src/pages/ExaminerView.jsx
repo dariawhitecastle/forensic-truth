@@ -1,11 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import {
-  useHistory,
-  Prompt,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom';
+import { toJS } from 'mobx';
+import { useHistory, Prompt } from 'react-router-dom';
 import * as R from 'ramda';
 
 import { Box, Button, Grid, Heading, Image, Layer, Text } from 'grommet';
@@ -40,6 +36,7 @@ const ExaminerView = observer(() => {
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
   const [unsavedChanges, setUnsavedChanges] = useState(true);
+  const [savedProgress, setSavedProgress] = useState('Save progress');
 
   useEffect(() => {
     if (sortedSectionList.length) {
@@ -67,21 +64,9 @@ const ExaminerView = observer(() => {
     }
   }, [sortedSectionList]);
 
-  const handleSideNavClick = (step) => {
-    const el = document.getElementById(step);
-    el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    });
-    setCurrentStep(step);
-  };
-
   useEffect(() => {
     getQuestions();
-    if (hydrated) {
-      fetchSubmission();
-    }
+    hydrated && fetchSubmission();
   }, [hydrated]);
 
   useEffect(() => {
@@ -91,6 +76,16 @@ const ExaminerView = observer(() => {
   useEffect(() => {
     !!sortedSectionList.length && setCurrentStep(sortedSectionList[0].id);
   }, [sortedSectionList]);
+
+  const handleSideNavClick = (step) => {
+    const el = document.getElementById(step);
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+    setCurrentStep(step);
+  };
 
   const getSubsections = R.map((subSection) => {
     const currentAnswerGroup = subSection[0].question.answerGroup;
@@ -119,6 +114,14 @@ const ExaminerView = observer(() => {
     success && push('/all-submissions');
   };
 
+  const handleSaveProgress = async () => {
+    if (R.not(R.isEmpty(notes))) {
+      const success = await submitNotes();
+      success ? setSavedProgress('Saved') : setSavedProgress('Error');
+      setTimeout(() => setSavedProgress('Save progress'), 500);
+    }
+  };
+
   return (
     <>
       <Prompt
@@ -143,6 +146,12 @@ const ExaminerView = observer(() => {
           justify='between'
           pad={{ horizontal: 'medium', vertical: 'small' }}>
           <Image src={logo} height='40' width='200' />
+          <Button
+            primary
+            label={savedProgress}
+            color='primary'
+            onClick={handleSaveProgress}
+          />
         </StyledHeader>
         {!R.isEmpty(sortedSectionList) && (
           <StyledSidebar
