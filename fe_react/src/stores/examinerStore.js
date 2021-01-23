@@ -128,6 +128,7 @@ export class ExaminerStore {
 
   @action
   submitNotes = async () => {
+    this.setNotesError(false);
     const createRequestObj = (note) => {
       const answerGroup = note[0];
       const body = note[1];
@@ -148,10 +149,10 @@ export class ExaminerStore {
     try {
       await submitNotesService(requestBody);
       this.resetNotes();
-      this.setNotesError(false);
       return true;
     } catch (err) {
       this.setNotesError(true);
+      return false;
     }
   };
 }

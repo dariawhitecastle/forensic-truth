@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as R from 'ramda'
+import * as R from 'ramda';
 
 const baseURL = process.env.REACT_APP_BASE_URL || window.location.origin;
 // TODO: handle errors
@@ -14,15 +14,16 @@ export const getQuestions = async () => {
 };
 
 export const submitApplication = async (personalData) => {
-  const answer = personalData.map(item => 
-    item.question > 200 ? {...item, question: R.take(2, item.question)} : item)
+  const answer = personalData.map((item) =>
+    item.question > 200 ? { ...item, question: R.take(2, item.question) } : item
+  );
   // TODO: add real caseID here
   var today = new Date();
   var date = today.toLocaleDateString();
   const payload = {
     caseId: 1,
     date,
-    answer
+    answer,
   };
   try {
     const response = await axios.post(`${baseURL}/api/submissions`, payload);

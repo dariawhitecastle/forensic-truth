@@ -1,10 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useHistory } from 'react-router-dom';
+import {
+  useHistory,
+  Prompt,
+  useRouteMatch,
+  useLocation,
+} from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Button, Grid, Heading, Image } from 'grommet';
-import { Send } from 'grommet-icons';
+import { Box, Button, Grid, Heading, Image, Layer, Text } from 'grommet';
+import { Send, CircleAlert, FormClose } from 'grommet-icons';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -22,8 +27,10 @@ const ExaminerView = observer(() => {
     getQuestions,
     setNotes,
     notes,
+    notesError,
     hydrated,
     fetchSubmission,
+    setNotesError,
     sortedSectionList,
     sortedAnswers,
     notesByAnswerGroup,
@@ -32,6 +39,7 @@ const ExaminerView = observer(() => {
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (sortedSectionList.length) {
@@ -103,78 +111,109 @@ const ExaminerView = observer(() => {
   });
 
   const handleSubmitNotes = async () => {
-    await submitNotes();
-    push('/all-submissions');
+    const success = await submitNotes();
+    success && push('/all-submissions');
   };
 
   return (
-    <Grid
-      fill
-      rows={['auto', 'flex']}
-      columns={['auto', 'flex']}
-      areas={[
-        { name: 'sidebar', start: [0, 1], end: [0, 1] },
-        { name: 'main', start: [1, 1], end: [1, 1] },
-      ]}>
-      <StyledHeader
-        elevation='xlarge'
-        direction='row'
-        align='center'
-        justify='between'
-        pad={{ horizontal: 'medium', vertical: 'small' }}>
-        <Image src={logo} height='40' width='200' />
-        <Button
-          primary
-          label='Back'
-          color='primary'
-          onClick={() => push('/all-submissions')}
-        />
-      </StyledHeader>
-      {!R.isEmpty(sortedSectionList) && (
-        <StyledSidebar
+    <>
+      {/* <Prompt
+        // when={true}
+        message='You have unsaved changes, are you sure you want to leave?'
+      /> */}
+      <Grid
+        fill
+        rows={['auto', 'flex']}
+        columns={['auto', 'flex']}
+        areas={[
+          { name: 'sidebar', start: [0, 1], end: [0, 1] },
+          { name: 'main', start: [1, 1], end: [1, 1] },
+        ]}>
+        <StyledHeader
           elevation='xlarge'
-          gridArea='sidebar'
-          width='250px'
-          animation={[
-            { type: 'fadeIn', duration: 300 },
-            { type: 'slideRight', size: 'xlarge', duration: 150 },
-          ]}>
-          <SidebarNav
-            currentStep={currentStep}
-            steps={sortedSectionList}
-            handleClickNext={handleSideNavClick}
-          />
-        </StyledSidebar>
-      )}
-      <MainComponent gridArea='main'>
-        <Box fill align='start' pad='medium'>
-          {sortedSectionList.length
-            ? sortedSectionList.map((section) => (
-                <div id={section.id} key={section.id}>
-                  <Heading level={3} size='large' textAlign='start'>
-                    {section.title}
-                  </Heading>
-                  {hydrated &&
-                    !R.isEmpty(answers) &&
-                    answers[section.id] &&
-                    getSubsections(R.values(answers[section.id]))}
-                </div>
-              ))
-            : null}
+          direction='row'
+          align='center'
+          justify='between'
+          pad={{ horizontal: 'medium', vertical: 'small' }}>
+          <Image src={logo} height='40' width='200' />
+        </StyledHeader>
+        {!R.isEmpty(sortedSectionList) && (
+          <StyledSidebar
+            elevation='xlarge'
+            gridArea='sidebar'
+            width='250px'
+            animation={[
+              { type: 'fadeIn', duration: 300 },
+              { type: 'slideRight', size: 'xlarge', duration: 150 },
+            ]}>
+            <SidebarNav
+              currentStep={currentStep}
+              steps={sortedSectionList}
+              handleClickNext={handleSideNavClick}
+            />
+          </StyledSidebar>
+        )}
+        <MainComponent gridArea='main'>
+          <Box fill align='start' pad='medium'>
+            {sortedSectionList.length
+              ? sortedSectionList.map((section) => (
+                  <div id={section.id} key={section.id}>
+                    <Heading level={3} size='large' textAlign='start'>
+                      {section.title}
+                    </Heading>
+                    {hydrated &&
+                      !R.isEmpty(answers) &&
+                      answers[section.id] &&
+                      getSubsections(R.values(answers[section.id]))}
+                  </div>
+                ))
+              : null}
 
-          <Button
-            alignSelf='end'
-            margin='large'
-            size='medium'
-            primary
-            color='primary'
-            icon={<Send />}
-            onClick={handleSubmitNotes}
-            label='Submit'
-          />
-        </Box>
-      </MainComponent>
-    </Grid>
+            <Button
+              alignSelf='end'
+              margin='large'
+              size='medium'
+              primary
+              color='primary'
+              icon={<Send />}
+              onClick={handleSubmitNotes}
+              label='Submit'
+            />
+          </Box>
+          {notesError && (
+            <Layer
+              position='bottom'
+              modal={false}
+              margin={{ vertical: 'medium', horizontal: 'small' }}
+              onEsc={() => setNotesError(false)}
+              responsive={false}
+              plain>
+              <Box
+                align='center'
+                direction='row'
+                gap='small'
+                justify='between'
+                round='medium'
+                elevation='medium'
+                pad={{ vertical: 'xsmall', horizontal: 'small' }}
+                background='status-error'>
+                <Box align='center' direction='row' gap='xsmall'>
+                  <CircleAlert />
+                  <Text>
+                    Oops! Changes were not saved. Please refresh and try again.
+                  </Text>
+                </Box>
+                <Button
+                  icon={<FormClose />}
+                  onClick={() => setNotesError(false)}
+                  plain
+                />
+              </Box>
+            </Layer>
+          )}
+        </MainComponent>
+      </Grid>
+    </>
   );
 });
 
