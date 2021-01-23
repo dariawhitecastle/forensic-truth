@@ -39,7 +39,7 @@ const ExaminerView = observer(() => {
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
-  const { pathname } = useLocation();
+  const [unsavedChanges, setUnsavedChanges] = useState(true);
 
   useEffect(() => {
     if (sortedSectionList.length) {
@@ -111,16 +111,23 @@ const ExaminerView = observer(() => {
   });
 
   const handleSubmitNotes = async () => {
+    if (R.isEmpty(notes)) {
+      return push('/all-submissions');
+    }
     const success = await submitNotes();
+    setUnsavedChanges(false);
     success && push('/all-submissions');
   };
 
   return (
     <>
-      {/* <Prompt
-        // when={true}
-        message='You have unsaved changes, are you sure you want to leave?'
-      /> */}
+      <Prompt
+        message={(_, action) => {
+          return action === 'POP' && unsavedChanges
+            ? 'You have unsaved changes, are you sure you want to leave?'
+            : true;
+        }}
+      />
       <Grid
         fill
         rows={['auto', 'flex']}

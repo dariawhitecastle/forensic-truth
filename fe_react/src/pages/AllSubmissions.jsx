@@ -35,9 +35,10 @@ const columns = [
     size: 'small',
   },
   {
+    property: 'submitted',
     header: <Text>Done</Text>,
     render: (row) => (
-      <Box align='center'>
+      <Box align='center' id={row.ssn}>
         <StatusGood
           size='medium'
           color={row.notes.length >= 41 ? 'success' : 'grey'}
@@ -46,6 +47,8 @@ const columns = [
     ),
   },
   {
+    property: 'report',
+    header: <Text>Report</Text>,
     render: (row) => (
       <Button
         primary
