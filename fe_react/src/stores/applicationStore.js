@@ -1,6 +1,6 @@
 import { action, observable, computed, makeAutoObservable } from 'mobx';
 import { createContext } from 'react';
-import { persist } from 'mobx-persist'
+import { persist } from 'mobx-persist';
 import * as R from 'ramda';
 
 import {
@@ -14,18 +14,16 @@ export class ApplicationStore {
   @persist('object') @observable personalInfo = {};
   @persist @observable disableNext = true;
   @persist @observable loginError = false;
-  @persist @observable submitApplicationError = false; 
-  @persist @observable questionServicePending = true
+  @persist @observable submitApplicationError = false;
+  @persist @observable questionServicePending = true;
 
   constructor() {
-      makeAutoObservable(this)
-    }
+    makeAutoObservable(this);
+  }
 
   @computed
   get sortedSectionList() {
-    // const sortById = R.sortBy(R.prop('id'));
     const mapSections = ({ id, name: title, question }) => {
-      // const sortedQuestions = R.sortBy(R.prop('order'))(question);
       return {
         id,
         title,
@@ -33,61 +31,63 @@ export class ApplicationStore {
         component: 'SingleStepForm',
       };
     };
-    // return R.compose(R.map(mapSections), sortById)(this.sectionList);
-     return R.map(mapSections)(this.sectionList);
+    return R.map(mapSections)(this.sectionList);
   }
 
   @action
   setQuestions = (payload) => {
     this.sectionList = payload;
-  }
+  };
 
   @action
-  updateQuestions = (questionId, updatedQuestions) => { 
-    const idx = R.findIndex(R.propEq('id', questionId), this.sectionList)
-    const updatedSection = R.assoc('question', updatedQuestions, this.sectionList[idx])
-    this.sectionList = R.update(idx, updatedSection, this.sectionList)
-  }
+  updateQuestions = (questionId, updatedQuestions) => {
+    const idx = R.findIndex(R.propEq('id', questionId), this.sectionList);
+    const updatedSection = R.assoc(
+      'question',
+      updatedQuestions,
+      this.sectionList[idx]
+    );
+    this.sectionList = R.update(idx, updatedSection, this.sectionList);
+  };
 
-   @action 
-   getQuestions = async () => {
-     const data = await getQuestionsService();
-    this.setQuestionServicePending(false)
+  @action
+  getQuestions = async () => {
+    const data = await getQuestionsService();
+    this.setQuestionServicePending(false);
     this.setQuestions(data);
-   }
-  
+  };
+
   @action
-  setQuestionServicePending = (payload) => { 
-    this.questionServicePending = payload
-  }
+  setQuestionServicePending = (payload) => {
+    this.questionServicePending = payload;
+  };
 
   @action
   resetForm = () => {
     this.personalInfo = {};
-  }
+  };
 
   @action
-  setPersonalInfo =({  field, value}) => {
+  setPersonalInfo = ({ field, value }) => {
     if (!value) return delete this.personalInfo[field];
-    
-    this.personalInfo = R.assoc(field, value, this.personalInfo)
-    
-  }
+
+    this.personalInfo = R.assoc(field, value, this.personalInfo);
+  };
 
   @action
-  setDisableNext = (payload) =>  {
+  setDisableNext = (payload) => {
     this.disableNext = payload;
-  }
+  };
 
   @action
   setLoginError = (payload) => {
     this.loginError = payload;
-  }
+  };
 
   @action
-  setSubmitApplicationError = (payload) =>  {
+  setSubmitApplicationError = (payload) => {
     this.submitApplicationError = payload;
-  }
+  };
 
   @action
   handleLogin = async (payload) => {
@@ -96,15 +96,15 @@ export class ApplicationStore {
     } catch (err) {
       this.setLoginError(true);
     }
-  }
-  @action 
-  submitApplication = async(payload) => {
+  };
+  @action
+  submitApplication = async (payload) => {
     try {
       await submitApplicationService(payload);
     } catch (err) {
       this.setSubmitApplicationError(true);
     }
-  }
+  };
 }
 
 export const application = new ApplicationStore();

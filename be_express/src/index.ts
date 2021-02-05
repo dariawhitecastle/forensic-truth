@@ -140,7 +140,7 @@ createConnection(config)
     app.post(
       '/api/note',
       RequestHandler(async (body: any) => {
-        await R.map(async (note) => {
+        await R.map(async (note: any) => {
           const noteToUpdate = await noteRepository.findOne(
             parseInt(note.answerGroup)
           );

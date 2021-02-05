@@ -1,6 +1,7 @@
-import { action, observable, computed, makeAutoObservable } from 'mobx';
+import { action, observable, computed, makeAutoObservable, toJS } from 'mobx';
 import { persist, create } from 'mobx-persist';
 import { createContext } from 'react';
+import { sortAnswerByOrder } from '../utils/helpers';
 import * as R from 'ramda';
 
 import {
@@ -40,7 +41,15 @@ export class ExaminerStore {
         R.view(R.lensPath(['question', 'answerGroup']))
       );
 
+      const sortByQuestionOrder = (obj) => {
+        obj[3] = sortAnswerByOrder(obj[3], [11, 13]);
+        obj[4] = sortAnswerByOrder(obj[4], [14]);
+        obj[5] = sortAnswerByOrder(obj[5], [20]);
+        return obj;
+      };
+
       return R.compose(
+        sortByQuestionOrder,
         R.map(groupedByAnswerGroup),
         groupedById
       )(this.currentSubmission.answer);

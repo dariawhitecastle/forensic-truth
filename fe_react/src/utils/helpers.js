@@ -25,3 +25,20 @@ export const checkCharLimit = (e, fn) => {
   }
   fn({ field, value: e.option || value });
 };
+
+export const sortAnswerByOrder = (obj, sections) => {
+  sections.forEach((section) => {
+    let unsortedAnswers = obj[section];
+    let sorted = [];
+    while (unsortedAnswers.length) {
+      let uniqBy = R.uniqBy(
+        R.view(R.lensPath(['question', 'order'])),
+        unsortedAnswers
+      );
+      sorted = R.concat(sorted, uniqBy);
+      unsortedAnswers = R.without(uniqBy, unsortedAnswers);
+    }
+    obj[section] = sorted;
+  });
+  return obj;
+};
