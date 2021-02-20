@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as R from 'ramda';
+import http from './http';
 
 const baseURL = process.env.REACT_APP_BASE_URL || window.location.origin;
 // TODO: handle errors
@@ -33,18 +34,20 @@ export const submitApplication = async (personalData) => {
   }
 };
 
-export const fetchAllSubmissions = async () => {
+export const fetchAllSubmissions = async (fn) => {
+  fn(false);
   try {
-    const response = await axios.get(`${baseURL}/api/all-submissions`);
+    const response = await http.get('/api/all-submissions');
     return response.data;
   } catch (err) {
+    fn(true);
     throw err;
   }
 };
 
 export const fetchSubmission = async (id) => {
   try {
-    const response = await axios.get(`${baseURL}/api/submissions?id=${id}`);
+    const response = await http.get(`${baseURL}/api/submissions?id=${id}`);
     return response.data;
   } catch (err) {
     throw err;
@@ -57,7 +60,7 @@ export const authenticate = async (credentials) => {
       `${baseURL}/api/examiner/login`,
       credentials
     );
-    sessionStorage.setItem('jwt', response.accessToken);
+    sessionStorage.setItem('jwt', response.data.accessToken);
     return true;
   } catch (err) {
     throw err;

@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Button, Box, Text, DataTable, Image } from 'grommet';
-import { StatusGood } from 'grommet-icons';
+import { Button, Box, Text, DataTable, Image, Layer } from 'grommet';
+import { CircleAlert, FormClose } from 'grommet-icons';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -33,18 +33,6 @@ const columns = [
     property: 'date',
     header: <Text>Date</Text>,
     size: 'small',
-  },
-  {
-    property: 'submitted',
-    header: <Text>Done</Text>,
-    render: (row) => (
-      <Box align='center' id={row.ssn}>
-        <StatusGood
-          size='medium'
-          color={row.notes.length >= 41 ? 'success' : 'grey'}
-        />
-      </Box>
-    ),
   },
   {
     property: 'report',
@@ -86,9 +74,11 @@ const AllSubmissions = observer(() => {
   const {
     setSelectedSubmissionId,
     allSubmissions,
+    apiError,
     fetchAllSubmissions,
     resetNotes,
     selectedSubmissionId,
+    setApiError,
   } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
@@ -140,6 +130,37 @@ const AllSubmissions = observer(() => {
           />
         ) : (
           <Text> No Submissions</Text>
+        )}
+        {apiError && (
+          <Layer
+            position='bottom'
+            modal={false}
+            margin={{ vertical: 'medium', horizontal: 'small' }}
+            onEsc={() => setApiError(false)}
+            responsive={false}
+            plain>
+            <Box
+              align='center'
+              direction='row'
+              gap='small'
+              justify='between'
+              round='medium'
+              elevation='medium'
+              pad={{ vertical: 'xsmall', horizontal: 'small' }}
+              background='status-error'>
+              <Box align='center' direction='row' gap='xsmall'>
+                <CircleAlert />
+                <Text>
+                  Oops! An error occurred! Please refresh and try again.
+                </Text>
+              </Box>
+              <Button
+                icon={<FormClose />}
+                onClick={() => setApiError(false)}
+                plain
+              />
+            </Box>
+          </Layer>
         )}
       </Box>
     </>

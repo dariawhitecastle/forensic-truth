@@ -3,7 +3,13 @@ import { Box, Text, TextArea } from 'grommet';
 import * as R from 'ramda';
 import { toJS } from 'mobx';
 
-const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
+const SubmissionSection = ({
+  answers,
+  autoSave,
+  id,
+  savedNote,
+  setUnsavedChanges,
+}) => {
   const [noteText, setNoteText] = useState();
 
   // ever 5 seconds autoSave to Store
@@ -40,6 +46,11 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
       [R.equals('false'), R.always('NO')],
       [R.T, R.always(answer)],
     ])(answer);
+  };
+
+  const handleOnChange = (e) => {
+    setUnsavedChanges(true);
+    setNoteText(e.target.value);
   };
 
   return (
@@ -86,7 +97,7 @@ const SubmissionSection = ({ answers, autoSave, id, savedNote }) => {
       <TextArea
         placeholder='Examiner Notes here'
         value={noteText ?? savedNote}
-        onChange={(e) => setNoteText(e.target.value)}
+        onChange={handleOnChange}
       />
     </Box>
   );

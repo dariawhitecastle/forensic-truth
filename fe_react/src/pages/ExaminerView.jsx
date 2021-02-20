@@ -35,7 +35,7 @@ const ExaminerView = observer(() => {
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
-  const [unsavedChanges, setUnsavedChanges] = useState(true);
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [savedProgress, setSavedProgress] = useState('Save progress');
 
   useEffect(() => {
@@ -101,6 +101,7 @@ const ExaminerView = observer(() => {
         answers={subSection}
         autoSave={setNotes}
         savedNote={currentNote}
+        setUnsavedChanges={setUnsavedChanges}
       />
     );
   });
@@ -115,6 +116,7 @@ const ExaminerView = observer(() => {
   };
 
   const handleSaveProgress = async () => {
+    setUnsavedChanges(false);
     if (R.not(R.isEmpty(notes))) {
       const success = await submitNotes();
       success ? setSavedProgress('Saved') : setSavedProgress('Error');

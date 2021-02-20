@@ -23,6 +23,7 @@ export class ExaminerStore {
   @persist('object') @observable notes = {};
   @persist('list') @observable allSubmissions = [];
   @observable notesError = false;
+  @observable apiError = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -89,8 +90,13 @@ export class ExaminerStore {
   };
 
   @action
+  setApiError = (payload) => {
+    this.apiError = payload;
+  };
+
+  @action
   fetchAllSubmissions = async () => {
-    const data = await fetchAllSubmissionsService();
+    const data = await fetchAllSubmissionsService(this.setApiError);
     this.setAllSubmissions(data);
   };
 
