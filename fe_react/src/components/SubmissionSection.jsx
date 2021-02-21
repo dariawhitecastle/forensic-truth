@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Text, TextArea } from 'grommet';
 import * as R from 'ramda';
-import { toJS } from 'mobx';
 
 const SubmissionSection = ({
   answers,

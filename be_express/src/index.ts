@@ -140,20 +140,23 @@ createConnection(config)
     app.post(
       '/api/note',
       RequestHandler(async (body: any) => {
+        /* do not remove await here */
         await R.map(async (note: any) => {
           const noteToUpdate = await noteRepository.findOne(
             parseInt(note.answerGroup)
           );
-
-          await noteRepository.merge(noteToUpdate, note);
-          (await noteToUpdate)
-            ? noteRepository.save(noteToUpdate)
-            : noteRepository.save(note);
+          if (noteToUpdate) {
+            noteRepository.merge(noteToUpdate, note);
+            noteRepository.save(noteToUpdate);
+          } else {
+            noteRepository.save(note);
+          }
         })(body);
 
         const savedNotes = await noteRepository.find({
           where: { submissionId: body[0].submissionId },
         });
+
         return savedNotes;
       })
     );

@@ -153,6 +153,7 @@ const ExaminerView = observer(() => {
             label={savedProgress}
             color='primary'
             onClick={handleSaveProgress}
+            disabled={!unsavedChanges}
           />
         </StyledHeader>
         {!R.isEmpty(sortedSectionList) && (
