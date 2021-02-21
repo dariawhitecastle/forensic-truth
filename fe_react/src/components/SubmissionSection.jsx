@@ -72,7 +72,9 @@ const SubmissionSection = ({
                 ? `${singleAnswer.question.width}%`
                 : '23%'
             }>
-            <Text weight='bold'>{singleAnswer.question.description}</Text>
+            <Text weight='bold' textAlign='start'>
+              {singleAnswer.question.description}
+            </Text>
             <Text>{singleAnswer.body}</Text>
           </Box>
         ) : (
@@ -86,7 +88,9 @@ const SubmissionSection = ({
                 ? `${singleAnswer.question.width}%`
                 : '100%'
             }>
-            <Text weight='bold'>{singleAnswer.question.description}</Text>
+            <Text textAlign='start' weight='bold'>
+              {singleAnswer.question.description}
+            </Text>
             <Text>
               {formatAnswer(singleAnswer.body, singleAnswer.question.type)}
             </Text>
