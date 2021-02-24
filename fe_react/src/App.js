@@ -14,8 +14,14 @@ import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
 // local dependencies
-import { Form, Login, Register, AllSubmissions, ExaminerView } from './pages';
-import './App.css';
+import {
+  Form,
+  Login,
+  Register,
+  AllSubmissions,
+  ExaminerView,
+  ReportView,
+} from './pages';
 import customTheme from './utils/theme';
 import { rootStore } from './stores/RootStore';
 
@@ -35,6 +41,7 @@ const ProtectedRoutes = () => {
     <>
       <Route path='/all-submissions' component={AllSubmissions} />
       <Route path='/examiner' component={ExaminerView} />
+      <Route path='/report' component={ReportView} />
     </>
   ) : (
     <Redirect to='/examiner/login' />
