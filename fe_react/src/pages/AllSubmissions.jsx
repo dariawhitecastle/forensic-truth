@@ -3,52 +3,17 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Button, Box, Text, DataTable, Image, Layer } from 'grommet';
-import { CircleAlert, FormClose } from 'grommet-icons';
+import { Button, Box, Text, DataTable, Image } from 'grommet';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
 
+// Components
+import ErrorPopup from '../components/ErrorPopup';
+
 // Assets
 import { StyledHeader } from './Form.styled';
 import logo from '../assets/logo.jpg';
-
-const columns = [
-  {
-    property: 'lastName',
-    header: <Text>Last Name</Text>,
-    size: 'medium',
-  },
-  {
-    property: 'firstName',
-    header: <Text>First Name</Text>,
-    size: 'medium',
-  },
-  {
-    property: 'ssn',
-    header: <Text> Last 4 digits of SSN</Text>,
-    size: 'medium',
-  },
-  {
-    property: 'date',
-    header: <Text>Date</Text>,
-    size: 'small',
-  },
-  {
-    property: 'report',
-    header: <Text>Report</Text>,
-    render: (row) => (
-      <Button
-        primary
-        disabled={row.notes.length < 41}
-        color='primary'
-        label='Write report'
-        onClick={() => console.log('writing report')}
-      />
-    ),
-    size: 'small',
-  },
-];
 
 const formatData = (submissions) =>
   submissions.map((submission) => {
@@ -83,6 +48,62 @@ const AllSubmissions = observer(() => {
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
 
+  const handleRowClick = (row, route) => {
+    setSelectedSubmissionId(row.id);
+    push(route);
+  };
+
+  const columns = [
+    {
+      property: 'lastName',
+      header: <Text>Last Name</Text>,
+      size: 'medium',
+    },
+    {
+      property: 'firstName',
+      header: <Text>First Name</Text>,
+      size: 'medium',
+    },
+    {
+      property: 'ssn',
+      header: <Text> Last 4 digits of SSN</Text>,
+      size: 'medium',
+    },
+    {
+      property: 'date',
+      header: <Text>Date</Text>,
+      size: 'small',
+    },
+    {
+      property: 'notes',
+      header: <Text>Notes</Text>,
+      render: (row) => (
+        <Button
+          primary
+          // disabled={row.notes.length < 40}
+          color='primary'
+          label='Notes'
+          onClick={() => handleRowClick(row, '/examiner')}
+        />
+      ),
+      size: 'xsmall',
+    },
+    {
+      property: 'report',
+      header: <Text>Report</Text>,
+      render: (row) => (
+        <Button
+          secondary
+          // disabled={row.notes.length < 40}
+          color='primary'
+          label='Write report'
+          onClick={() => handleRowClick(row, '/report')}
+        />
+      ),
+      size: 'small',
+    },
+  ];
+
   useEffect(() => {
     resetNotes();
   }, [selectedSubmissionId]);
@@ -94,11 +115,6 @@ const AllSubmissions = observer(() => {
   useEffect(() => {
     setSubmissions(formatData(allSubmissions));
   }, [allSubmissions.length]);
-
-  const handleRowClick = (row) => {
-    setSelectedSubmissionId(row.id);
-    push('/examiner');
-  };
 
   return (
     <>
@@ -126,42 +142,11 @@ const AllSubmissions = observer(() => {
                 c.property === 'ssn',
             }))}
             data={submissions}
-            onClickRow={(event) => handleRowClick(event.datum)}
           />
         ) : (
           <Text> No Submissions</Text>
         )}
-        {apiError && (
-          <Layer
-            position='bottom'
-            modal={false}
-            margin={{ vertical: 'medium', horizontal: 'small' }}
-            onEsc={() => setApiError(false)}
-            responsive={false}
-            plain>
-            <Box
-              align='center'
-              direction='row'
-              gap='small'
-              justify='between'
-              round='medium'
-              elevation='medium'
-              pad={{ vertical: 'xsmall', horizontal: 'small' }}
-              background='status-error'>
-              <Box align='center' direction='row' gap='xsmall'>
-                <CircleAlert />
-                <Text>
-                  Oops! An error occurred! Please refresh and try again.
-                </Text>
-              </Box>
-              <Button
-                icon={<FormClose />}
-                onClick={() => setApiError(false)}
-                plain
-              />
-            </Box>
-          </Layer>
-        )}
+        {apiError && <ErrorPopup setError={setApiError} />}
       </Box>
     </>
   );

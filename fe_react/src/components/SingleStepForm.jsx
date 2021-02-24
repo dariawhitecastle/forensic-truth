@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useCallback, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
 import { Form, Heading } from 'grommet';
 
@@ -23,7 +23,7 @@ const SingleStepForm = observer(
     personalInfo,
     setPersonalInfo,
     setDisableNext,
-    updateQuestions
+    updateQuestions,
   }) => {
     const [currentSubqs, setCurrentSubqs] = useState([]);
     const [tableRow, setTableRow] = useState(0);
@@ -34,19 +34,20 @@ const SingleStepForm = observer(
         headerRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
-          inline: 'start'
+          inline: 'start',
         });
       }
-        const subqs = R.reduce(
-          (acc, { subQuestions }) => acc.concat(subQuestions),
-          [],
-          questionList
-        );
-        setCurrentSubqs(subqs);
+      const subqs = R.reduce(
+        (acc, { subQuestions }) => acc.concat(subQuestions),
+        [],
+        questionList
+      );
+      setCurrentSubqs(subqs);
     }, [currentStep]);
 
     useEffect(() => {
-      const isRequired = (question) => question.required && question.type !== 'none';
+      const isRequired = (question) =>
+        question.required && question.type !== 'none';
 
       const isAnswered = (question) => R.has(question.id, personalInfo);
       const isRequiredAndAnswered = (question) =>
@@ -60,102 +61,96 @@ const SingleStepForm = observer(
       const validatedList = R.map(isRequiredAndAnswered, filteredQuestionList);
       const isInvalid = validatedList.includes(false);
 
-      isInvalid && setDisableNext(true) 
+      isInvalid && setDisableNext(true);
       !!Object.keys(personalInfo).length && !isInvalid && setDisableNext(false);
     }, [Object.keys(personalInfo).length, currentSubqs]);
 
-    const onChange =
-      (e, id, type, option) => {
-        const { value } = e.target;
-        // find this question in the questionList
-        const filtered = questionList.find(
-          (singleQuestion) => singleQuestion.id === id
-        );
+    const onChange = (e, id, type, option) => {
+      const { value } = e.target;
+      // find this question in the questionList
+      const filtered = questionList.find(
+        (singleQuestion) => singleQuestion.id === id
+      );
 
-        switch (type) {
-          case 'yesNo': 
-            if (value === 'true' && filtered?.subQuestions?.length) {
-              // remove subquestion from currentSubqs
-              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
-            } else if (value === 'false' && filtered?.subQuestions?.length) {
-                // add subquestion back to currentSubqs
-                const subqs = R.union(currentSubqs, filtered?.subQuestions);
-                setCurrentSubqs(subqs);
-                // clear out all subquestions from personal info
-              R.forEach(({ order, id}) => {
-                if (filtered.subQuestions.includes(order.toString())) { 
+      switch (type) {
+        case 'yesNo':
+          if (value === 'true' && filtered?.subQuestions?.length) {
+            // remove subquestion from currentSubqs
+            setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
+          } else if (value === 'false' && filtered?.subQuestions?.length) {
+            // add subquestion back to currentSubqs
+            const subqs = R.union(currentSubqs, filtered?.subQuestions);
+            setCurrentSubqs(subqs);
+            // clear out all subquestions from personal info
+            R.forEach(({ order, id }) => {
+              if (filtered.subQuestions.includes(order.toString())) {
+                setPersonalInfo({ field: parseInt(id), value: undefined });
+              }
+            }, questionList);
+          }
+          // make sure this is set last or it clears out selected option
+          setPersonalInfo({ field: id, value });
+          break;
+        case 'yesNo reverse':
+          setPersonalInfo({ field: id, value });
+          if (value === 'false' && filtered?.subQuestions?.length) {
+            // remove subquestion from currentSubqs
+            setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));
+          } else {
+            // add subquestion back to currentSubqs
+            const subqs = R.reduce(
+              (acc, { subQuestions }) => acc.concat(subQuestions),
+              [],
+              questionList
+            );
+            setCurrentSubqs(subqs);
+            // clear out all subquestions from personal info
+            R.forEach((q) => {
+              // check if subQuestions have subQuestions ugh
+              questionList.find(({ order, subQuestions }) => {
+                if (order === parseInt(q) && subQuestions.length) {
+                  const id = subQuestions[0];
                   setPersonalInfo({ field: parseInt(id), value: undefined });
                 }
-                
-               }, questionList);
-            }
-            // make sure this is set last or it clears out selected option
-            setPersonalInfo({ field: id, value });
-            break;
-          case 'yesNo reverse':
-            setPersonalInfo({ field: id, value });
-            if (value === 'false' && filtered?.subQuestions?.length) {
-              // remove subquestion from currentSubqs
-              setCurrentSubqs(R.without(filtered.subQuestions, currentSubqs));       
-            } else {
-              // add subquestion back to currentSubqs
-              const subqs = R.reduce(
-                (acc, { subQuestions }) => acc.concat(subQuestions),
-                [],
-                questionList
-              );
-              setCurrentSubqs(subqs);
-              // clear out all subquestions from personal info
-              R.forEach((q) => {
-                // check if subQuestions have subQuestions ugh
-                questionList.find(({ order, subQuestions }) => {
-                  if (order === parseInt(q) && subQuestions.length) { 
-                    const id = subQuestions[0]
-                    setPersonalInfo({ field: parseInt(id), value: undefined });
-                  }
-                })
-                setPersonalInfo({ field: parseInt(q), value: undefined });
-               }, filtered.subQuestions);
-            }
-            break;
+              });
+              setPersonalInfo({ field: parseInt(q), value: undefined });
+            }, filtered.subQuestions);
+          }
+          break;
 
-          case 'checkboxGroup':
-            const includesDrug = personalInfo[id]?.find(
-              (answer) => answer?.name === option.name
-            );
+        case 'checkboxGroup':
+          const includesDrug = personalInfo[id]?.find(
+            (answer) => answer?.name === option.name
+          );
 
-            let selectedValues = !!includesDrug
-              ? R.reject(R.propEq('name', option.name), personalInfo[id])
-              : personalInfo[id]
-              ? [...personalInfo[id], option]
-              : [option];
+          let selectedValues = !!includesDrug
+            ? R.reject(R.propEq('name', option.name), personalInfo[id])
+            : personalInfo[id]
+            ? [...personalInfo[id], option]
+            : [option];
 
-            setPersonalInfo({
-              field: id,
-              value: selectedValues,
-            });
-            break;
-          case 'drugDate':
-            const drugIndex = R.findIndex(
-              R.propEq('name', option.name),
-              personalInfo[id]
-            );
-            const updatedDrugInfo = R.update(
-              drugIndex,
-              option,
-              personalInfo[id]
-            );
+          setPersonalInfo({
+            field: id,
+            value: selectedValues,
+          });
+          break;
+        case 'drugDate':
+          const drugIndex = R.findIndex(
+            R.propEq('name', option.name),
+            personalInfo[id]
+          );
+          const updatedDrugInfo = R.update(drugIndex, option, personalInfo[id]);
 
-            setPersonalInfo({
-              field: id,
-              value: updatedDrugInfo,
-            });
-            break;
-          default:
-            // set value in state
-            checkCharLimit(e, setPersonalInfo, personalInfo);
-        }
+          setPersonalInfo({
+            field: id,
+            value: updatedDrugInfo,
+          });
+          break;
+        default:
+          // set value in state
+          checkCharLimit(e, setPersonalInfo, personalInfo);
       }
+    };
 
     const onAddMore = (options, id) => {
       setTableRow(tableRow + 1);
@@ -172,7 +167,7 @@ const SingleStepForm = observer(
       const idx = R.findIndex(R.propEq('id', id), questionList);
       const subQuestions = R.map(findSubQ, options);
       const updated = R.insert(idx, subQuestions, questionList);
-      updateQuestions(currentStep, R.flatten(updated))
+      updateQuestions(currentStep, R.flatten(updated));
     };
 
     const renderFormFields = () =>

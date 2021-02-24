@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { toJS } from 'mobx';
 import { useHistory, Prompt } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Box, Button, Grid, Heading, Image, Layer, Text } from 'grommet';
-import { Send, CircleAlert, FormClose } from 'grommet-icons';
+import { Box, Button, Grid, Heading, Image } from 'grommet';
+import { Send } from 'grommet-icons';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -13,6 +12,7 @@ import { ExaminerStoreContext } from '../stores/examinerStore';
 // Componenets
 import SidebarNav from '../components/Sidebar';
 import SubmissionSection from '../components/SubmissionSection';
+import ErrorPopup from '../components/ErrorPopup';
 
 // Assets
 import { StyledSidebar, StyledHeader, MainComponent } from './Form.styled';
@@ -199,37 +199,7 @@ const ExaminerView = observer(() => {
               label='Submit'
             />
           </Box>
-          {notesError && (
-            <Layer
-              position='bottom'
-              modal={false}
-              margin={{ vertical: 'medium', horizontal: 'small' }}
-              onEsc={() => setNotesError(false)}
-              responsive={false}
-              plain>
-              <Box
-                align='center'
-                direction='row'
-                gap='small'
-                justify='between'
-                round='medium'
-                elevation='medium'
-                pad={{ vertical: 'xsmall', horizontal: 'small' }}
-                background='status-error'>
-                <Box align='center' direction='row' gap='xsmall'>
-                  <CircleAlert />
-                  <Text>
-                    Oops! Changes were not saved. Please refresh and try again.
-                  </Text>
-                </Box>
-                <Button
-                  icon={<FormClose />}
-                  onClick={() => setNotesError(false)}
-                  plain
-                />
-              </Box>
-            </Layer>
-          )}
+          {notesError && <ErrorPopup setError={setNotesError} />}
         </MainComponent>
       </Grid>
     </>
