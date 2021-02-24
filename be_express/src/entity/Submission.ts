@@ -9,6 +9,7 @@ import {
 import { Answer } from './Answer';
 import { User } from './User';
 import { Note } from './Note';
+import { ReportSection } from './ReportSection';
 
 @Entity()
 export class Submission {
@@ -34,4 +35,10 @@ export class Submission {
     cascade: true,
   })
   public note: Note[];
+
+  @OneToMany(() => ReportSection, (reportSection) => reportSection.submission, {
+    eager: true,
+    cascade: true,
+  })
+  public reportSection: ReportSection[];
 }
