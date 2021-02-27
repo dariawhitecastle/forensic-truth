@@ -21,6 +21,27 @@ export class ReportSection {
   @Column()
   submissionId: number;
 
+  @Column()
+  name: string;
+
+  @Column()
+  position: string;
+
+  @Column()
+  caseNumber: number;
+
+  @Column()
+  date: Date;
+
+  @Column()
+  timeIn: string;
+
+  @Column()
+  timeOut: string;
+
+  @Column()
+  chartNum: number;
+
   @ManyToOne(() => Submission, (submission) => submission.reportSection)
   @JoinColumn({ name: 'submissionId' })
   public submission: Submission;
