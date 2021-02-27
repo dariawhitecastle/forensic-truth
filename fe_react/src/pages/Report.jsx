@@ -8,10 +8,11 @@ import { Box, Grid, Heading, Image } from 'grommet';
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
 
-// Componenets
+// Components
 import SidebarNav from '../components/Sidebar';
 import ErrorPopup from '../components/ErrorPopup';
 import ReportSection from '../components/ReportSection';
+import ReportHeader from '../components/ReportHeader';
 
 // Assets
 import { StyledSidebar, StyledHeader, MainComponent } from './Form.styled';
@@ -117,6 +118,7 @@ const ReportView = observer(() => {
           pad={{ horizontal: 'medium', vertical: 'small' }}>
           <Image src={logo} height='40' width='200' />
         </StyledHeader>
+
         {!R.isEmpty(sortedSectionList) && (
           <StyledSidebar
             elevation='xlarge'
@@ -135,6 +137,7 @@ const ReportView = observer(() => {
         )}
         <MainComponent gridArea='main'>
           <Box fill align='start' pad='medium'>
+            <ReportHeader />
             {sortedSectionList.length
               ? sortedSectionList.map((section) => (
                   <div id={section.id} key={section.id}>

@@ -79,26 +79,28 @@ const AllSubmissions = observer(() => {
       header: <Text>Notes</Text>,
       render: (row) => (
         <Button
-          primary
+          hoverIndicator='light-2'
           // disabled={row.notes.length < 40}
-          color='primary'
-          label='Notes'
-          onClick={() => handleRowClick(row, '/examiner')}
-        />
+          onClick={() => handleRowClick(row, '/examiner')}>
+          <Box pad='small' direction='row' align='center'>
+            <Text>Add Notes</Text>
+          </Box>
+        </Button>
       ),
-      size: 'xsmall',
+      size: 'small',
     },
     {
       property: 'report',
       header: <Text>Report</Text>,
       render: (row) => (
         <Button
-          secondary
+          hoverIndicator='light-2'
           // disabled={row.notes.length < 40}
-          color='primary'
-          label='Write report'
-          onClick={() => handleRowClick(row, '/report')}
-        />
+          onClick={() => handleRowClick(row, '/report')}>
+          <Box pad='small' direction='row' align='center'>
+            <Text>Write Report</Text>
+          </Box>
+        </Button>
       ),
       size: 'small',
     },
