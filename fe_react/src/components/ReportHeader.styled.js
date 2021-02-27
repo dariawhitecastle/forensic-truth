@@ -5,7 +5,7 @@ export const StyledFormField = styled(FormField)`
   flex-direction: row;
   align-items: flex-end;
   label {
-    width: 120px;
+    width: 200px;
     margin: 0;
     margin-right: 20px;
   }

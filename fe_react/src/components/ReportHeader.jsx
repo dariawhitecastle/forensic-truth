@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, TextInput, Heading } from 'grommet';
+import { Form, TextInput, Heading, Box } from 'grommet';
 
 import { StyledFormField } from './ReportHeader.styled';
 
@@ -51,6 +51,7 @@ const ReportHeader = ({
         label='Number of charts'>
         <TextInput name='chartNum' onChange={handleOnChange} value={chartNum} />
       </StyledFormField>
+      <Box margin={{ bottom: 'medium' }} />
     </Form>
   );
 };

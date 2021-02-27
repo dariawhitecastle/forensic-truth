@@ -141,9 +141,6 @@ const ReportView = observer(() => {
             {sortedSectionList.length
               ? sortedSectionList.map((section) => (
                   <div id={section.id} key={section.id}>
-                    <Heading level={3} size='large' textAlign='start'>
-                      {section.title}
-                    </Heading>
                     {hydrated &&
                       !R.isEmpty(answers) &&
                       answers[section.id] &&

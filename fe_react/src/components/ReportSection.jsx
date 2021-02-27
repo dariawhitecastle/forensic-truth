@@ -1,11 +1,12 @@
 import React from 'react';
 import { toJS } from 'mobx';
-import { Box, Text, TextArea } from 'grommet';
+import { Box, Text, Button, TextArea } from 'grommet';
 import * as R from 'ramda';
+import { Add } from 'grommet-icons';
 
 import { ReportSectionHeaders } from '../utils/constants';
 
-const SubmissionSection = ({ answers, id, savedNote }) => {
+const ReportSection = ({ answers, id, savedNote, onChange, reportNote }) => {
   const formatAnswer = (answer, questionType) => {
     if (questionType === 'checkBoxGroup' && answer) {
       const formattedAnswer = answer.replace(/["\\]/g, '').split('},');
@@ -32,14 +33,51 @@ const SubmissionSection = ({ answers, id, savedNote }) => {
     ])(answer);
   };
 
+  const FormattedNotes = () => {
+    // const onAddMore = () => console.log('added');
+    //  <Button
+    //    primary
+    //    color='success'
+    //    icon={<Add color='white' />}
+    //    onClick={() => onAddMore()}
+    //  />;
+    return savedNote
+      ? savedNote.body.split('//').map((note) => (
+          <Box direction='row'>
+            <Text color='success'>{note}</Text>
+          </Box>
+        ))
+      : null;
+  };
+
   const sectionHeader = (question) => {
-    console.log(toJS(question));
     const header = R.find(
       R.propEq('questionId', question.id),
       ReportSectionHeaders
     );
     return header?.description;
   };
+
+  const ReportSection = ({ questionId, reportHeader }) => {
+    const handleReportSectionChange = (e) => {
+      console.log(e.target.value, e.target.name);
+      onChange({ [questionId]: e.target.value });
+    };
+    return (
+      <Box margin={{ vertical: 'medium' }}>
+        <Text weight='bold'>{reportHeader}</Text>
+        <Box margin={{ vertical: 'medium' }} width='large' height='small'>
+          <TextArea
+            fill
+            name={questionId}
+            value={reportNote}
+            onChange={handleReportSectionChange}
+          />
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <Box
       pad={{ vertical: 'medium' }}
@@ -62,11 +100,16 @@ const SubmissionSection = ({ answers, id, savedNote }) => {
                 ? `${singleAnswer.question.width}%`
                 : '23%'
             }>
-            <Text weight='bold' textAlign='start'>
+            <Text textAlign='start' color='primary' weight='bold'>
               {singleAnswer.question.description}
             </Text>
-            <Text>{singleAnswer.body}</Text>
-            {reportHeader ? <Text>{reportHeader}</Text> : null}
+            <Text color='primary'>{singleAnswer.body}</Text>
+            {reportHeader ? (
+              <ReportSection
+                questionId={singleAnswer.question.id}
+                reportHeader={reportHeader}
+              />
+            ) : null}
           </Box>
         ) : (
           <Box
@@ -79,20 +122,29 @@ const SubmissionSection = ({ answers, id, savedNote }) => {
                 ? `${singleAnswer.question.width}%`
                 : '100%'
             }>
-            <Text textAlign='start' weight='bold'>
+            <Text textAlign='start' color='primary' weight='bold'>
               {singleAnswer.question.description}
             </Text>
-            <Text>
+            <Text color='primary'>
               {formatAnswer(singleAnswer.body, singleAnswer.question.type)}
             </Text>
-            {reportHeader ? <Text>{reportHeader}</Text> : null}
+            {reportHeader ? (
+              <ReportSection
+                questionId={singleAnswer.question.id}
+                reportHeader={reportHeader}
+              />
+            ) : null}
           </Box>
         );
       })}
-
-      <Text>{` Examiner notes: ${savedNote?.body}`}</Text>
+      <Box margin={{ vertical: 'medium' }}>
+        <Text color='success' weight='bold'>
+          Examiner notes
+        </Text>
+        <FormattedNotes />
+      </Box>
     </Box>
   );
 };
 
-export default SubmissionSection;
+export default ReportSection;
