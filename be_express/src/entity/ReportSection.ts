@@ -28,6 +28,9 @@ export class ReportSection {
   position: string;
 
   @Column()
+  agency: string;
+
+  @Column()
   caseNumber: number;
 
   @Column()
@@ -41,6 +44,9 @@ export class ReportSection {
 
   @Column()
   chartNum: number;
+
+  @Column()
+  acquaintanceExam: number;
 
   @ManyToOne(() => Submission, (submission) => submission.reportSection)
   @JoinColumn({ name: 'submissionId' })
