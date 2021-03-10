@@ -11,5 +11,11 @@ export const StyledFormField = styled(FormField)`
   }
   div {
     height: 30px;
+    input {
+      padding: 5px;
+    }
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 `;
