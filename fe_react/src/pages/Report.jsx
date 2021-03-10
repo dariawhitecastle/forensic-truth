@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
-
-import { Box, Grid, Heading, Image } from 'grommet';
+import { Send } from 'grommet-icons';
+import { Box, Grid, Button, Image } from 'grommet';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -21,19 +21,23 @@ import logo from '../assets/logo.jpg';
 const ReportView = observer(() => {
   const {
     getQuestions,
-    setNotes,
-    notes,
-    notesError,
     hydrated,
     fetchSubmission,
-    setNotesError,
     sortedSectionList,
     sortedAnswers,
     notesByAnswerGroup,
-    submitNotes,
+    setReportNote,
+    report,
+    setReportError,
+    reportError,
+    submitReport,
   } = useContext(ExaminerStoreContext);
+
+  const { push } = useHistory();
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
+  const [savedProgress, setSavedProgress] = useState('Save progress');
 
   useEffect(() => {
     if (sortedSectionList.length) {
@@ -84,6 +88,24 @@ const ReportView = observer(() => {
     setCurrentStep(step);
   };
 
+  const handleSubmitReport = async () => {
+    if (R.isEmpty(report)) {
+      return push('/all-submissions');
+    }
+    const success = await submitReport();
+    setUnsavedChanges(false);
+    success && push('/all-submissions');
+  };
+
+  const handleSaveProgress = async () => {
+    setUnsavedChanges(false);
+    if (R.not(R.isEmpty(report))) {
+      const success = await submitReport();
+      success ? setSavedProgress('Saved') : setSavedProgress('Error');
+      setTimeout(() => setSavedProgress('Save progress'), 500);
+    }
+  };
+
   const getSubsections = R.map((subSection) => {
     const currentAnswerGroup = subSection[0].question.answerGroup;
     const savedNote = R.find(
@@ -96,6 +118,8 @@ const ReportView = observer(() => {
         id={currentAnswerGroup}
         answers={subSection}
         savedNote={savedNote}
+        onChange={setReportNote}
+        report={report}
       />
     );
   });
@@ -117,6 +141,13 @@ const ReportView = observer(() => {
           justify='between'
           pad={{ horizontal: 'medium', vertical: 'small' }}>
           <Image src={logo} height='40' width='200' />
+          <Button
+            primary
+            label={savedProgress}
+            color='primary'
+            onClick={handleSaveProgress}
+            disabled={!unsavedChanges}
+          />
         </StyledHeader>
 
         {!R.isEmpty(sortedSectionList) && (
@@ -148,8 +179,18 @@ const ReportView = observer(() => {
                   </div>
                 ))
               : null}
+            <Button
+              alignSelf='end'
+              margin='large'
+              size='medium'
+              primary
+              color='primary'
+              icon={<Send />}
+              onClick={handleSubmitReport}
+              label='Submit'
+            />
           </Box>
-          {notesError && <ErrorPopup setError={setNotesError} />}
+          {reportError && <ErrorPopup setError={setReportError} />}
         </MainComponent>
       </Grid>
     </>

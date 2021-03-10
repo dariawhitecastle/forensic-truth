@@ -22,8 +22,10 @@ export class ExaminerStore {
   @persist('object') @observable currentSubmission = {};
   @persist('object') @observable notes = {};
   @persist('list') @observable allSubmissions = [];
+  @persist('object') @observable report = {};
   @observable notesError = false;
   @observable apiError = false;
+  @observable reportError = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -169,6 +171,21 @@ export class ExaminerStore {
       this.setNotesError(true);
       return false;
     }
+  };
+
+  @action
+  setReportNote = (questionId, reportNote) => {
+    this.report = { ...this.report, [questionId]: reportNote };
+  };
+
+  @action
+  setReportError = (payload) => {
+    this.reportError = payload;
+  };
+
+  @action
+  submitReport = () => {
+    // submit report with whatever is in the store atm
   };
 }
 

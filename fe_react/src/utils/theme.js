@@ -20,6 +20,6 @@ const customTheme = {
   checkBox: {
     gap: '6px',
   },
-}
+};
 
-export default customTheme
+export default customTheme;

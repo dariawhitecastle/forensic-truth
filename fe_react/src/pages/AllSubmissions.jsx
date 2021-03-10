@@ -79,7 +79,8 @@ const AllSubmissions = observer(() => {
       header: <Text>Notes</Text>,
       render: (row) => (
         <Button
-          hoverIndicator='light-2'
+          primary
+          color='primary'
           // disabled={row.notes.length < 40}
           onClick={() => handleRowClick(row, '/examiner')}>
           <Box pad='small' direction='row' align='center'>
@@ -94,11 +95,29 @@ const AllSubmissions = observer(() => {
       header: <Text>Report</Text>,
       render: (row) => (
         <Button
-          hoverIndicator='light-2'
+          primary
+          color='primary'
+          // hoverIndicator='light-2'
           // disabled={row.notes.length < 40}
           onClick={() => handleRowClick(row, '/report')}>
           <Box pad='small' direction='row' align='center'>
             <Text>Write Report</Text>
+          </Box>
+        </Button>
+      ),
+      size: 'small',
+    },
+    {
+      property: 'download',
+      header: <Text>Download</Text>,
+      render: (row) => (
+        <Button
+          primary
+          color='primary'
+          // disabled={row.notes.length < 40}
+          onClick={() => handleRowClick(row, '/report')}>
+          <Box pad='small' direction='row' align='center'>
+            <Text>Report only</Text>
           </Box>
         </Button>
       ),
