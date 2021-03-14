@@ -32,6 +32,7 @@ const ExaminerView = observer(() => {
     notesByAnswerGroup,
     submitNotes,
   } = useContext(ExaminerStoreContext);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState([]);
   const { push } = useHistory();
@@ -67,7 +68,7 @@ const ExaminerView = observer(() => {
   useEffect(() => {
     getQuestions();
     hydrated && fetchSubmission();
-  }, [hydrated]);
+  }, []);
 
   useEffect(() => {
     setAnswers(sortedAnswers);

@@ -7,9 +7,13 @@ import * as R from 'ramda';
 import {
   getQuestions as getQuestionsService,
   fetchSubmission as fetchSubmissionService,
-  submitNotes as submitNotesService,
   fetchAllSubmissions as fetchAllSubmissionsService,
 } from '../services/applicationServices';
+
+import {
+  submitNotes as submitNotesService,
+  submitReport as submitReportService,
+} from '../services/examinerServices';
 
 const hydrate = create({
   storage: Window.sessionStorage,
@@ -174,8 +178,13 @@ export class ExaminerStore {
   };
 
   @action
-  setReportNote = (questionId, reportNote) => {
-    this.report = { ...this.report, [questionId]: reportNote };
+  setReportNote = (label, reportNote) => {
+    this.report = { ...this.report, [label]: reportNote };
+  };
+
+  @action
+  resetReport = () => {
+    this.report = {};
   };
 
   @action
@@ -184,8 +193,16 @@ export class ExaminerStore {
   };
 
   @action
-  submitReport = () => {
-    // submit report with whatever is in the store atm
+  submitReport = async () => {
+    console.log(toJS(this.report));
+    try {
+      await submitReportService(this.report);
+      this.resetReport();
+      return true;
+    } catch (err) {
+      this.setReportError(true);
+      return false;
+    }
   };
 }
 

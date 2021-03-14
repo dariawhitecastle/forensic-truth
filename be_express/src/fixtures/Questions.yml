@@ -110,8 +110,8 @@ items:
     answerGroup: 1
   question8:
     description:
-      Is this an application for the City and County of Denver or the Denver Civil
-      Service Commission (Police or Fire)?
+      Is this an application for the City and County of Denver or the Denver
+      Civil Service Commission (Police or Fire)?
     type: yesNo reverse
     placeholder:
     required: true
@@ -155,7 +155,8 @@ items:
     section: '@section1'
     answerGroup: 2
   question12:
-    description: Have you ever taken a polygraph or voice stress examination (CVSA)?
+    description:
+      Have you ever taken a polygraph or voice stress examination (CVSA)?
     type: yesNo
     placeholder:
     required: false
@@ -290,7 +291,8 @@ items:
     section: '@section2'
     answerGroup: 9
   question22:
-    description: What other applications do you currently have in active process?
+    description:
+      What other applications do you currently have in active process?
     type: textArea
     placeholder: 'Type here'
     required: false
@@ -323,8 +325,8 @@ items:
     answerGroup: 10
   question25:
     description:
-      Have you held a driver's licenses in any other state or country in the last 7
-      years?
+      Have you held a driver's licenses in any other state or country in the
+      last 7 years?
     type: yesNo
     placeholder:
     required: true
@@ -346,14 +348,16 @@ items:
     section: '@section3'
     answerGroup: 10
   question28:
-    description: 'List all traffic violations, photo radar tickets, and at fault traffic accidents in the last 7 years:'
+    description:
+      'List all traffic violations, photo radar tickets, and at fault traffic
+      accidents in the last 7 years:'
     type: none
     placeholder:
     order: 6
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    required: false
+    required: true
     section: '@section3'
     answerGroup: 11
   question29:
@@ -361,7 +365,7 @@ items:
     type: table
     order: 7
     placeholder: 11/2020
-    required: false
+    required: true
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -372,7 +376,7 @@ items:
     type: table
     order: 8
     placeholder: Denver, CO
-    required: false
+    required: true
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -383,7 +387,7 @@ items:
     type: table
     order: 9
     placeholder: Speeding
-    required: false
+    required: true
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -394,7 +398,7 @@ items:
     type: table
     order: 10
     placeholder: Citation
-    required: false
+    required: true
     subQuestions: ''
     responseOptions: ''
     externalUse: true
@@ -433,8 +437,8 @@ items:
     answerGroup: 12
   question34:
     description:
-      Has your drivers license ever been suspended, restricted or revoked, or have
-      you ever been denied a drivers license?
+      Has your drivers license ever been suspended, restricted or revoked, or
+      have you ever been denied a drivers license?
     type: yesNo
     required: true
     order: 14
@@ -627,8 +631,8 @@ items:
     section: '@section4'
   question50:
     description:
-      List ALL the jobs you have been fired from, left by mutual decision, or have
-      been asked to resign from.
+      List ALL the jobs you have been fired from, left by mutual decision, or
+      have been asked to resign from.
     type: textArea
     placeholder: 'Pleasantville PD'
     required: true
@@ -888,14 +892,14 @@ items:
     subQuestions: ''
     responseOptions: ''
     externalUse: true
-    required: false
+    required: true
     section: '@section5'
     answerGroup: 20
   question71:
     description: Date
     type: table
     placeholder: '05/2005'
-    required: false
+    required: true
     order: 3
     subQuestions: ''
     responseOptions: ''
@@ -907,7 +911,7 @@ items:
     description: Type of offense
     type: table
     placeholder: 'Shoplifting'
-    required: false
+    required: true
     order: 4
     charLimit: 40
     subQuestions: ''
@@ -919,7 +923,7 @@ items:
     description: City/State
     type: table
     placeholder: 'Pleasantville, CO'
-    required: false
+    required: true
     order: 5
     subQuestions: ''
     responseOptions: ''
@@ -930,7 +934,7 @@ items:
     description: Sentence
     type: table
     placeholder: 'Fines, community service, classes'
-    required: false
+    required: true
     order: 6
     charLimit: 50
     subQuestions: ''
@@ -1014,7 +1018,9 @@ items:
     section: '@section6'
     answerGroup: 21
   question85:
-    description: "Have you ever used someone else's prescription medication, for any reason?"
+    description:
+      "Have you ever used someone else's prescription medication, for any
+      reason?"
     type: yesNo
     placeholder:
     required: true
@@ -1062,7 +1068,9 @@ items:
     section: '@section6'
     answerGroup: 23
   question89:
-    description: 'Have you ever used marijuana, alcohol, or any other illegal drugs at work?'
+    description:
+      'Have you ever used marijuana, alcohol, or any other illegal drugs at
+      work?'
     type: yesNo
     placeholder:
     required: true
@@ -1075,7 +1083,8 @@ items:
   question90:
     description: 'Please explain '
     type: textArea
-    placeholder: 'Went to work at Pleasantville Bar high on marijuana last in 4/2009'
+    placeholder:
+      'Went to work at Pleasantville Bar high on marijuana last in 4/2009'
     required: false
     charLimit: 140
     order: 10
@@ -1192,8 +1201,9 @@ items:
     answerGroup: 27
   question100:
     description:
-      Not counting employers, in the past 10 years, have you, without permission,
-      taken, shoplifted or stolen from anyone (including shoplifting)?
+      Not counting employers, in the past 10 years, have you, without
+      permission, taken, shoplifted or stolen from anyone (including
+      shoplifting)?
     type: yesNo
     placeholder:
     order: 21
@@ -1237,7 +1247,8 @@ items:
     required: false
     section: '@section7'
   question104:
-    description: 'When was the last time you participated in a physical fight?  '
+    description:
+      'When was the last time you participated in a physical fight?  '
     type: text
     placeholder: '9/2012'
     required: false
@@ -1271,7 +1282,9 @@ items:
     section: '@section7'
     answerGroup: 30
   question107:
-    description: Have you treated anyone unfairly based on their race, creed, gender, or sexual orientation?
+    description:
+      Have you treated anyone unfairly based on their race, creed, gender, or
+      sexual orientation?
     type: yesNo
     placeholder:
     required: true
@@ -1328,8 +1341,8 @@ items:
   question112:
     description:
       Have you ever violated any laws or regulations regarding parks or wildlife
-      rules (e.g., hunting or fishing without a license)? Please describe when and
-      where.
+      rules (e.g., hunting or fishing without a license)? Please describe when
+      and where.
     type: textArea
     placeholder: 'I fished without a license in 2014 in Wyoming'
     order: 10
@@ -1390,7 +1403,7 @@ items:
       that admissions in this section are not automatic disqualifiers)?
     type: textArea
     placeholder: 'I last had intercourse in a park at night in 2014'
-    required: false
+    required: true
     charLimit: 300
     order: 15
     subQuestions: ''
@@ -1445,7 +1458,8 @@ items:
   question122:
     description: 'Please provide number of bills behind, how long, explanation'
     type: textArea
-    placeholder: "Internet, 3 months, spouse lost their job and we couldn't pay it"
+    placeholder:
+      "Internet, 3 months, spouse lost their job and we couldn't pay it"
     required: false
     charLimit: 140
     order: 5
@@ -1456,8 +1470,8 @@ items:
     answerGroup: 37
   question123:
     description:
-      Do you currently have any judgments, garnishments, court actions, or pending
-      actions against you for any money you owe anyone?
+      Do you currently have any judgments, garnishments, court actions, or
+      pending actions against you for any money you owe anyone?
     type: yesNo
     placeholder:
     required: true

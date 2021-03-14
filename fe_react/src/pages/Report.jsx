@@ -106,6 +106,11 @@ const ReportView = observer(() => {
     }
   };
 
+  const handleOnChange = (label, value) => {
+    setUnsavedChanges(true);
+    setReportNote(label, value);
+  };
+
   const getSubsections = R.map((subSection) => {
     const currentAnswerGroup = subSection[0].question.answerGroup;
     const savedNote = R.find(
@@ -118,7 +123,7 @@ const ReportView = observer(() => {
         id={currentAnswerGroup}
         answers={subSection}
         savedNote={savedNote}
-        onChange={setReportNote}
+        onChange={handleOnChange}
         report={report}
       />
     );
@@ -168,7 +173,7 @@ const ReportView = observer(() => {
         )}
         <MainComponent gridArea='main'>
           <Box fill align='start' pad='medium'>
-            <ReportHeader />
+            <ReportHeader onChange={handleOnChange} />
             {sortedSectionList.length
               ? sortedSectionList.map((section) => (
                   <div id={section.id} key={section.id}>

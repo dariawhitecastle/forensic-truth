@@ -13,11 +13,9 @@ const ReportHeader = ({
   timeIn,
   timeOut,
   chartNum,
+  onChange,
 }) => {
-  const [form, setForm] = React.useState({});
-
-  const handleOnChange = ({ target: { name, value } }) =>
-    setForm({ ...form, [name]: value });
+  const handleOnChange = ({ target: { name, value } }) => onChange(name, value);
 
   return (
     <Form>

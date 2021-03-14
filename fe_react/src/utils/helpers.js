@@ -28,7 +28,7 @@ export const checkCharLimit = (e, fn) => {
 
 export const sortAnswerByOrder = (obj, sections) => {
   sections.forEach((section) => {
-    let unsortedAnswers = obj[section];
+    let unsortedAnswers = R.prop(section, obj);
     let sorted = [];
     while (unsortedAnswers.length) {
       let uniqBy = R.uniqBy(
@@ -42,3 +42,5 @@ export const sortAnswerByOrder = (obj, sections) => {
   });
   return obj;
 };
+
+export const toJS = (body) => JSON.parse(JSON.stringify(body));

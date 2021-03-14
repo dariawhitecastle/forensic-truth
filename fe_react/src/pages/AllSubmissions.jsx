@@ -3,7 +3,8 @@ import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import * as R from 'ramda';
 
-import { Button, Box, Text, DataTable, Image } from 'grommet';
+import { Button, Box, Text, DataTable, Image, DropButton } from 'grommet';
+import { DocumentDownload } from 'grommet-icons';
 
 // Store
 import { ExaminerStoreContext } from '../stores/examinerStore';
@@ -47,11 +48,34 @@ const AllSubmissions = observer(() => {
   } = useContext(ExaminerStoreContext);
   const [submissions, setSubmissions] = useState([]);
   const { push } = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
+
+  console.log(selectedSubmissionId);
 
   const handleRowClick = (row, route) => {
     setSelectedSubmissionId(row.id);
     push(route);
   };
+
+  const dropMenuItems = () => (
+    <Box>
+      <Button plain>
+        <Box pad='small' direction='row' align='center'>
+          <Text>Report only</Text>
+        </Box>
+      </Button>
+      <Button plain>
+        <Box pad='small' direction='row' align='center'>
+          <Text>Full package</Text>
+        </Box>
+      </Button>
+      <Button plain>
+        <Box pad='small' direction='row' align='center'>
+          <Text>View report</Text>
+        </Box>
+      </Button>
+    </Box>
+  );
 
   const columns = [
     {
@@ -81,9 +105,8 @@ const AllSubmissions = observer(() => {
         <Button
           primary
           color='primary'
-          // disabled={row.notes.length < 40}
           onClick={() => handleRowClick(row, '/examiner')}>
-          <Box pad='small' direction='row' align='center'>
+          <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}>
             <Text>Add Notes</Text>
           </Box>
         </Button>
@@ -97,10 +120,9 @@ const AllSubmissions = observer(() => {
         <Button
           primary
           color='primary'
-          // hoverIndicator='light-2'
-          // disabled={row.notes.length < 40}
+          disabled={row.notes.length < 37}
           onClick={() => handleRowClick(row, '/report')}>
-          <Box pad='small' direction='row' align='center'>
+          <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}>
             <Text>Write Report</Text>
           </Box>
         </Button>
@@ -111,17 +133,18 @@ const AllSubmissions = observer(() => {
       property: 'download',
       header: <Text>Download</Text>,
       render: (row) => (
-        <Button
-          primary
-          color='primary'
-          // disabled={row.notes.length < 40}
-          onClick={() => handleRowClick(row, '/report')}>
-          <Box pad='small' direction='row' align='center'>
-            <Text>Report only</Text>
+        <DropButton
+          alignSelf='center'
+          margin={{ horizontal: '25%' }}
+          dropContent={dropMenuItems()}
+          dropProps={{ align: { right: 'right', top: 'bottom' } }}
+          onClick={() => setShowMenu(!showMenu)}>
+          <Box pad='small'>
+            <DocumentDownload />
           </Box>
-        </Button>
+        </DropButton>
       ),
-      size: 'small',
+      size: 'xsmall',
     },
   ];
 

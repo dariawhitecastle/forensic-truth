@@ -62,15 +62,19 @@ export const states = [
 
 export const ReportSectionHeaders = [
   {
-    questionId: 15,
+    questionId: 14,
     description: 'PREVIOUS POLYGRAPH EXAMS',
   },
   {
-    questionId: 22,
+    questionId: 20,
     description: 'ACCURACY OF ALL INFORMATION PROVIDED TO THIS DEPARTMENT',
   },
   {
-    questionId: 25,
+    questionId: 21,
+    description: 'CHEATING ON EXAMINATIONS FOR THIS DEPARTMENT',
+  },
+  {
+    questionId: 27,
     description: 'EMPLOYMENT INTENTIONS',
   },
   {
@@ -82,76 +86,76 @@ export const ReportSectionHeaders = [
     description: 'EDUCATION',
   },
   {
-    questionId: 55,
+    questionId: 57,
     description: 'EMPLOYMENT TERMINATIONS',
   },
   {
-    questionId: 61,
+    questionId: 64,
     description: 'DISCIPLINARY ACTIONS',
   },
   {
-    questionId: 75,
+    questionId: 81,
     description: 'MILITARY HISTORY',
   },
   {
     questionId: 83,
-    description: `CRIMINAL HISTORY/RECORD (convictions)`,
+    description: `CRIMINAL HISTORY/RECORD`,
   },
   {
-    questionId: 83,
+    questionId: 86,
     description: `SERIOUS UNDETECTED CRIMES`,
   },
   {
-    questionId: 92,
+    questionId: 95,
     description: `ILLEGAL DRUG USE`,
   },
   {
-    questionId: 95,
+    questionId: 97,
     description: `ILLEGAL DRUG SALES/DISTRIBUTION`,
   },
   {
-    questionId: 97,
-    description: `EMPLOYMENT THEFTS`,
-  },
-  {
     questionId: 100,
-    description: `EMPLOYMENT THEFTS (Money for the last 10 years)`,
+    description: `EMPLOYMENT THEFTS (Property for the last 10 years)`,
   },
   {
     questionId: 103,
+    description: `EMPLOYMENT THEFTS (Money for the last 10 years)`,
+  },
+  {
+    questionId: 107,
     description: `THEFTS (Other than from an employer in the last 10 years)`,
   },
   {
-    questionId: 108,
+    questionId: 110,
     description: `PERPETRATING ACTS OF PHYSICAL/MENTAL ABUSE`,
   },
   {
-    questionId: 110,
+    questionId: 112,
     description: `PREJUDICE`,
   },
   {
-    questionId: 113,
+    questionId: 114,
     description: `ILLEGAL FIRE SETTING (FOR FIRE APPLICANTS ONLY)`,
   },
 
   {
-    questionId: 115,
+    questionId: 117,
     description: `VIOLATING LAWS OR REGULATIONS REGARDING PARKS AND WILDLIFE RULES (FOR CPW APPLICANTS ONLY)`,
   },
   {
-    questionId: 118,
+    questionId: 120,
     description: `ABUSE OF LAW ENFORCEMENT POWERS`,
   },
   {
-    questionId: 120,
+    questionId: 122,
     description: `PERPETRATING ACTS OF ILLEGAL SEXUAL ACTIVITIES`,
   },
   {
-    questionId: 131,
+    questionId: 555,
     description: `DEROGATORY FINANCIAL INFORMATION`,
   },
   {
-    questionId: 0,
+    questionId: 333,
     description: 'ADDITIONAL NOTES BY EXAMINER',
   },
 ];
