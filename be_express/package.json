@@ -13,7 +13,7 @@
     "ramda": "^0.26.1",
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typeorm": "0.2.22"
+    "typeorm": "0.2.25"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
