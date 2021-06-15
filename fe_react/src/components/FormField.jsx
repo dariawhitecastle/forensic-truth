@@ -46,7 +46,7 @@ const FormFieldComponent = ({
       const drugName = option;
       const includesDrug = personalInfo[id]?.find(R.propEq('name', drugName));
       const drugDate = includesDrug?.date;
-      const otherDrug = option === 'Other'
+      const otherDrug = option === 'Other';
       return (
         <Box direction='row' key={drugName}>
           <CheckBox
@@ -71,7 +71,9 @@ const FormFieldComponent = ({
                     date: event.target.value,
                   })
                 }
-                placeholder={ otherDrug ? 'Please explain' : 'Enter date last used'}
+                placeholder={
+                  otherDrug ? 'Please explain' : 'Enter date last used'
+                }
                 type='text'
               />
             </Box>
@@ -99,7 +101,7 @@ const FormFieldComponent = ({
             onChange={(event) => onChange(event, id)}
             placeholder={placeholder}
             type='text'
-            required={required}
+            // required={required}
           />
         </Box>
       );
@@ -132,46 +134,28 @@ const FormFieldComponent = ({
           width={width ? `${width}%` : 'auto'}>
           <StyledFormField
             autoComplete='none'
-            label={
-              required ? (
-                <Box direction='row'>
-                  <Text>{description}</Text>
-                  <Text color='status-critical'>*</Text>
-                </Box>
-              ) : (
-                description
-              )
-            }
+            label={description}
             maxLength={charLimit ?? 100}
             name={id.toString()}
             value={personalInfo[id] ?? ''}
             onChange={(event) => onChange(event, id)}
             placeholder={placeholder}
             type={type === 'date' ? 'text' : type}
-            required={required}
+            // required={required}
           />
         </Box>
       );
     case 'textArea':
       return (
         <Box width='80%'>
-          <Box pad={{ vertical: 'medium' }}>
-            {required ? (
-              <Box direction='row'>
-                <Text>{description}</Text>
-                <Text color='status-critical'>*</Text>
-              </Box>
-            ) : (
-              description
-            )}
-          </Box>
+          <Box pad={{ vertical: 'medium' }}>{description}</Box>
           <TextArea
             placeholder={placeholder || 'Type here'}
             name={id.toString()}
             maxLength={charLimit ?? 100}
             value={personalInfo[id]}
             onChange={(event) => onChange(event, id)}
-            required={required}
+            // required={required}
           />
         </Box>
       );
@@ -181,14 +165,7 @@ const FormFieldComponent = ({
           width={description.length > 25 ? '80%' : '33%'}
           pad={{ right: 'medium' }}
           style={{ display: 'inline-flex' }}>
-          {required ? (
-            <Box direction='row'>
-              <Text>{description}</Text>
-              <Text color='status-critical'>*</Text>
-            </Box>
-          ) : (
-            description
-          )}
+          {description}
           <Select
             options={responseOptions.length ? responseOptions : states}
             placeholder={description}
@@ -196,7 +173,7 @@ const FormFieldComponent = ({
             name={id.toString()}
             value={personalInfo[id]}
             onChange={(event) => onChange(event, id)}
-            required={required}
+            // required={required}
           />
         </Box>
       );
@@ -204,14 +181,7 @@ const FormFieldComponent = ({
     case 'yesNo reverse':
       return (
         <Box pad={{ vertical: 'small' }} direction='row' align='start'>
-          {required ? (
-            <Box direction='row'>
-              <Text>{description}</Text>
-              <Text color='status-critical'>*</Text>
-            </Box>
-          ) : (
-            description
-          )}
+          {description}
           <StyledRadioButtonGroup
             name={id.toString()}
             options={[
@@ -234,21 +204,14 @@ const FormFieldComponent = ({
     case 'radio':
       return (
         <Box pad='small'>
-          {required ? (
-            <Box direction='row'>
-              <Text>{description}</Text>
-              <Text color='status-critical'>*</Text>
-            </Box>
-          ) : (
-            <Text margin={{ top: '12px', bottom: '12px' }}>{description}</Text>
-          )}
+          {<Text margin={{ top: '12px', bottom: '12px' }}>{description}</Text>}
           <RadioButtonGroup
             label={description}
             name={id.toString()}
             options={responseOptions}
             value={personalInfo[id]}
             onChange={(event) => onChange(event, id)}
-            required={required}
+            // required={required}
           />
         </Box>
       );
@@ -256,14 +219,7 @@ const FormFieldComponent = ({
       return (
         <Box width='100%'>
           <Heading level='4' style={{ maxWidth: '100%' }}>
-            {required ? (
-              <Box direction='row'>
-                <Text>{description}</Text>
-                <Text color='status-critical'>*</Text>
-              </Box>
-            ) : (
-              description
-            )}
+            {description}
           </Heading>
         </Box>
       );

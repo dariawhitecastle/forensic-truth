@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
-import { Form, Heading } from 'grommet';
+import { Form, Heading, Text, Box } from 'grommet';
 
 import * as R from 'ramda';
 
@@ -186,7 +186,11 @@ const SingleStepForm = observer(
       <StyledFormWrapper height='100vh' alignSelf='center' ref={headerRef}>
         <Heading alignSelf='center' textAlign='center' level={3}>
           {header}
+          <Text color='red' style={{ display: 'block' }}>
+            All fields are mandatory
+          </Text>
         </Heading>
+
         <Form validate='blur' onSubmit={() => saveData(personalInfo)}>
           {renderFormFields()}
         </Form>

@@ -13,6 +13,7 @@ const StyledButtonBox = styled(Box)`
   bottom: 0px;
   padding: 24px;
   width: calc(100% - 249px);
+  box-shadow: 0px 1px 16px rgb(0 0 0 / 20%);
 `;
 
 const Wizard = observer(
@@ -25,10 +26,10 @@ const Wizard = observer(
     component,
     setDisableNext,
   }) => {
-    const [returning, setReturning] = useState(false)
+    const [returning, setReturning] = useState(false);
 
     const goToNext = () => {
-      setReturning(false)
+      setReturning(false);
       if (currentStep <= steps.length) {
         onClickNext(currentStep + 1);
       }
@@ -36,7 +37,7 @@ const Wizard = observer(
     };
 
     const goToPrev = () => {
-      setReturning(true)
+      setReturning(true);
       if (currentStep > 1) {
         setDisableNext(false);
         onClickPrev(currentStep - 1);
@@ -64,11 +65,7 @@ const Wizard = observer(
         </Box>
         {/* </CSSTransition>
       </TransitionGroup> */}
-        <StyledButtonBox
-          direction='row'
-          display='flex'
-          justify='between'
-          elevation='large'>
+        <StyledButtonBox direction='row' display='flex' justify='between'>
           {currentStep > 1 ? (
             <Button
               primary
