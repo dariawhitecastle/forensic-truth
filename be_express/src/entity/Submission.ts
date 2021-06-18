@@ -5,11 +5,13 @@ import {
   OneToOne,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { Answer } from './Answer';
 import { User } from './User';
 import { Note } from './Note';
 import { ReportSection } from './ReportSection';
+import { ReportNote } from './ReportNote';
 
 @Entity()
 export class Submission {
@@ -36,9 +38,15 @@ export class Submission {
   })
   public note: Note[];
 
-  @OneToMany(() => ReportSection, (reportSection) => reportSection.submission, {
+  @OneToMany(() => ReportNote, (reportNote) => reportNote.submission, {
     eager: true,
     cascade: true,
   })
-  public reportSection: ReportSection[];
+  public reportNote: ReportNote[];
+
+  @OneToOne(() => ReportSection, (reportSection) => reportSection.submission, {
+    eager: true,
+    cascade: true,
+  })
+  public reportSection: ReportSection;
 }

@@ -120,7 +120,7 @@ const AllSubmissions = observer(() => {
         <Button
           primary
           color='primary'
-          disabled={row.notes.length < 37}
+          // disabled={row.notes.length < 37}
           onClick={() => handleRowClick(row, '/report')}>
           <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}>
             <Text>Write Report</Text>

@@ -62,15 +62,15 @@ export const states = [
 
 export const ReportSectionHeaders = [
   {
-    questionId: 14,
+    questionId: 16,
     description: 'PREVIOUS POLYGRAPH EXAMS',
   },
   {
-    questionId: 20,
+    questionId: 22,
     description: 'ACCURACY OF ALL INFORMATION PROVIDED TO THIS DEPARTMENT',
   },
   {
-    questionId: 21,
+    questionId: 24,
     description: 'CHEATING ON EXAMINATIONS FOR THIS DEPARTMENT',
   },
   {
@@ -78,11 +78,11 @@ export const ReportSectionHeaders = [
     description: 'EMPLOYMENT INTENTIONS',
   },
   {
-    questionId: 38,
+    questionId: 42,
     description: 'DRIVING RECORD',
   },
   {
-    questionId: 45,
+    questionId: 49,
     description: 'EDUCATION',
   },
   {
@@ -102,7 +102,7 @@ export const ReportSectionHeaders = [
     description: `CRIMINAL HISTORY/RECORD`,
   },
   {
-    questionId: 86,
+    questionId: 85,
     description: `SERIOUS UNDETECTED CRIMES`,
   },
   {
@@ -151,11 +151,11 @@ export const ReportSectionHeaders = [
     description: `PERPETRATING ACTS OF ILLEGAL SEXUAL ACTIVITIES`,
   },
   {
-    questionId: 555,
+    questionId: 131,
     description: `DEROGATORY FINANCIAL INFORMATION`,
   },
   {
-    questionId: 333,
+    questionId: 132,
     description: 'ADDITIONAL NOTES BY EXAMINER',
   },
 ];

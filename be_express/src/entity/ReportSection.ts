@@ -1,6 +1,6 @@
 import {
   Entity,
-  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   Column,
   JoinColumn,
@@ -14,9 +14,6 @@ export class ReportSection {
 
   @Column()
   body: string;
-
-  @Column()
-  questionId: number;
 
   @Column()
   submissionId: number;
@@ -48,7 +45,7 @@ export class ReportSection {
   @Column()
   acquaintanceExam: number;
 
-  @ManyToOne(() => Submission, (submission) => submission.reportSection)
+  @OneToOne(() => Submission, (submission) => submission.reportSection)
   @JoinColumn({ name: 'submissionId' })
   public submission: Submission;
 }

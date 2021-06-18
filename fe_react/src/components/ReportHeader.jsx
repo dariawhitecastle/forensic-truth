@@ -15,7 +15,8 @@ const ReportHeader = ({
   chartNum,
   onChange,
 }) => {
-  const handleOnChange = ({ target: { name, value } }) => onChange(name, value);
+  const handleOnChange = ({ target: { name, value } }) =>
+    onChange(name, value, 'section');
 
   return (
     <Form>

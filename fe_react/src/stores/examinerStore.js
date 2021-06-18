@@ -119,9 +119,12 @@ export class ExaminerStore {
 
   @action
   fetchSubmission = async () => {
+    this.report = { submissionId: this.selectedSubmissionId, notes: [] };
+
     try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
       this.setCurrentSubmission(data[0]);
+      this.setReport({ submissionId: this.selectedSubmissionId });
     } catch (err) {
       throw err;
     }
@@ -178,8 +181,33 @@ export class ExaminerStore {
   };
 
   @action
-  setReportNote = (label, reportNote) => {
-    this.report = { ...this.report, [label]: reportNote };
+  setReport = (label, value, type) => {
+    console.log(toJS(this.report));
+    if (type === 'section') {
+      this.report.reportSection = {
+        ...this.report.reportSection,
+        [label]: value,
+      };
+    } else {
+      if (!this.report.notes.length) {
+        return this.report.notes.push({ questionId: label, body: value });
+      }
+
+      const foundIdx = this.report.notes.findIndex(
+        (note) => note.questionId === label
+      );
+
+      const updatedNote = {
+        questionId: label,
+        body: value,
+      };
+
+      if (foundIdx) {
+        this.report.notes = R.update(foundIdx, updatedNote, this.report.notes);
+      } else {
+        this.report.notes.push(updatedNote);
+      }
+    }
   };
 
   @action

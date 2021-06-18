@@ -24,10 +24,12 @@ import bcrypt from 'bcrypt';
 import { User } from './entity/User';
 import { Section } from './entity/Section';
 import { Note } from './entity/Note';
+import { ReportNote } from './entity/ReportNote';
 
 // connection
 import config from './typeorm.config';
 import { Submission } from './entity/Submission';
+import { ReportSection } from './entity/ReportSection';
 
 createConnection(config)
   .then(async (connection) => {
@@ -158,6 +160,90 @@ createConnection(config)
         });
 
         return savedNotes;
+      })
+    );
+
+    // /report
+    const reportNotesRepository = connection.getRepository(ReportNote);
+    const reportSectionRepository = connection.getRepository(ReportSection);
+
+    // /report?reportId=xxx,lastName=yyy
+    app.get(
+      '/api/report',
+      RequestHandler((query) => reportNotesRepository.find(query), ['query'])
+    );
+
+    interface ReportNote {
+      questionId: number;
+      body: string;
+    }
+    interface ReportSection {
+      id?: number;
+      body?: string;
+      name?: string;
+      position?: string;
+      agency?: string;
+      caseNumber?: number;
+      date?: Date;
+      timeIn?: string;
+      timeOut?: string;
+      chartNum?: number;
+      acquaintanceExam?: number;
+    }
+
+    interface ReportReqPayload {
+      reportSection?: ReportSection;
+      notes?: ReportNote[];
+      reportId?: number;
+      submissionId: number;
+    }
+    app.post(
+      '/api/report',
+      RequestHandler(async (reportReqPayload: ReportReqPayload) => {
+        const { submissionId, reportSection, notes } = reportReqPayload;
+        // update Report Section if it was sent
+        if (reportReqPayload.reportSection) {
+          const reportSectionToUpdate = await reportSectionRepository.findOne({
+            where: { submissionId },
+          });
+
+          if (reportSectionToUpdate) {
+            reportSectionRepository.merge(reportSectionToUpdate, reportSection);
+            reportSectionRepository.save(reportSectionToUpdate);
+          } else {
+            reportSectionRepository.save(reportSection);
+          }
+        }
+        // update Report Notes if they were sent
+        if (notes?.length) {
+          /* do not remove await here */
+          await R.map(async (reportNote: any) => {
+            const reportNoteToUpdate = await reportNotesRepository.findOne(
+              parseInt(reportNote.questionId)
+            );
+            if (reportNoteToUpdate) {
+              reportNotesRepository.merge(reportNoteToUpdate, reportNote);
+              reportNotesRepository.save(reportNoteToUpdate);
+            } else {
+              reportNotesRepository.save(reportNote);
+            }
+          })(notes);
+        }
+
+        const updatedReportSection = await reportSectionRepository.findOne({
+          where: { submissionId },
+        });
+        const updatedReportNotes = await reportNotesRepository.find({
+          where: { submissionId },
+        });
+
+        const updatedReport = {
+          reportSection: updatedReportSection,
+          notes: updatedReportNotes,
+          submissionId,
+        };
+
+        return updatedReport;
       })
     );
 

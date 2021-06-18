@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Prompt } from 'react-router-dom';
 import * as R from 'ramda';
 import { Send } from 'grommet-icons';
 import { Box, Grid, Button, Image } from 'grommet';
@@ -26,7 +26,7 @@ const ReportView = observer(() => {
     sortedSectionList,
     sortedAnswers,
     notesByAnswerGroup,
-    setReportNote,
+    setReport,
     report,
     setReportError,
     reportError,
@@ -106,9 +106,9 @@ const ReportView = observer(() => {
     }
   };
 
-  const handleOnChange = (label, value) => {
+  const handleOnChange = (label, value, type = 'note') => {
     setUnsavedChanges(true);
-    setReportNote(label, value);
+    setReport(label, value, type);
   };
 
   const getSubsections = R.map((subSection) => {
@@ -131,6 +131,13 @@ const ReportView = observer(() => {
 
   return (
     <>
+      <Prompt
+        message={(_, action) => {
+          return action === 'POP' && unsavedChanges
+            ? 'You have unsaved changes, are you sure you want to leave?'
+            : true;
+        }}
+      />
       <Grid
         fill
         rows={['auto', 'flex']}
@@ -174,7 +181,7 @@ const ReportView = observer(() => {
         <MainComponent gridArea='main'>
           <Box fill align='start' pad='medium'>
             <ReportHeader onChange={handleOnChange} />
-            {sortedSectionList.length
+            {sortedSectionList?.length
               ? sortedSectionList.map((section) => (
                   <div id={section.id} key={section.id}>
                     {hydrated &&

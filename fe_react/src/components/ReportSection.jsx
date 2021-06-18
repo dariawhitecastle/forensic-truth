@@ -10,7 +10,7 @@ import { StyledTextInput, ExaminerNotes } from './ReportSection.styled';
 const FormattedNotes = ({ savedNote }) => {
   return savedNote
     ? savedNote.body.split('//').map((note) => (
-        <Box direction='row'>
+        <Box direction='row' key='note'>
           <Text color='success'>{note}</Text>
         </Box>
       ))
@@ -63,6 +63,7 @@ const TableCell = ({ singleAnswer }) => {
 };
 
 const Section = ({ answers, id, savedNote, onChange, report }) => {
+  const lastSection = answers[0].question.section.id === 8;
   const formatAnswer = (answer, questionType) => {
     if (questionType === 'checkBoxGroup' && answer) {
       const formattedAnswer = answer.replace(/["\\]/g, '').split('},');
@@ -104,13 +105,13 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
       {answers.map((singleAnswer, idx) => {
         const reportHeader = sectionHeader(singleAnswer.question);
         const tableType = singleAnswer.question.type === 'table';
+        const lastQuestion = singleAnswer.question.id === 131;
 
         if (tableType) {
           const followedByNonTableType =
-            answers[idx + 1]?.question.type !== 'table';
+            answers[idx - 1]?.question.type !== 'table';
           return (
             <Fragment key={singleAnswer.id}>
-              <TableCell singleAnswer={singleAnswer} />
               {followedByNonTableType ? (
                 <ReportSection
                   questionId={singleAnswer.question.id}
@@ -119,18 +120,21 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
                   report={report}
                 />
               ) : null}
+              <TableCell singleAnswer={singleAnswer} />
             </Fragment>
           );
         }
 
         return (
           <Fragment key={singleAnswer.id}>
-            <ReportSection
-              questionId={singleAnswer.question.id}
-              reportHeader={reportHeader}
-              onChange={onChange}
-              report={report}
-            />
+            {!lastQuestion && (
+              <ReportSection
+                questionId={singleAnswer.question.id}
+                reportHeader={reportHeader}
+                onChange={onChange}
+                report={report}
+              />
+            )}
             <Box
               align='start'
               style={{ display: 'inline-flex' }}
@@ -146,16 +150,33 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
               <Text color='primary'>
                 {formatAnswer(singleAnswer.body, singleAnswer.question.type)}
               </Text>
+              {lastQuestion && (
+                <ReportSection
+                  questionId={singleAnswer.question.id}
+                  reportHeader={reportHeader}
+                  onChange={onChange}
+                  report={report}
+                />
+              )}
             </Box>
           </Fragment>
         );
       })}
-      <Box margin={{ vertical: 'medium' }}>
-        <ExaminerNotes color='red' weight='bold'>
-          Examiner notes
-        </ExaminerNotes>
-        <FormattedNotes savedNote={savedNote} />
-      </Box>
+      {lastSection ? (
+        <ReportSection
+          questionId={132}
+          reportHeader='ADDITIONAL NOTES BY EXAMINER'
+          onChange={onChange}
+          report={report}
+        />
+      ) : (
+        <Box margin={{ vertical: 'medium' }}>
+          <ExaminerNotes color='red' weight='bold'>
+            Examiner notes
+          </ExaminerNotes>
+          <FormattedNotes savedNote={savedNote} />
+        </Box>
+      )}
     </Box>
   );
 };
