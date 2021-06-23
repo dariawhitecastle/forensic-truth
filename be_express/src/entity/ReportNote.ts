@@ -12,7 +12,7 @@ export class ReportNote {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   body: string;
 
   @Column()

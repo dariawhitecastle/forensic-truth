@@ -184,7 +184,7 @@ createConnection(config)
       position?: string;
       agency?: string;
       caseNumber?: number;
-      date?: Date;
+      date?: string;
       timeIn?: string;
       timeOut?: string;
       chartNum?: number;
@@ -202,16 +202,16 @@ createConnection(config)
       RequestHandler(async (reportReqPayload: ReportReqPayload) => {
         const { submissionId, reportSection, notes } = reportReqPayload;
         // update Report Section if it was sent
-        if (reportReqPayload.reportSection) {
-          const reportSectionToUpdate = await reportSectionRepository.findOne({
-            where: { submissionId },
-          });
+        if (reportSection) {
+          const reportSectionToUpdate = await reportSectionRepository.findOne(
+            submissionId
+          );
 
           if (reportSectionToUpdate) {
             reportSectionRepository.merge(reportSectionToUpdate, reportSection);
             reportSectionRepository.save(reportSectionToUpdate);
           } else {
-            reportSectionRepository.save(reportSection);
+            reportSectionRepository.save({ ...reportSection, submissionId });
           }
         }
         // update Report Notes if they were sent
@@ -225,17 +225,19 @@ createConnection(config)
               reportNotesRepository.merge(reportNoteToUpdate, reportNote);
               reportNotesRepository.save(reportNoteToUpdate);
             } else {
-              reportNotesRepository.save(reportNote);
+              reportNotesRepository.save({ ...reportNote, submissionId });
             }
           })(notes);
         }
 
-        const updatedReportSection = await reportSectionRepository.findOne({
-          where: { submissionId },
-        });
         const updatedReportNotes = await reportNotesRepository.find({
           where: { submissionId },
         });
+        const updatedReportSection = await reportSectionRepository.findOne(
+          submissionId
+        );
+
+        console.log('****updatedReportSection', updatedReportSection);
 
         const updatedReport = {
           reportSection: updatedReportSection,

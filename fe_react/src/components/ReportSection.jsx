@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { Box, Text, Button } from 'grommet';
 import * as R from 'ramda';
 import { Add } from 'grommet-icons';
-import { toJS } from 'mobx';
 
 import { ReportSectionHeaders } from '../utils/constants';
 import { StyledTextInput, ExaminerNotes } from './ReportSection.styled';
+import { toJS } from '../utils/helpers';
 
 const FormattedNotes = ({ savedNote }) => {
   return savedNote
@@ -17,7 +17,20 @@ const FormattedNotes = ({ savedNote }) => {
     : null;
 };
 
-const ReportSection = ({ questionId, reportHeader, onChange, report }) => {
+const ReportSection = ({
+  questionId,
+  reportHeader,
+  onChange,
+  reportNotes = [],
+}) => {
+  // console.log(toJS(report));
+
+  const value = R.compose(
+    R.defaultTo(''),
+    R.prop('body'),
+    R.find(R.propEq('questionId', questionId))
+  )(reportNotes);
+
   if (!reportHeader) return null;
   const handleReportSectionChange = (e) => {
     onChange(questionId, e.target.value);
@@ -33,7 +46,7 @@ const ReportSection = ({ questionId, reportHeader, onChange, report }) => {
       <Box margin={{ vertical: 'medium' }} width='large' direction='row'>
         <StyledTextInput
           name={questionId}
-          value={report[questionId]}
+          value={value}
           onChange={handleReportSectionChange}
           placeholder='Enter report notes'
         />
@@ -117,7 +130,7 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
                   questionId={singleAnswer.question.id}
                   reportHeader={reportHeader}
                   onChange={onChange}
-                  report={report}
+                  reportNotes={report.notes}
                 />
               ) : null}
               <TableCell singleAnswer={singleAnswer} />
@@ -132,7 +145,7 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
                 questionId={singleAnswer.question.id}
                 reportHeader={reportHeader}
                 onChange={onChange}
-                report={report}
+                reportNotes={report.notes}
               />
             )}
             <Box
@@ -155,7 +168,7 @@ const Section = ({ answers, id, savedNote, onChange, report }) => {
                   questionId={singleAnswer.question.id}
                   reportHeader={reportHeader}
                   onChange={onChange}
-                  report={report}
+                  reportNotes={report.notes}
                 />
               )}
             </Box>

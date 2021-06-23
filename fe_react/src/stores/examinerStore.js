@@ -119,15 +119,25 @@ export class ExaminerStore {
 
   @action
   fetchSubmission = async () => {
-    this.report = { submissionId: this.selectedSubmissionId, notes: [] };
+    this.report = { submissionId: this.selectedSubmissionId };
 
     try {
       const data = await fetchSubmissionService(this.selectedSubmissionId);
       this.setCurrentSubmission(data[0]);
-      this.setReport({ submissionId: this.selectedSubmissionId });
+      if (data[0].reportSection) {
+        this.setReportSection(data[0].reportSection);
+      }
+      if (data[0].reportNote) {
+        this.report.notes = data[0].reportNote;
+      }
     } catch (err) {
       throw err;
     }
+  };
+
+  @action
+  setReportSection = (section) => {
+    this.report.reportSection = section;
   };
 
   @action
@@ -182,7 +192,6 @@ export class ExaminerStore {
 
   @action
   setReport = (label, value, type) => {
-    console.log(toJS(this.report));
     if (type === 'section') {
       this.report.reportSection = {
         ...this.report.reportSection,
@@ -190,7 +199,7 @@ export class ExaminerStore {
       };
     } else {
       if (!this.report.notes.length) {
-        return this.report.notes.push({ questionId: label, body: value });
+        return (this.report.notes = [{ questionId: label, body: value }]);
       }
 
       const foundIdx = this.report.notes.findIndex(
@@ -202,7 +211,8 @@ export class ExaminerStore {
         body: value,
       };
 
-      if (foundIdx) {
+      if (foundIdx > -1) {
+        console.log(foundIdx, updatedNote, toJS(this.report.notes));
         this.report.notes = R.update(foundIdx, updatedNote, this.report.notes);
       } else {
         this.report.notes.push(updatedNote);
@@ -212,7 +222,11 @@ export class ExaminerStore {
 
   @action
   resetReport = () => {
-    this.report = {};
+    this.report = {
+      submissionId: this.selectedSubmissionId,
+      reportSection: {},
+      reportNotes: [],
+    };
   };
 
   @action

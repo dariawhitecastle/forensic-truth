@@ -12,37 +12,37 @@ export class ReportSection {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   body: string;
 
-  @Column()
+  @Column({ nullable: true })
   submissionId: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   position: string;
 
-  @Column()
+  @Column({ nullable: true })
   agency: string;
 
-  @Column()
+  @Column({ nullable: true })
   caseNumber: number;
 
-  @Column()
-  date: Date;
+  @Column({ nullable: true })
+  date: string;
 
-  @Column()
+  @Column({ nullable: true })
   timeIn: string;
 
-  @Column()
+  @Column({ nullable: true })
   timeOut: string;
 
-  @Column()
+  @Column({ nullable: true })
   chartNum: number;
 
-  @Column()
+  @Column({ nullable: true })
   acquaintanceExam: number;
 
   @OneToOne(() => Submission, (submission) => submission.reportSection)

@@ -50,8 +50,6 @@ const AllSubmissions = observer(() => {
   const { push } = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
-  console.log(selectedSubmissionId);
-
   const handleRowClick = (row, route) => {
     setSelectedSubmissionId(row.id);
     push(route);

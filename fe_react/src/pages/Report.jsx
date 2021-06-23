@@ -180,7 +180,10 @@ const ReportView = observer(() => {
         )}
         <MainComponent gridArea='main'>
           <Box fill align='start' pad='medium'>
-            <ReportHeader onChange={handleOnChange} />
+            <ReportHeader
+              reportHeader={report.reportSection}
+              onChange={handleOnChange}
+            />
             {sortedSectionList?.length
               ? sortedSectionList.map((section) => (
                   <div id={section.id} key={section.id}>

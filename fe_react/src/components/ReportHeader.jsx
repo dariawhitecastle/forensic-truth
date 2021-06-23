@@ -1,20 +1,21 @@
 import React from 'react';
 import { Form, TextInput, Heading, Box } from 'grommet';
+import { toJS } from '../utils/helpers';
 
 import { StyledFormField } from './ReportHeader.styled';
 
-const ReportHeader = ({
-  agency,
-  acquaintanceExam,
-  name,
-  position,
-  caseNumber,
-  date,
-  timeIn,
-  timeOut,
-  chartNum,
-  onChange,
-}) => {
+const ReportHeader = ({ reportHeader = {}, onChange }) => {
+  const {
+    agency,
+    acquaintanceExam,
+    name,
+    position,
+    caseNumber,
+    date,
+    timeIn,
+    timeOut,
+    chartNum,
+  } = reportHeader;
   const handleOnChange = ({ target: { name, value } }) =>
     onChange(name, value, 'section');
 
